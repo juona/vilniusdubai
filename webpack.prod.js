@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 const merge = require("webpack-merge");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -28,13 +28,21 @@ module.exports = merge(common, {
 		]
 	},
 	module: {
-		rules: [{
-			test: /\.css$/,
-			use: [{
-					loader: MiniCssExtractPlugin.loader
-				},
-				"css-loader"
-			]
-		}]
+		rules: [
+			{
+				test: /\.css$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
+					"css-loader"
+				]
+			},
+			{
+				test: /\.js(x?)$/,
+				exclude: /node_modules/,
+				loader: "babel-loader"
+			}
+		]
 	}
 });
