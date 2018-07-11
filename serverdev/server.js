@@ -20,6 +20,8 @@ app.use(
 	})
 );
 
+app.use(express.static(photosPath));
+
 app.get("/photos", (req, res) => {
 	let startIndex = req.query.start;
 	let number = req.query.number;
@@ -84,7 +86,7 @@ function getTagsOfPhotos(photoNames) {
 function getEXIFToolPhotoPathCMDArgument(photoNames) {
 	if (photoNames) {
 		photoNames.forEach((photoName, index) => {
-			photoNames[index] = photosPath + photoName;
+			photoNames[index] = path.join(photosPath, photoName);
 		});
 		return photoNames;
 	} else {

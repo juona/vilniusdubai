@@ -2,20 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import Photo from "./Photo";
+import styles from "./AllPhotos.css";
 
 // Presentation
 
 export const AllPhotos = ({ photos, selectedTags }) => {
 	const visiblePhotos = getVisiblePhotos(photos, selectedTags);
 	const rows = Object.entries(visiblePhotos).map(photoData => (
-		<li key={photoData[0]}>
+		<li key={photoData[0]} className={styles.listItem}>
 			<Photo photoURL={photoData[1].photoName} />
-			<span>{photoData[1].tags.join(", ")}</span>
 		</li>
 	));
 
 	return (
-		<ul>{rows}</ul>
+		<ul className={styles.list}>{rows}</ul>
 	);
 };
 

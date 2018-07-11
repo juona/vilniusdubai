@@ -12,5 +12,7 @@
 	left: 401px;
 	top: 0;
 	bottom: 0;
-	right: 0;
+	right: -17px;
+	overflow-y: scroll;
+	background: white;
 }

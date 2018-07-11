@@ -1,4 +1,5 @@
 :global body {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	color: #190e0e;
+	overflow: hidden;
 }

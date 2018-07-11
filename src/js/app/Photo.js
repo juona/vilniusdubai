@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import styles from "./Photo.css";
 
-const Photo = ({ photoURL }) => <img src={photoURL} />;
+const Photo = ({ photoURL }) => <img src={"thumbs/" + photoURL} className={styles.photo} />;
 
 Photo.propTypes = {
 	photoURL: PropTypes.string.isRequired
