@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggleTag } from "./actions";
 import Tag from "./Tag";
+import styles from "./TagList.css";
 
 // Presentation
 
 export const TagList = ({ tags, onTagClick }) => (
-	<div>
+	<div className={styles.tagList}>
 		{tags.map(tagName => (
 			<Tag
 				key={tagName}
@@ -32,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-	tags: state.tagNames
+	tags: state.tagNames.items
 });
 
 export default connect(

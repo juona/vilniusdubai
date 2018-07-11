@@ -21,11 +21,13 @@
 	},
 	"dependencies": {
 		"connect": "^3.6.6",
+		"express": "^4.16.3",
 		"react": "^16.4.1",
 		"react-dom": "^16.4.1",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",
 		"redux": "^4.0.0",
+		"redux-thunk": "^2.3.0",
 		"serve-static": "^1.13.2"
 	},
 	"scripts": {

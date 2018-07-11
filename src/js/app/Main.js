@@ -1,11 +1,16 @@
 import React from "react";
 import Menu from "./Menu";
 import AllPhotos from "./AllPhotos";
+import styles from "./Main.css";
 
 const Main = () => (
 	<div>
-		<Menu />
-		<AllPhotos />
+		<div className={styles.tagList}>
+			<Menu/>
+		</div>
+		<div className={styles.photoList}>
+			<AllPhotos/>
+		</div>
 	</div>
 );
 

@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Tag.css";
 
 const Tag = ({ onClick, isSelected, tagName }) => (
-	<label>
-		<input type="checkbox" onChange={onClick} value={tagName} />
-		{tagName}
+	<label className={styles.label}>
+		<input type="checkbox" onChange={onClick} value={tagName} className={styles.input}/>
+		<span className={styles.span}>{tagName}</span>
 	</label>
 );
 

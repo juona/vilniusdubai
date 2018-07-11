@@ -1,0 +1,38 @@
+.input {
+	display: none;
+}
+
+.label {
+	display: inline-block;
+	box-sizing: border-box;
+	margin: 20px;
+	width: 90px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.span {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	border: 1px solid #a1aec4;
+	background-color: #a1aec4;
+	text-align: center;
+	line-height: 29px;
+	vertical-align: middle;
+	text-transform: capitalize;
+}
+
+.span:hover {
+	background-color: #4286f4;
+}
+
+.span:active {
+	background-color: #02173a;
+}
+
+.input:checked + span {
+	background-color: #b5d1ff;
+}

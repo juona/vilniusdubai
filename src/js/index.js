@@ -1,11 +1,18 @@
 import React from "react";
 import { render } from "react-dom";
-import { createStore } from "redux";
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import Router from "./router";
 import reducers from "./app/reducers";
+import { fetchTags, fetchPhotos } from "./app/actions";
+import styles from "./index.css";
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+store.dispatch(fetchTags());
+
+store.dispatch(fetchPhotos(0, 10));
 
 const appContainer = document.createElement("div");
 appContainer.setAttribute("id", "router");

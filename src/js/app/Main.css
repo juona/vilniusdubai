@@ -1,0 +1,16 @@
+.tagList {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 400px;
+	border-right: solid 1px grey;
+}
+
+.photoList {
+	position: absolute;
+	left: 401px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
