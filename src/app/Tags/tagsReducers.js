@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import { TOGGLE_TAG, REQUEST_TAGS, RECEIVE_TAGS } from "./tagsActions";
 
 export const selectedTags = function(state = new Set(), action) {

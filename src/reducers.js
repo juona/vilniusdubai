@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 import * as tagsReducers from "./app/Tags/tagsReducers";
 import * as photosReducers from "./app/Photos/photosReducers";
+import * as errorScreenReducers from "./app/ErrorScreen/errorScreenReducers";
 
-export default combineReducers(Object.assign({}, tagsReducers, photosReducers));
+export default combineReducers(Object.assign({}, tagsReducers, photosReducers, errorScreenReducers));
 
 /*
 	State structure
@@ -21,6 +22,7 @@ export default combineReducers(Object.assign({}, tagsReducers, photosReducers));
 		tagNames: {
 			isFetching: false,
 			items: [_tag1_, _tag2_, _tag3_]
-		}
+		},
+		fatalError: ""
 	}
 */

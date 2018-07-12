@@ -9,6 +9,8 @@ const compiler = webpack(config);
 
 const photosPath = path.join(__dirname, "../photos/");
 const exiftoolPath = path.join(__dirname, "../bin/exiftool");
+const exiftoolOutputRegex = /(IMG_\S*)\s+Subject\s*:\s*([a-z, ]+)/g;
+const thumbsDirectoryName = "thumbs";
 
 const allPhotoNames = fs.readdirSync(photosPath);
 
@@ -22,27 +24,46 @@ app.use(
 
 app.use(express.static(photosPath));
 
-app.get("/photos", (req, res) => {
+app.get("/photos", (req, res, next) => {
 	let startIndex = req.query.start;
 	let number = req.query.number;
-	getPhotos(startIndex, number).then(allTags => {
-		res.end(
-			JSON.stringify({
-				data: convertTagsByPhotosMapToObject(allTags.tagsByPhotos)
-			})
-		);
-	});
+	getPhotos(startIndex, number).then(
+		photosData => {
+			res.end(
+				JSON.stringify({
+					data: convertTagsByPhotosMapToObject(
+						photosData.tagsByPhotos
+					)
+				})
+			);
+		},
+		error => {
+			next(error);
+		}
+	);
 });
 
-app.get("/tags", (req, res) => {
-	getTagsOfPhotos().then(allTags => {
-		res.end(
-			JSON.stringify({
-				data: Array.from(allTags.allTags)
-			})
-		);
-	});
+app.get("/tags", (req, res, next) => {
+	getTagsOfPhotos().then(
+		tagsData => {
+			res.end(
+				JSON.stringify({
+					data: Array.from(tagsData.allTags)
+				})
+			);
+		},
+		error => {
+			next(error);
+		}
+	);
 });
+
+app.use(handleError);
+
+function handleError(error, req, res, next) {
+	res.status(500).send("Something broke!");
+	next(error);
+}
 
 function getPhotos(startIndex, number) {
 	let requiredPhotoNames = allPhotoNames.slice(
@@ -54,20 +75,23 @@ function getPhotos(startIndex, number) {
 
 function getTagsOfPhotos(photoNames) {
 	let photoPathCMDArgument = getEXIFToolPhotoPathCMDArgument(photoNames);
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		exiftool = execFile(
 			exiftoolPath,
 			["-xmp:subject", ...photoPathCMDArgument],
 			(error, stdout) => {
-				let outputRegex = /(IMG_\S*)\s+Subject\s*:\s*([a-z, ]+)/g;
+				if (error) {
+					reject(error);
+				}
+
 				let allTags = {
 					allTags: new Set(),
 					tagsByPhotos: new Map()
 				};
 
 				let match, imageName, photoTags;
-				while ((match = outputRegex.exec(stdout))) {
-					imageName = match[1];
+				while ((match = exiftoolOutputRegex.exec(stdout))) {
+					imageName = path.join(thumbsDirectoryName, match[1]);
 					photoTags = new Set(match[2].split(/, */));
 
 					allTags.allTags = new Set([
@@ -100,7 +124,7 @@ function convertTagsByPhotosMapToObject(tagsByPhotos) {
 		tagsByPhotosObject[photoName] = {
 			tags: Array.from(tagSet),
 			photoName: photoName
-		}
+		};
 	}
 	return tagsByPhotosObject;
 }

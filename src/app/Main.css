@@ -1,7 +1,27 @@
-.tagList {
+.container {
 	position: absolute;
 	left: 0;
 	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	text-align: center;
+	line-height: 35px;
+	vertical-align: middle;
+	font-size: 2em;
+}
+
+.tagList {
+	position: absolute;
+	left: 0;
+	top: 70px;
 	bottom: 0;
 	width: 400px;
 	border-right: solid 1px grey;
@@ -10,7 +30,7 @@
 .photoList {
 	position: absolute;
 	left: 401px;
-	top: 0;
+	top: 70px;
 	bottom: 0;
 	right: -17px;
 	overflow-y: scroll;
