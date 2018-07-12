@@ -4,8 +4,8 @@ import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import Router from "./router";
-import reducers from "./app/reducers";
-import { fetchTags, fetchPhotos } from "./app/actions";
+import reducers from "./reducers";
+import { fetchTags, fetchPhotos } from "./actions";
 import styles from "./index.css";
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));

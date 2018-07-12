@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggleTag } from "./actions";
+import { toggleTag } from "./tagsActions";
 import Tag from "./Tag";
 import styles from "./TagList.css";
 

@@ -1,12 +1,12 @@
 import React from "react";
-import Menu from "./Menu";
-import AllPhotos from "./AllPhotos";
+import AllPhotos from "./Photos/AllPhotos";
+import TagList from "./Tags/TagList";
 import styles from "./Main.css";
 
 const Main = () => (
 	<div>
 		<div className={styles.tagList}>
-			<Menu/>
+			<TagList/>
 		</div>
 		<div className={styles.photoList}>
 			<AllPhotos/>
