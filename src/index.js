@@ -14,7 +14,7 @@ const store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
 
 store.dispatch(fetchTags());
 
-store.dispatch(fetchPhotos(0, 10));
+store.dispatch(fetchPhotos());
 
 const appContainer = document.createElement("div");
 appContainer.setAttribute("id", "router");
