@@ -1,7 +1,12 @@
 import { displayFatalError } from "../../actions";
 
+export const DISPLAY_MORE_PHOTOS = Symbol("DISPLAY_MORE_PHOTOS");
+export const displayMorePhotos = () => ({
+	type: DISPLAY_MORE_PHOTOS
+});
+
 export const REQUEST_PHOTOS = Symbol("REQUEST_PHOTOS");
-const requestPhotos = (start, number) => ({
+const requestPhotos = () => ({
 	type: REQUEST_PHOTOS
 });
 
@@ -9,40 +14,24 @@ export const RECEIVE_PHOTOS = Symbol("RECEIVE_PHOTOS");
 const receivePhotos = json => ({
 	type: RECEIVE_PHOTOS,
 	payload: {
-		photos: json.data,
-		hasMoreItems: json.hasMorePhotos
+		tagsByPhotos: json.tagsByPhotos,
+		photosByTags: json.photosByTags
 	}
 });
 
 export const fetchPhotos = () => {
 	return function(dispatch, getState) {
-		const state = getState();
-
-		const isFetching = state.photos.isFetching;
-		const hasMoreItems = state.photos.hasMoreItems;
-		if (isFetching || !hasMoreItems) {
-			return;
-		}
-
 		dispatch(requestPhotos());
-
-		const numberOfPhotos = Object.keys(state.photos.items).length;
-		return fetch(getPhotosQuery(numberOfPhotos, numberOfPhotosToLoad))
+		return fetch("photos")
 			.then(response => handleResponse(response, dispatch))
 			.then(json => dispatch(receivePhotos(json)));
 	};
 };
 
-const numberOfPhotosToLoad = 25;
-
-function getPhotosQuery(start, number) {
-	return "photos?start=" + start + "&number=" + number;
-}
-
 function handleResponse(response, dispatch) {
 	if (response.status === 500) {
 		dispatch(displayFatalError("Server Error!"));
-		return Promise.reject("test");
+		return Promise.reject();
 	} else {
 		return response.json();
 	}

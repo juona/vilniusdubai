@@ -7,7 +7,6 @@ import styles from "./Spinner.css";
 
 const Spinner = ({ isLoading }) => {
 	let className = isLoading ? styles.container : styles.containerHidden;
-	console.log("isLoading = " + isLoading);
 	return (
 		<div className={className}>
 			<div className={styles.spinner} />

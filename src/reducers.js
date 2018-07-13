@@ -10,18 +10,26 @@ export default combineReducers(Object.assign({}, tagsReducers, photosReducers, e
 
 	{
 		selectedTags: Set,
+		numberOfVisiblePhotos: 25,
 		photos: {
 			isFetching: false,
-			items: {
-				_photoName_: {
-					photoName: _photoName_,
+			items: [
+				{
+					photoName: _photoName1_,
 					tags: [_tag1_, _tag2_]
+				},
+				{
+					photoName: _photoName2_,
+					tags: [_tag1_, _tag4_]
 				}
+			],
+			photosByTags: {
+				_tag1_: [_photoName1_, _photoName2_]
 			}
 		},
-		tagNames: {
+		tags: {
 			isFetching: false,
-			items: [_tag1_, _tag2_, _tag3_]
+			items: [_tag1_, _tag2_, _tag3_, _tag4_]
 		},
 		fatalError: ""
 	}

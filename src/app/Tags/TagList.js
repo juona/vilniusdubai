@@ -9,11 +9,11 @@ import styles from "./TagList.css";
 
 export const TagList = ({ tags, onTagClick }) => (
 	<div className={styles.tagList}>
-		{tags.map(tagName => (
+		{tags.map(tag => (
 			<Tag
-				key={tagName}
-				tagName={tagName}
-				onClick={() => onTagClick(tagName)}
+				key={tag}
+				tagName={tag}
+				onClick={() => onTagClick(tag)}
 			/>
 		))}
 	</div>
@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-	tags: state.tagNames.items
+	tags: state.tags.items
 });
 
 export default connect(

@@ -15,7 +15,7 @@ export const RECEIVE_TAGS = Symbol("RECEIVE_TAGS");
 const receiveTags = json => ({
 	type: RECEIVE_TAGS,
 	payload: {
-		tagNames: json.data
+		tags: json.tags
 	}
 });
 

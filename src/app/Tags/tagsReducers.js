@@ -14,7 +14,7 @@ export const selectedTags = function(state = new Set(), action) {
 	}
 };
 
-export const tagNames = function(
+export const tags = function(
 	state = {
 		isFetching: false,
 		items: []
@@ -29,7 +29,7 @@ export const tagNames = function(
 		case RECEIVE_TAGS:
 			return {
 				isFetching: false,
-				items: action.payload.tagNames
+				items: action.payload.tags
 			};
 		default:
 			return state;

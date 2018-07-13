@@ -36,6 +36,6 @@
 	background-color: #02173a;
 }
 
-.input:checked + button {
-	background-color: #b5d1ff;
+.input:checked + .button {
+	background-color: orange;
 }
