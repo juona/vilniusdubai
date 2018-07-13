@@ -25,15 +25,16 @@ app.use(
 app.use(express.static(photosPath));
 
 app.get("/photos", (req, res, next) => {
-	let startIndex = req.query.start;
-	let number = req.query.number;
+	let startIndex = parseInt(req.query.start);
+	let number = parseInt(req.query.number);
 	getPhotos(startIndex, number).then(
 		photosData => {
 			res.end(
 				JSON.stringify({
 					data: convertTagsByPhotosMapToObject(
 						photosData.tagsByPhotos
-					)
+					),
+					hasMorePhotos: photosData.hasMorePhotos
 				})
 			);
 		},
@@ -66,11 +67,15 @@ function handleError(error, req, res, next) {
 }
 
 function getPhotos(startIndex, number) {
-	let requiredPhotoNames = allPhotoNames.slice(
+	const requiredPhotoNames = allPhotoNames.slice(
 		startIndex,
 		startIndex + number
 	);
-	return getTagsOfPhotos(requiredPhotoNames);
+	const hasMorePhotos = startIndex + number < allPhotoNames.length;
+	return getTagsOfPhotos(requiredPhotoNames).then(tagsData => {
+		tagsData.hasMorePhotos = hasMorePhotos;
+		return tagsData;
+	}); 
 }
 
 function getTagsOfPhotos(photoNames) {
@@ -119,6 +124,10 @@ function getEXIFToolPhotoPathCMDArgument(photoNames) {
 }
 
 function convertTagsByPhotosMapToObject(tagsByPhotos) {
+	if (!tagsByPhotos) {
+		return {};
+	}
+
 	const tagsByPhotosObject = {};
 	for (let [photoName, tagSet] of tagsByPhotos) {
 		tagsByPhotosObject[photoName] = {
@@ -127,6 +136,10 @@ function convertTagsByPhotosMapToObject(tagsByPhotos) {
 		};
 	}
 	return tagsByPhotosObject;
+}
+
+function hasMorePhotos(tagsByPhotos) {
+	return tagsByPhotos && Array.from(tagsByPhotos.keys()).length 
 }
 
 app.listen(8080, () => console.log("Server running on 8080..."));

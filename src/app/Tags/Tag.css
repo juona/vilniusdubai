@@ -11,7 +11,7 @@
 	cursor: pointer;
 }
 
-.span {
+.button {
 	display: block;
 	box-sizing: border-box;
 	width: 100%;
@@ -25,14 +25,14 @@
 	text-transform: capitalize;
 }
 
-.span:hover {
+.button:hover {
 	background-color: #4286f4;
 }
 
-.span:active {
+.button:active {
 	background-color: #02173a;
 }
 
-.input:checked + span {
+.input:checked + button {
 	background-color: #b5d1ff;
 }

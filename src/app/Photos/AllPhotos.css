@@ -6,7 +6,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	height: 100%;
 	width: 100%;
 }
 
@@ -18,4 +17,21 @@
 	min-width: 350px;
 	vertical-align: middle;
 	line-height: 350px;
+	position: relative;
+	overflow: hidden;
+}
+
+.wrapper {
+	height: 100%;
+	width: calc(100% + 17px);
+	overflow-y: scroll;
+}
+
+.blurredPhoto {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
 }

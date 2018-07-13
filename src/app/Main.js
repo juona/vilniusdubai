@@ -1,24 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
 import AllPhotos from "./Photos/AllPhotos";
 import TagList from "./Tags/TagList";
-import Spinner from "./Spinner/Spinner";
 import ErrorScreen from "./ErrorScreen/ErrorScreen";
 import styles from "./Main.css";
 
 const Main = () => (
 	<div className={styles.container}>
-		<Spinner/>
-		<ErrorScreen/>
+		<ErrorScreen />
 		<header className={styles.header}>
 			From Vilnius to Dubai
-			<br/>
+			<br />
 			One bicycle trip in photos
 		</header>
 		<div className={styles.tagList}>
-			<TagList/>
+			<TagList />
 		</div>
 		<div className={styles.photoList}>
-			<AllPhotos/>
+			<AllPhotos />
 		</div>
 	</div>
 );

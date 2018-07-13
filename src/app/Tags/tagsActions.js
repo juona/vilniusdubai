@@ -1,4 +1,4 @@
-import { displayFatalError } from "../ErrorScreen/errorScreenActions";
+import { displayFatalError } from "../../actions";
 
 export const TOGGLE_TAG = Symbol("TOGGLE_TAG");
 export const toggleTag = tagName => ({

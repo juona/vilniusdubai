@@ -32,7 +32,7 @@
 	left: 401px;
 	top: 70px;
 	bottom: 0;
-	right: -17px;
-	overflow-y: scroll;
+	right: 0;
+	overflow: hidden;
 	background: white;
 }

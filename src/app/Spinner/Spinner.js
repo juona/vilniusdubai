@@ -5,8 +5,9 @@ import styles from "./Spinner.css";
 
 // Presentation
 
-export const Spinner = ({ isLoading }) => {
+const Spinner = ({ isLoading }) => {
 	let className = isLoading ? styles.container : styles.containerHidden;
+	console.log("isLoading = " + isLoading);
 	return (
 		<div className={className}>
 			<div className={styles.spinner} />
@@ -18,10 +19,4 @@ Spinner.propTypes = {
 	isLoading: PropTypes.bool.isRequired
 };
 
-// Logic
-
-const mapStateToProps = state => ({
-	isLoading: state.photos.isFetching || state.tagNames.isFetching
-});
-
-export default connect(mapStateToProps)(Spinner);
+export default Spinner;

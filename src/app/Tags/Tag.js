@@ -5,7 +5,7 @@ import styles from "./Tag.css";
 const Tag = ({ onClick, isSelected, tagName }) => (
 	<label className={styles.label}>
 		<input type="checkbox" onChange={onClick} value={tagName} className={styles.input}/>
-		<span className={styles.span}>{tagName}</span>
+		<span className={styles.button}>{tagName}</span>
 	</label>
 );
 

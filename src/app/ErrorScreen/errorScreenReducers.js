@@ -1,4 +1,4 @@
-import { DISPLAY_FATAL_ERROR } from "./errorScreenActions";
+import { DISPLAY_FATAL_ERROR } from "../../actions";
 
 export const fatalError = function(state = "", action) {
 	switch (action.type) {

@@ -1,31 +1,39 @@
-import { displayFatalError } from "../ErrorScreen/errorScreenActions";
+import { displayFatalError } from "../../actions";
 
 export const REQUEST_PHOTOS = Symbol("REQUEST_PHOTOS");
 const requestPhotos = (start, number) => ({
-	type: REQUEST_PHOTOS,
-	payload: {
-		start,
-		end: start + number - 1
-	}
+	type: REQUEST_PHOTOS
 });
 
 export const RECEIVE_PHOTOS = Symbol("RECEIVE_PHOTOS");
 const receivePhotos = json => ({
 	type: RECEIVE_PHOTOS,
 	payload: {
-		photos: json.data
+		photos: json.data,
+		hasMoreItems: json.hasMorePhotos
 	}
 });
 
-export const fetchPhotos = (start, number) => {
-	return function(dispatch) {
-		dispatch(requestPhotos(start, number));
+export const fetchPhotos = () => {
+	return function(dispatch, getState) {
+		const state = getState();
 
-		return fetch(getPhotosQuery(start, number))
+		const isFetching = state.photos.isFetching;
+		const hasMoreItems = state.photos.hasMoreItems;
+		if (isFetching || !hasMoreItems) {
+			return;
+		}
+
+		dispatch(requestPhotos());
+
+		const numberOfPhotos = Object.keys(state.photos.items).length;
+		return fetch(getPhotosQuery(numberOfPhotos, numberOfPhotosToLoad))
 			.then(response => handleResponse(response, dispatch))
 			.then(json => dispatch(receivePhotos(json)));
 	};
 };
+
+const numberOfPhotosToLoad = 25;
 
 function getPhotosQuery(start, number) {
 	return "photos?start=" + start + "&number=" + number;

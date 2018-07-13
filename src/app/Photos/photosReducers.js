@@ -3,6 +3,7 @@ import { REQUEST_PHOTOS, RECEIVE_PHOTOS } from "./photosActions";
 export const photos = function(
 	state = {
 		isFetching: false,
+		hasMoreItems: true,
 		items: {}
 	},
 	action
@@ -15,7 +16,8 @@ export const photos = function(
 		case RECEIVE_PHOTOS:
 			return {
 				isFetching: false,
-				items: Object.assign({}, state.items, action.payload.photos)
+				items: Object.assign({}, state.items, action.payload.photos),
+				hasMoreItems: action.payload.hasMoreItems
 			};
 		default:
 			return state;
