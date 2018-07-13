@@ -1,3 +1,5 @@
+@value darkgrey, orange, pink, yellow, lightblue, teal from "../global.css";
+
 .container {
 	position: absolute;
 	left: 0;
@@ -16,6 +18,7 @@
 	line-height: 35px;
 	vertical-align: middle;
 	font-size: 1.5em;
+	background-color: lightblue;
 }
 
 .tagList {

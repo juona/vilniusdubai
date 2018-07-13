@@ -1,14 +1,17 @@
+@value darkgrey, orange, pink, yellow, lightblue, teal from "../../global.css";
+
 .input {
 	display: none;
 }
 
 .label {
 	display: inline-block;
-	box-sizing: border-box;
-	margin: 20px;
-	width: 90px;
-	height: 30px;
 	cursor: pointer;
+	border-radius: 1px;
+	background-color: white;
+	border: 1px solid lightblue;
+	box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.25);
+	margin: 10px;
 }
 
 .button {
@@ -16,20 +19,20 @@
 	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
-	border-radius: 4px;
-	border: 1px solid #a1aec4;
-	background-color: #a1aec4;
 	text-align: center;
 	line-height: 29px;
 	vertical-align: middle;
 	text-transform: capitalize;
+	font-size: .8em;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
-.button:hover {
+.label:hover {
 	background-color: #4286f4;
 }
 
-.button:active {
+.label:active {
 	background-color: #02173a;
 }
 

@@ -5,4 +5,8 @@
 	bottom: 0;
 	right: -17px;
 	overflow-y: scroll;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
