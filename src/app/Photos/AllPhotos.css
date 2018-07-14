@@ -3,21 +3,12 @@
 	background: white;
 	padding: 0;
 	margin: 0;
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
 	width: 100%;
 }
 
 .listItem {
-	display: inline-block;
+	flex-grow: 4;
 	box-sizing: border-box;
-	text-align: center;
-	flex-grow: 1;
-	min-width: 350px;
-	vertical-align: middle;
-	line-height: 350px;
-	position: relative;
 	overflow: hidden;
 }
 
@@ -25,13 +16,4 @@
 	height: 100%;
 	width: calc(100% + 17px);
 	overflow-y: scroll;
-}
-
-.blurredPhoto {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-
 }

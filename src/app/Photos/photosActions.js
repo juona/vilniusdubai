@@ -14,7 +14,7 @@ export const RECEIVE_PHOTOS = Symbol("RECEIVE_PHOTOS");
 const receivePhotos = json => ({
 	type: RECEIVE_PHOTOS,
 	payload: {
-		tagsByPhotos: json.tagsByPhotos,
+		tagsAndSizes: json.tagsAndSizes,
 		photosByTags: json.photosByTags
 	}
 });

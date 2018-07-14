@@ -13,7 +13,7 @@ const exiftoolOutputRegex = /(IMG_\S*)\s+Subject\s*:\s*([a-z, ]+)/g;
 const thumbsDirectoryName = "thumbs";
 
 const allPhotoNames = Object.freeze(fs.readdirSync(photosPath));
-const allTags = Object.freeze(getTagsOfPhotos());
+const photosData = Object.freeze(getPhotosData());
 
 const app = express();
 
@@ -26,17 +26,16 @@ app.use(
 app.use(express.static(photosPath));
 
 app.get("/photos", (req, res) => {
-	allTags.tagsByPhotos
 	res.end(JSON.stringify({
-		photosByTags: photoMapToObject(allTags.photosByTags),
-		tagsByPhotos: photoMapToArray(allTags.tagsByPhotos)
+		photosByTags: photoMapToObject(photosData.photosByTags),
+		tagsAndSizes: photoMapToArray(photosData.tagsAndSizes)
 	}));
 });
 
 app.get("/tags", (req, res, next) => {
 	res.end(
 		JSON.stringify({
-			tags: Array.from(allTags.allTags)
+			tags: Array.from(photosData.allTags)
 		})
 	);
 });
@@ -48,37 +47,50 @@ function handleError(error, req, res, next) {
 	next(error);
 }
 
-function getTagsOfPhotos() {
-	const exiftoolOutput = execFileSync(exiftoolPath, [
+function getPhotosData() {
+	const lines = execFileSync(exiftoolPath, [
 		"-xmp:subject",
+		"-exif:exifimageheight",
+		"-exif:exifimagewidth",
 		photosPath
-	]);
+	]).toString('utf8').split("\r\n");
 
-	const allTags = {
+	const photosData = {
 		allTags: new Set(),
-		tagsByPhotos: new Map(),
+		tagsAndSizes: new Map(),
 		photosByTags: new Map()
 	};
 
-	let match, photoName, photoTags;
-	while ((match = exiftoolOutputRegex.exec(exiftoolOutput))) {
-		photoName = match[1];
-		photoTags = match[2].split(/, */);
+	const photoNameRegex = /(IMG_\S+)$/;
+	const tagsRegex = /^Subject\s+:\s+([a-z, ]+)/;
+	const heightRegex = /^Exif Image Height\D+(\d+)/;
+	const widthRegex = /^Exif Image Width\D+(\d+)/;
 
-		allTags.allTags = new Set([...allTags.allTags, ...photoTags]);
-		allTags.tagsByPhotos.set(photoName, photoTags);
+	let match, name, tags, height, width;
+	for (var lineIndex = 0; lineIndex < lines.length - 3; lineIndex += 4) {
+		name = photoNameRegex.exec(lines[lineIndex])[0];
+		tags = tagsRegex.exec(lines[lineIndex + 1])[1].split(/, */);
+		height = heightRegex.exec(lines[lineIndex + 2])[1];
+		width = widthRegex.exec(lines[lineIndex + 3])[1];
 
-		photoTags.forEach(tag => {
-			let photosByTag = allTags.photosByTags.get(tag);
+		photosData.allTags = new Set([...photosData.allTags, ...tags]);
+		photosData.tagsAndSizes.set(name, {
+			tags,
+			height,
+			width
+		});
+
+		tags.forEach(tag => {
+			let photosByTag = photosData.photosByTags.get(tag);
 			if (!photosByTag) {
 				photosByTag = new Set();
-				allTags.photosByTags.set(tag, photosByTag);
+				photosData.photosByTags.set(tag, photosByTag);
 			}
-			photosByTag.add(photoName);
+			photosByTag.add(name);
 		})
 	}
 	
-	return allTags;
+	return photosData;
 }
 
 const photoMapToArray = (map) => {
@@ -86,7 +98,9 @@ const photoMapToArray = (map) => {
 	map.forEach((value, key) => {
 		array.push({
 			name: key,
-			tags: value,
+			tags: value.tags,
+			height: value.height,
+			width: value.width,
 			thumbnail: path.join("thumbs", key)
 		})
 	});

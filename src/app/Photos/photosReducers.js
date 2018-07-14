@@ -19,7 +19,7 @@ export const photos = function(
 		case RECEIVE_PHOTOS:
 			return {
 				isFetching: false,
-				items: action.payload.tagsByPhotos,
+				items: action.payload.tagsAndSizes,
 				photosByTags: action.payload.photosByTags
 			};
 		default:
