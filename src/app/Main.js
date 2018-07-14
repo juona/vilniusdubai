@@ -1,31 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import AllPhotos from "./Photos/AllPhotos";
 import TagList from "./Tags/TagList";
 import ErrorScreen from "./ErrorScreen/ErrorScreen";
+import FullPhoto from "./Photos/FullPhoto";
 import Header from "./Header/Header";
-import { toggleTagList } from "../actions";
 import styles from "./Main.css";
 
-export const Main = ({ onTagsClick }) => (
+const Main = () => (
 	<div className={styles.container}>
 		<ErrorScreen />
-		<Header onTagsClick={onTagsClick}/>
+		<Header />
 		<TagList />
-		<div className={styles.photoList}>
-			<AllPhotos />
-		</div>
+		<AllPhotos />
+		<FullPhoto />
 	</div>
 );
 
-// Logic
-
-const mapDispatchToProps = dispatch => ({
-	onTagsClick: () => {
-		dispatch(toggleTagList());
-	}
-});
-
-export default connect(() => ({}),
-	mapDispatchToProps
-)(Main);
+export default Main;

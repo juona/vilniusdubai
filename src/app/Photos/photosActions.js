@@ -1,5 +1,13 @@
 import { displayFatalError } from "../../actions";
 
+export const TOGGLE_FULL_PHOTO = Symbol("TOGGLE_FULL_PHOTO");
+export const toggleFullPhoto = (photoName) => ({
+	type: TOGGLE_FULL_PHOTO,
+	payload: {
+		photoName
+	}
+});
+
 export const DISPLAY_MORE_PHOTOS = Symbol("DISPLAY_MORE_PHOTOS");
 export const displayMorePhotos = () => ({
 	type: DISPLAY_MORE_PHOTOS

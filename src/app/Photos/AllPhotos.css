@@ -16,7 +16,10 @@
 }
 
 .wrapper {
-	height: 100%;
-	width: calc(100% + 17px);
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: -17px;
+	bottom: 0;
 	overflow-y: scroll;
 }

@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Photo from "./Photo";
+import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
 import styles from "./AllPhotos.css";
-import { displayMorePhotos } from "../../actions";
 
 // Presentation
 
@@ -83,7 +83,7 @@ export class AllPhotos extends React.Component {
 			};
 			return (
 				<li key={photo.name} className={styles.listItem} style={style}>
-					<Photo photoURL={photo.thumbnail} />
+					<Photo photoURL={photo.thumbnail} onClick={this.props.onPhotoClick} fullPhotoURL={photo.name} />
 				</li>
 			);
 		});
@@ -110,6 +110,7 @@ AllPhotos.propTypes = {
 		})
 	).isRequired,
 	selectedTags: PropTypes.instanceOf(Set).isRequired,
+	onPhotoClick: PropTypes.func,
 	photosWrapperID: PropTypes.string,
 	photosContentsID: PropTypes.string,
 	handleScroll: PropTypes.func
@@ -147,6 +148,9 @@ const mapDispatchToProps = dispatch => ({
 		if (isBottom(wrappedElement, elementWrapper)) {
 			dispatch(displayMorePhotos());
 		}
+	},
+	onPhotoClick: (photoName) => {
+		dispatch(toggleFullPhoto(photoName));
 	}
 });
 

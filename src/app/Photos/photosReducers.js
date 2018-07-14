@@ -1,4 +1,4 @@
-import { DISPLAY_MORE_PHOTOS, REQUEST_PHOTOS, RECEIVE_PHOTOS } from "./photosActions";
+import { TOGGLE_FULL_PHOTO, DISPLAY_MORE_PHOTOS, REQUEST_PHOTOS, RECEIVE_PHOTOS } from "./photosActions";
 import { TOGGLE_TAG } from "../../actions";
 
 const PHOTO_NUMBER_INCREMENT = 25;
@@ -33,6 +33,15 @@ export const numberOfVisiblePhotos = function(state = PHOTO_NUMBER_INCREMENT, ac
 			return state + PHOTO_NUMBER_INCREMENT;
 		case TOGGLE_TAG:
 			return PHOTO_NUMBER_INCREMENT;
+		default:
+			return state;
+	}
+}
+
+export const visibleFullPhotoName  = function(state = null, action) {
+	switch (action.type) {
+		case TOGGLE_FULL_PHOTO:
+			return action.payload.photoName || null;
 		default:
 			return state;
 	}
