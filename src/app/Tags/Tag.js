@@ -10,7 +10,10 @@ const Tag = ({ onClick, isSelected, tagName }) => (
 			value={tagName}
 			className={styles.input}
 		/>
-		<span className={styles.button}>{tagName}</span>
+		<span className={styles.rotatedContainer}>
+			<span className={styles.button}>{tagName}</span>
+			<span className={styles.rotated}/>
+		</span>
 	</label>
 );
 

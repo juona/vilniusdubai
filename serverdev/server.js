@@ -35,7 +35,7 @@ app.get("/photos", (req, res) => {
 app.get("/tags", (req, res, next) => {
 	res.end(
 		JSON.stringify({
-			tags: Array.from(photosData.allTags)
+			tags: Array.from(photosData.allTags).sort()
 		})
 	);
 });

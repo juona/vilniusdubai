@@ -26,13 +26,14 @@
 	left: 0;
 	top: 70px;
 	bottom: 0;
-	width: 400px;
-	border-right: solid 1px grey;
+	right: 0;
+	z-index: 1;
+	background: rgba(30, 30, 30, 0.75);
 }
 
 .photoList {
 	position: absolute;
-	left: 401px;
+	left: 0px;
 	top: 70px;
 	bottom: 0;
 	right: 0;
