@@ -10,6 +10,11 @@ import { displayMorePhotos } from "../../actions";
 const rowMaxHeight = 250;
 
 export class AllPhotos extends React.Component {
+	constructor() {
+		super();
+		this.isScalingPhotos = false;
+	}
+
 	scrollToTop() {
 		document.getElementById(this.props.photosWrapperID).scrollTop = 0;
 	}
@@ -25,10 +30,16 @@ export class AllPhotos extends React.Component {
 		this.scalePhotos();
 	}
 
+	componentDidMount() {
+		//window.onresize = this.scalePhotos.bind(this);
+	}
+
 	scalePhotos() {
+		this.isScalingPhotos = true;
 		let wrapper = document.getElementById(this.props.photosContentsID);
 
 		if (!wrapper) {
+			this.isScalingPhotos = false;
 			return;
 		}
 
@@ -61,6 +72,7 @@ export class AllPhotos extends React.Component {
 			row = [];
 			totalWidth = 0;
 		}
+		this.isScalingPhotos = false;
 	}
 
 	render() {

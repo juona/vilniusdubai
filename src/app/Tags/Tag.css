@@ -29,7 +29,7 @@
 	height: 100%;
 	width: 100%;
 	left: 0;
-	background: white;
+	background: yellow;
 	transform: rotate(45deg);
 }
 
@@ -48,6 +48,6 @@
 	background-color: #02173a;
 }
 
-.input:checked + .button {
+.input:checked + .rotatedContainer > .rotated {
 	background-color: orange;
 }

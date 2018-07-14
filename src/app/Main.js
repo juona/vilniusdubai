@@ -3,23 +3,29 @@ import { connect } from "react-redux";
 import AllPhotos from "./Photos/AllPhotos";
 import TagList from "./Tags/TagList";
 import ErrorScreen from "./ErrorScreen/ErrorScreen";
+import Header from "./Header/Header";
+import { toggleTagList } from "../actions";
 import styles from "./Main.css";
 
-const Main = () => (
+export const Main = ({ onTagsClick }) => (
 	<div className={styles.container}>
 		<ErrorScreen />
-		<header className={styles.header}>
-			From Vilnius to Dubai
-			<br />
-			One bicycle trip in photos
-		</header>
-		<div className={styles.tagList}>
-			<TagList />
-		</div>
+		<Header onTagsClick={onTagsClick}/>
+		<TagList />
 		<div className={styles.photoList}>
 			<AllPhotos />
 		</div>
 	</div>
 );
 
-export default Main;
+// Logic
+
+const mapDispatchToProps = dispatch => ({
+	onTagsClick: () => {
+		dispatch(toggleTagList());
+	}
+});
+
+export default connect(() => ({}),
+	mapDispatchToProps
+)(Main);

@@ -1,12 +1,14 @@
 .tagList {
 	position: absolute;
-	top: 0;
+	top: 70px;
 	left: 0;
 	bottom: 0;
-	right: -17px;
-	overflow-y: scroll;
+	right: 0;
 	text-align: center;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	z-index: 1;
+	background: rgba(30, 30, 30, 0.75);
+}
+
+.tagListHidden {
+	display: none;
 }

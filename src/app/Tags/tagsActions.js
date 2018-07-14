@@ -6,6 +6,11 @@ export const toggleTag = tagName => ({
 	payload: { tagName }
 });
 
+export const TOGGLE_TAG_LIST = Symbol("TOGGLE_TAG_LIST");
+export const toggleTagList = () => ({
+	type: TOGGLE_TAG_LIST
+});
+
 export const REQUEST_TAGS = Symbol("REQUEST_TAGS");
 const requestTags = () => ({
 	type: REQUEST_TAGS

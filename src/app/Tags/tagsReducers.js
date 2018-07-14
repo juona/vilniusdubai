@@ -1,4 +1,4 @@
-import { TOGGLE_TAG, REQUEST_TAGS, RECEIVE_TAGS } from "./tagsActions";
+import { TOGGLE_TAG, TOGGLE_TAG_LIST, REQUEST_TAGS, RECEIVE_TAGS } from "./tagsActions";
 
 export const selectedTags = function(state = new Set(), action) {
 	switch (action.type) {
@@ -36,3 +36,12 @@ export const tags = function(
 	}
 	return state;
 };
+
+export const tagListVisible = function(state = false, action) {
+	switch (action.type) {
+		case TOGGLE_TAG_LIST:
+			return !state;
+		default:
+			return state;
+	}
+}
