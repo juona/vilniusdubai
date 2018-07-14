@@ -7,7 +7,7 @@ import { displayMorePhotos } from "../../actions";
 
 // Presentation
 
-const rowMaxHeight = 220;
+const rowMaxHeight = 250;
 
 export class AllPhotos extends React.Component {
 	scrollToTop() {
@@ -21,15 +21,53 @@ export class AllPhotos extends React.Component {
 		) {
 			this.scrollToTop();
 		}
+
+		this.scalePhotos();
+	}
+
+	scalePhotos() {
+		let wrapper = document.getElementById(this.props.photosContentsID);
+
+		if (!wrapper) {
+			return;
+		}
+
+		let wrapperWidth = wrapper.offsetWidth;
+		let elements = Array.from(wrapper.children);
+		let row = [];
+		let totalWidth = 0;
+		elements.forEach(element => {
+			var elementWidth = element.offsetWidth * rowMaxHeight / element.offsetHeight;
+			row.push(element);
+			totalWidth += elementWidth; // Plus margins from css
+
+			if (totalWidth > wrapperWidth) {
+				row.forEach((rowItem, index) => {
+					let ratio = wrapperWidth / totalWidth * rowMaxHeight / rowItem.offsetHeight;
+					let newHeight = Math.floor(rowItem.offsetHeight * ratio);
+					let newWidth = Math.floor(rowItem.offsetWidth * ratio);
+					rowItem.style = `height: ${newHeight}px; width: ${newWidth}px;`;
+				});
+				row = [];
+				totalWidth = 0;
+			}
+		});
+
+		if (row.length > 0) {
+			row.forEach(rowItem => {
+				let ratio = rowMaxHeight / rowItem.offsetHeight;
+				rowItem.style = `height: ${rowItem.offsetHeight * ratio}px; width: ${rowItem.offsetWidth * ratio}px;`;
+			});
+			row = [];
+			totalWidth = 0;
+		}
 	}
 
 	render() {
 		const rows = this.props.photos.map(photo => {
-			var height = rowMaxHeight + "px";
-			var width = rowMaxHeight * photo.width / photo.height + "px";
 			var style = {
-				height,
-				width
+				height: photo.height + "px",
+				width: photo.width + "px"
 			};
 			return (
 				<li key={photo.name} className={styles.listItem} style={style}>
