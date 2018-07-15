@@ -1,0 +1,22 @@
+.container {
+	composes: absolute-position from global;
+	z-index: 1000;
+	background: rgb(30, 30, 30);
+}
+
+.containerHidden {
+	display: none;
+}
+
+.error {
+	composes: absolute-position from global;
+	display: block;
+	height: 100px;
+	width: 100%;
+	margin: auto;
+	color: #ce3131;
+	font-size: 60px;
+	line-height: 100px;
+	vertical-align: middle;
+	text-align: center;
+}

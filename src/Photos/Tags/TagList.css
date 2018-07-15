@@ -1,0 +1,11 @@
+.tagList {
+	composes: absolute-position from global;
+	top: 70px;
+	text-align: center;
+	z-index: 1;
+	background: rgba(30, 30, 30, 0.75);
+}
+
+.tagListHidden {
+	display: none;
+}

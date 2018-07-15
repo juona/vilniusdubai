@@ -1,0 +1,9 @@
+.container {
+	composes: absolute-position from global;
+}
+
+.photoList {
+	composes: absolute-position from global;
+	overflow: hidden;
+	background: white;
+}

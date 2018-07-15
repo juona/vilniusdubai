@@ -1,0 +1,35 @@
+@value teal, white from "../../global.css";
+
+.header {
+	composes: absolute-position from global;
+	height: 70px;
+	text-align: center;
+	line-height: 35px;
+	color: white;
+	background-image: url("../../resources/gradient-background.png");
+	background-size: auto 100%;
+	background-position: 0 50%;
+	background-repeat: repeat-x;
+}
+
+.logo {
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	left: 20px;
+	top: calc(50% - 20px);
+	text-align: justify;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.logo span {
+	background-image: url("../../resources/bike.png");
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	width: 80px;
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}

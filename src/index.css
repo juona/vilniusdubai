@@ -1,8 +1,9 @@
-@value white, darkgrey from "./global.css";
+@value white, darkgrey, font from "./global.css";
 
 :global body {
-	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-family: font;
 	color: darkgrey;
 	background-color: white;
 	overflow: hidden;
+	margin: 0;
 }

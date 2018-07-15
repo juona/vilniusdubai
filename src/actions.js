@@ -1,6 +1,6 @@
-export * from "./app/Photos/photosActions";
-export * from "./app/Tags/tagsActions";
-export * from "./app/ErrorScreen/errorScreenActions";
+export * from "./Photos/Photos/photosActions";
+export * from "./Photos/Tags/tagsActions";
+export * from "./Photos/ErrorScreen/errorScreenActions";;
 
 /*
 	Flux standard action:

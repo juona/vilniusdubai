@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import * as tagsReducers from "./app/Tags/tagsReducers";
-import * as photosReducers from "./app/Photos/photosReducers";
-import * as errorScreenReducers from "./app/ErrorScreen/errorScreenReducers";
+import * as tagsReducers from "./Photos/Tags/tagsReducers";
+import * as photosReducers from "./Photos/Photos/photosReducers";
+import * as errorScreenReducers from "./Photos/ErrorScreen/errorScreenReducers";
 
 export default combineReducers(Object.assign({}, tagsReducers, photosReducers, errorScreenReducers));
 

@@ -1,0 +1,53 @@
+@value darkgrey, orange, pink, yellow, lightblue, teal from "../../global.css";
+
+.input {
+	display: none;
+}
+
+.label {
+	height: 100px;
+	width: 100px;
+	margin: 2px;
+	position: absolute;
+	text-align: center;
+	overflow: hidden;
+}
+
+.rotatedContainer {
+	transform: scale(1.2, 0.707);
+	display: flex;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.rotated {
+	overflow: hidden;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	background: yellow;
+	transform: rotate(45deg);
+}
+
+.button {
+	transform: scale(0.833, 1.414);
+	text-transform: capitalize;
+	position: absolute;
+	z-index: 1;
+}
+
+.rotated:hover, .button:hover + .rotated {
+	background-color: #4286f4;
+}
+
+.rotated:active, .button:active + .rotated {
+	background-color: #02173a;
+}
+
+.input:checked + .rotatedContainer > .rotated {
+	background-color: orange;
+}

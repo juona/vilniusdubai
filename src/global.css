@@ -1,7 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Ewert|Lobster|Pacifico');
+
+@value font: 'Montserrat', sans-serif;
+@value ewert: 'Ewert', sans-serif;
+
 @value darkgrey: #272727;
 @value orange: #fc6922;
 @value pink: #e4966c;
 @value yellow: #ffe251;
 @value lightblue: #4d9294;
 @value teal: #13494c;
-@value white: #f7faff
+@value white: #f7faff;
+
+:global .absolute-position {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
