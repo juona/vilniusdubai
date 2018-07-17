@@ -1,4 +1,4 @@
-import { displayFatalError } from "../../actions";
+import HttpUtils from "../../common/http-utils";
 
 export const TOGGLE_FULL_PHOTO = Symbol("TOGGLE_FULL_PHOTO");
 export const toggleFullPhoto = (photoName) => ({
@@ -27,20 +27,4 @@ const receivePhotos = json => ({
 	}
 });
 
-export const fetchPhotos = () => {
-	return function(dispatch, getState) {
-		dispatch(requestPhotos());
-		return fetch("photos")
-			.then(response => handleResponse(response, dispatch))
-			.then(json => dispatch(receivePhotos(json)));
-	};
-};
-
-function handleResponse(response, dispatch) {
-	if (response.status === 500) {
-		dispatch(displayFatalError("Server Error!"));
-		return Promise.reject();
-	} else {
-		return response.json();
-	}
-}
+export const fetchPhotos = () => HttpUtils.fetchData("photos", requestPhotos, receivePhotos);

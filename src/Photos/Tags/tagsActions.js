@@ -1,4 +1,4 @@
-import { displayFatalError } from "../../actions";
+import HttpUtils from "../../common/http-utils";
 
 export const TOGGLE_TAG = Symbol("TOGGLE_TAG");
 export const toggleTag = tagName => ({
@@ -24,21 +24,4 @@ const receiveTags = json => ({
 	}
 });
 
-export const fetchTags = () => {
-	return function(dispatch) {
-		dispatch(requestTags());
-
-		return fetch("tags")
-			.then(response => handleResponse(response, dispatch))
-			.then(json => dispatch(receiveTags(json)));
-	};
-};
-
-function handleResponse(response, dispatch) {
-	if (response.status === 500) {
-		dispatch(displayFatalError("Server Error!"));
-		return Promise.reject("test");
-	} else {
-		return response.json();
-	}
-}
+export const fetchTags = () => HttpUtils.fetchData("tags", requestTags, receiveTags);

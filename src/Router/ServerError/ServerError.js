@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./ServerError.css";
 
@@ -13,10 +12,4 @@ ServerError.propTypes = {
 	errorMessage: PropTypes.string.isRequired
 };
 
-// Logic
-
-const mapStateToProps = state => ({
-	errorMessage: state.fatalError
-});
-
-export default connect(mapStateToProps)(ServerError);
+export default ServerError;
