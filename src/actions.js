@@ -1,6 +1,6 @@
 export * from "./Photos/Photos/photosActions";
 export * from "./Photos/Tags/tagsActions";
-export * from "./Photos/ErrorScreen/errorScreenActions";;
+export * from "./Router/ServerError/serverErrorActions";;
 
 /*
 	Flux standard action:

@@ -6,7 +6,6 @@ const PHOTO_NUMBER_INCREMENT = 25;
 export const photos = function(
 	state = {
 		isFetching: false,
-		hasMoreItems: true,
 		items: []
 	},
 	action

@@ -37,7 +37,7 @@ export const tags = function(
 	return state;
 };
 
-export const tagListVisible = function(state = false, action) {
+export const isTagListVisible = function(state = false, action) {
 	switch (action.type) {
 		case TOGGLE_TAG_LIST:
 			return !state;

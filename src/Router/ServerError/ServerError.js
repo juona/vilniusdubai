@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import styles from "./ErrorScreen.css";
+import styles from "./ServerError.css";
 
-const ErrorScreen = ({ errorMessage }) => (
+const ServerError = ({ errorMessage }) => (
 	<div className={errorMessage ? styles.container : styles.containerHidden}>
 		<span className={styles.error}>{errorMessage}</span>
 	</div>
 );
 
-ErrorScreen.propTypes = {
+ServerError.propTypes = {
 	errorMessage: PropTypes.string.isRequired
 };
 
@@ -19,4 +19,4 @@ const mapStateToProps = state => ({
 	errorMessage: state.fatalError
 });
 
-export default connect(mapStateToProps)(ErrorScreen);
+export default connect(mapStateToProps)(ServerError);

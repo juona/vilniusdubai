@@ -1,26 +1,34 @@
 import { combineReducers } from "redux";
 import * as tagsReducers from "./Photos/Tags/tagsReducers";
 import * as photosReducers from "./Photos/Photos/photosReducers";
-import * as errorScreenReducers from "./Photos/ErrorScreen/errorScreenReducers";
+import * as serverErrorReducers from "./Router/ServerError/serverErrorReducers";
 
-export default combineReducers(Object.assign({}, tagsReducers, photosReducers, errorScreenReducers));
+export default combineReducers(Object.assign({}, tagsReducers, photosReducers, serverErrorReducers));
 
 /*
 	State structure
 
 	{
 		selectedTags: Set,
+		isTagListVisible: false,
 		numberOfVisiblePhotos: 25,
+		visibleFullPhotoName: "",
 		photos: {
 			isFetching: false,
 			items: [
 				{
-					photoName: _photoName1_,
-					tags: [_tag1_, _tag2_]
+					name: _photoName1_,
+					tags: [_tag1_, _tag2_],
+					height: 1200,
+					width: 1600,
+					thumbnail: "thumbs/_photoName1_"
 				},
 				{
-					photoName: _photoName2_,
-					tags: [_tag1_, _tag4_]
+					name: _photoName2_,
+					tags: [_tag1_, _tag4_],
+					height: 1200,
+					width: 1600,
+					thumbnail: "thumbs/_photoName2_"
 				}
 			],
 			photosByTags: {

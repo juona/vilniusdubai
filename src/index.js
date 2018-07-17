@@ -5,10 +5,10 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import logger from 'redux-logger';
 
-import Router from "./router";
+import Router from "./Router/Router";
 import reducers from "./reducers";
 import { fetchTags, fetchPhotos } from "./actions";
-import styles from "./index.css";
+import styles from "./global.css";
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
 

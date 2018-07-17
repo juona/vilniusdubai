@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
 	tags: state.tags.items,
 	tagsWrapperID: tagsWrapperID,
-	isVisible: state.tagListVisible
+	isVisible: state.isTagListVisible
 });
 
 export default connect(

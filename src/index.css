@@ -1,9 +1,0 @@
-@value white, darkgrey, font from "./global.css";
-
-:global body {
-	font-family: font;
-	color: darkgrey;
-	background-color: white;
-	overflow: hidden;
-	margin: 0;
-}

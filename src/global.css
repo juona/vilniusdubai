@@ -18,3 +18,11 @@
 	bottom: 0;
 	right: 0;
 }
+
+:global body {
+	font-family: font;
+	color: darkgrey;
+	background-color: white;
+	overflow: hidden;
+	margin: 0;
+}

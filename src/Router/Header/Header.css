@@ -2,6 +2,7 @@
 
 .header {
 	composes: absolute-position from global;
+	z-index: 10;
 	height: 70px;
 	text-align: center;
 	line-height: 35px;
