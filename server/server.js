@@ -3,27 +3,39 @@ const webpack = require("webpack");
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
-const webpackDevMiddleware = require("webpack-dev-middleware");
-const config = require("../webpack.dev.js");
-const compiler = webpack(config);
 
-const photosPath = path.join(__dirname, "../photos/");
-const exiftoolPath = path.join(__dirname, "../bin/exiftool");
-const exiftoolOutputRegex = /(IMG_\S*)\s+Subject\s*:\s*([a-z, ]+)/g;
-const thumbsDirectoryName = "thumbs";
+const PHOTOS_PATH = path.join(__dirname, "../photos/");
+const EXIFTOOL_PATH = path.join(__dirname, "../bin/exiftool");
+const DEFAULT_PORT = 8080;
+const THUMBS_DIRECTORY_NAME = "thumbs";
 
-const allPhotoNames = Object.freeze(fs.readdirSync(photosPath));
+const allPhotoNames = Object.freeze(fs.readdirSync(PHOTOS_PATH));
 const photosData = Object.freeze(getPhotosData());
 
 const app = express();
 
-app.use(
-	webpackDevMiddleware(compiler, {
-		publicPath: config.output.publicPath
-	})
-);
+const isDevelopment  = app.get('env') !== "production";
 
-app.use(express.static(photosPath));
+app.set("port", process.env.PORT || DEFAULT_PORT);
+
+if (isDevelopment) {
+	const webpackDevMiddleware = require("webpack-dev-middleware");
+	const config = require("../webpack.dev.js");
+	const compiler = webpack(config);
+
+	app.use(
+		webpackDevMiddleware(compiler, {
+			publicPath: config.output.publicPath
+		})
+	);
+
+} else {
+	app.use(express.static(path.join(__dirname, "../build/")));
+
+	app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../build/index.html")));
+}
+
+app.use(express.static(PHOTOS_PATH));
 
 app.get("/photos", (req, res) => {
 	res.end(JSON.stringify({
@@ -48,11 +60,11 @@ function handleError(error, req, res, next) {
 }
 
 function getPhotosData() {
-	const lines = execFileSync(exiftoolPath, [
+	const lines = execFileSync(EXIFTOOL_PATH, [
 		"-xmp:subject",
 		"-exif:exifimageheight",
 		"-exif:exifimagewidth",
-		photosPath
+		PHOTOS_PATH
 	]).toString('utf8').split("\r\n");
 
 	const photosData = {
@@ -115,4 +127,4 @@ const photoMapToObject = map => {
 	return object;
 }
 
-app.listen(8080, () => console.log("Server running on 8080..."));
+app.listen(app.get("port"), () => console.log(`Server running on ${app.get("port")}...`));
