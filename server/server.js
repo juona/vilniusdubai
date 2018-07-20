@@ -17,9 +17,9 @@ const photosData = Object.freeze(getPhotosData());
 
 const app = express();
 
-const isDevelopment  = app.get('env') !== "production";
+const isDevelopment = app.get("env") !== "production";
 
-console.log(`Production mode: ${!isDevelopment}`)
+console.log(`Production mode: ${!isDevelopment}`);
 
 app.set("port", process.env.PORT || DEFAULT_PORT);
 
@@ -33,7 +33,6 @@ if (isDevelopment) {
 			publicPath: config.output.publicPath
 		})
 	);
-
 } else {
 	app.use(express.static(BUILD_PATH));
 
@@ -43,10 +42,12 @@ if (isDevelopment) {
 app.use(express.static(PHOTOS_PATH));
 
 app.get("/photos", (req, res) => {
-	res.end(JSON.stringify({
-		photosByTags: photoMapToObject(photosData.photosByTags),
-		tagsAndSizes: photoMapToArray(photosData.tagsAndSizes)
-	}));
+	res.end(
+		JSON.stringify({
+			photosByTags: photoMapToObject(photosData.photosByTags),
+			tagsAndSizes: photoMapToArray(photosData.tagsAndSizes)
+		})
+	);
 });
 
 app.get("/tags", (req, res, next) => {
@@ -70,7 +71,9 @@ function getPhotosData() {
 		"-exif:exifimageheight",
 		"-exif:exifimagewidth",
 		PHOTOS_PATH
-	]).toString('utf8').split("\r\n");
+	])
+		.toString("utf8")
+		.split("\r\n");
 
 	const photosData = {
 		allTags: new Set(),
@@ -104,13 +107,13 @@ function getPhotosData() {
 				photosData.photosByTags.set(tag, photosByTag);
 			}
 			photosByTag.add(name);
-		})
+		});
 	}
-	
+
 	return photosData;
 }
 
-const photoMapToArray = (map) => {
+const photoMapToArray = map => {
 	let array = [];
 	map.forEach((value, key) => {
 		array.push({
@@ -119,17 +122,19 @@ const photoMapToArray = (map) => {
 			height: value.height,
 			width: value.width,
 			thumbnail: path.join("thumbs", key)
-		})
+		});
 	});
 	return array;
-}
+};
 
 const photoMapToObject = map => {
 	let object = {};
 	map.forEach((value, key) => {
-		object[key] = Array.from(value)
+		object[key] = Array.from(value);
 	});
 	return object;
-}
+};
 
-app.listen(app.get("port"), () => console.log(`Server running on ${app.get("port")}...`));
+app.listen(app.get("port"), () =>
+	console.log(`Server running on ${app.get("port")}...`)
+);
