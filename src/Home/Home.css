@@ -15,6 +15,43 @@
 	overflow: hidden;
 }
 
+.hackShadowContainer {
+	position: absolute;
+	top: calc(70px + 5%);
+	width: 10%;
+	bottom: 10%;
+	overflow: hidden;
+	display: none;
+}
+
+.hackShadowContainerLeft {
+	composes: hackShadowContainer;
+	left: 0;
+	display: block;
+}
+
+.hackShadowContainerRight {
+	composes: hackShadowContainer;
+	right: 0;
+	display: block;
+}
+
+.hackShadow {
+	position: absolute;
+	top: 5%;
+	bottom: 5%;
+	width: 0;
+	box-shadow: 0 0 15px 15px rgba(200, 200, 200, .8);
+}
+
+.hackShadowContainerLeft .hackShadow {
+	right: 0;
+}
+
+.hackShadowContainerRight .hackShadow {
+	left: 0;
+}
+
 .menu {
 	composes: absolute-position from global;
 	left: -20%;
@@ -23,7 +60,6 @@
 	align-items: center;
 	justify-content: space-around;
 	transform: skewX(-30deg);
-	z-index: 1;
 }
 
 .linkPhotos {

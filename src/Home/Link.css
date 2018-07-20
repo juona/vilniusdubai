@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Ewert|Lobster|Pacifico');
 
 .link {
+	flex-grow: 1;
 	display: flex;
 	align-items: center;
-	transform-origin: center;
-	background: rgba(0, 0, 0, .8);
 	height: 90%;
 	cursor: pointer;
 	font-size: 7rem;
@@ -13,11 +12,10 @@
 	text-decoration: none;
 	color: white;
 	transition: flex-grow .3s ease-in-out;
-	flex-grow: 1;
 }
 
 .link:hover {
 	box-shadow: 0 0 15px 15px rgba(200, 200, 200, .8);
-	z-index: 4;
 	flex-grow: 1.3;
+	z-index: 1;
 }
