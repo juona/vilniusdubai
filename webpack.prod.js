@@ -52,9 +52,9 @@ module.exports = merge(common, {
 			{
 				test: /\.(png|jpg|jpeg)$/,
 				loader: "url-loader",
-				options: { 
-                    limit: 100000
-                } 
+				options: {
+					limit: 100000
+				}
 			}
 		]
 	}
