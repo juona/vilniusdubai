@@ -9,12 +9,17 @@ const EXIFTOOL_PATH = path.join(__dirname, "../bin/exiftool");
 const DEFAULT_PORT = 8080;
 const THUMBS_DIRECTORY_NAME = "thumbs";
 
+const BUILD_PATH = path.join(__dirname, "../build/");
+const INDEX_FILE = path.join(BUILD_PATH, "index.html");
+
 const allPhotoNames = Object.freeze(fs.readdirSync(PHOTOS_PATH));
 const photosData = Object.freeze(getPhotosData());
 
 const app = express();
 
 const isDevelopment  = app.get('env') !== "production";
+
+console.log(`Production mode: ${!isDevelopment}`)
 
 app.set("port", process.env.PORT || DEFAULT_PORT);
 
@@ -30,9 +35,9 @@ if (isDevelopment) {
 	);
 
 } else {
-	app.use(express.static(path.join(__dirname, "../build/")));
+	app.use(express.static(BUILD_PATH));
 
-	app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../build/index.html")));
+	app.get("/", (req, res) => res.sendFile(INDEX_FILE));
 }
 
 app.use(express.static(PHOTOS_PATH));
