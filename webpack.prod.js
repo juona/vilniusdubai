@@ -35,13 +35,26 @@ module.exports = merge(common, {
 					{
 						loader: MiniCssExtractPlugin.loader
 					},
-					"css-loader"
+					{
+						loader: "css-loader",
+						options: {
+							modules: true,
+							localIdentName: "[name]__[local]___[hash:base64:5]"
+						}
+					}
 				]
 			},
 			{
 				test: /\.js(x?)$/,
 				exclude: /node_modules/,
 				loader: "babel-loader"
+			},
+			{
+				test: /\.(png|jpg|jpeg)$/,
+				loader: "url-loader",
+				options: { 
+                    limit: 100000
+                } 
 			}
 		]
 	}
