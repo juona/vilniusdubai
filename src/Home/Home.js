@@ -44,27 +44,33 @@ export default class Home extends React.Component {
 					<div className={styles.hackShadow} />
 				</div>
 				<div className={styles.menuContainer}>
-					<nav className={styles.menu}>
-						<Link
-							to="/photos"
-							className={styles.linkPhotos}
-							onMouseEnter={this.toggleLeftShadow}
-							onMouseLeave={this.toggleLeftShadow}
-						>
-							<span className={styles.textNode}>Gallery</span>
-						</Link>
-						<Link to="/map" className={styles.linkMap}>
-							<span className={styles.textNode}>Map</span>
-						</Link>
-						<Link
-							to="/stories"
-							className={styles.linkAbout}
-							onMouseEnter={this.toggleRightShadow}
-							onMouseLeave={this.toggleRightShadow}
-						>
-							<span className={styles.textNode}>Stories</span>
-						</Link>
-					</nav>
+						<nav className={styles.menu}>
+							<Link
+								to="/photos"
+								className={styles.linkPhotos}
+								onMouseEnter={this.toggleLeftShadow}
+								onMouseLeave={this.toggleLeftShadow}
+							>
+								<span className={styles.textNode}>Gallery</span>
+								<div className={styles.linkBackground}></div>
+							</Link>
+							<Link to="/map" className={styles.linkMap}>
+								<span className={styles.textNode}>Map</span>
+								<div className={styles.linkBackground}></div>
+							</Link>
+							<Link
+								to="/stories"
+								className={styles.linkAbout}
+								onMouseEnter={this.toggleRightShadow}
+								onMouseLeave={this.toggleRightShadow}
+							>
+								<span className={styles.textNode}>Stories</span>
+								<div className={styles.linkBackground}></div>
+							</Link>
+						</nav>
+				</div>
+				<div className={styles.menuShadowContainer}>
+					<div className={styles.menuShadow}></div>
 				</div>
 			</div>
 		);

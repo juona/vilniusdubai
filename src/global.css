@@ -11,7 +11,9 @@
 @value teal: #13494c;
 @value white: #f7faff;
 
-@value backgroundDim: rgba(0, 0, 0, 0.8);
+@value backgroundDim: rgba(0, 0, 0, 0.9);
+
+@value headerHeight: 70px;
 
 :global .absolute-position {
 	position: absolute;

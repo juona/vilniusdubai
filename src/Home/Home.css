@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Ewert|Lobster|Pacifico');
 
+@value selectedShadow: 0 0 5px 5px rgba(200, 200, 200, .8);
+@value white, headerHeight from "../global.css";
+
+/* Background */
+
 .container {
 	composes: absolute-position from global;
 	background: url("../resources/background.jpeg");
@@ -8,21 +13,29 @@
 	overflow: hidden;
 }
 
-.menuContainer {
+/* Menu container */
+
+.menuContainerBase {
 	position: absolute;
-	top: calc(70px + 5%);
+	top: calc(headerHeight + 5%);
 	bottom: 10%;
-	left: 10%;
-	right: 10%;
+	z-index: 1;
 	overflow: hidden;
 }
 
+.menuContainer {
+	composes: menuContainerBase;
+	left: 10%;
+	right: 10%;
+	display: flex;
+	align-items: center;
+}
+
+/* Hack shadows */
+
 .hackShadowContainer {
-	position: absolute;
-	top: calc(70px + 5%);
+	composes: menuContainerBase;
 	width: 10%;
-	bottom: 10%;
-	overflow: hidden;
 	display: none;
 }
 
@@ -43,7 +56,7 @@
 	top: 5%;
 	bottom: 5%;
 	width: 0;
-	box-shadow: 0 0 15px 15px rgba(200, 200, 200, .8);
+	box-shadow: selectedShadow;
 }
 
 .hackShadowContainerLeft .hackShadow {
@@ -54,8 +67,12 @@
 	left: 0;
 }
 
+/* Menu and its main shadow */
+
 .menu {
-	composes: absolute-position from global;
+	position: absolute;
+	top: 5%;
+	bottom: 5%;
 	left: -20%;
 	right: -20%;
 	display: flex;
@@ -64,23 +81,36 @@
 	transform: skewX(-30deg);
 }
 
+.menuShadowContainer {
+	composes: menuContainer;
+	z-index: 0;
+	overflow: visible;
+}
+
+.menuShadow {
+	position: absolute;
+	top: 5%;
+	bottom: 5%;
+	left: 0;
+	right: 0;
+	box-shadow: 0 0 5px 5px rgba(30, 30, 30, 0.5);
+}
+
+/* Default link styles */
+
 .link {
 	flex-grow: 1;
+	position: relative;
 	display: flex;
 	align-items: center;
-	height: 90%;
+	height: 100.1%;
 	cursor: pointer;
 	font-size: 7rem;
 	font-weight: bold;
 	text-decoration: none;
 	color: white;
 	transition: flex-grow .3s ease-in-out;
-}
-
-.link:hover {
-	box-shadow: 0 0 15px 15px rgba(200, 200, 200, .8);
-	flex-grow: 1.3;
-	z-index: 1;
+	overflow: hidden;
 }
 
 .linkPhotos {
@@ -99,8 +129,8 @@
 }
 
 .textNode {
+	z-index: 1;
 	flex-grow: 1;
-	transform: skewX(30deg);
 	text-align: center;
 }
 
@@ -108,6 +138,46 @@
 	transform: skewX(30deg) translate(25%, -100%);
 }
 
+.linkMap .textNode {
+	transform: skewX(30deg);
+}
+
 .linkAbout .textNode {
 	transform: skewX(30deg) translate(-25%, 100%);
+}
+
+/* Hover backgrounds */
+
+.linkBackground {
+	transform: skewX(30deg);
+	position: absolute;
+	left: -50%;
+	top: -5%;
+	max-width: 200%;
+	width: 200%;
+	height: 110%;
+	opacity: 0;
+	transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+}
+
+.linkMap .linkBackground {
+	background-image: url("../resources/map.png");
+	background-position: 50% 50%;
+}
+
+.linkPhotos .linkBackground {
+	background-image: url("../resources/photos.png");
+	background-position: 50% 50%;
+}
+
+/* Hover */
+
+.link:hover {
+	box-shadow: selectedShadow;
+	flex-grow: 1.3;
+	z-index: 1;
+}
+
+.link:hover .linkBackground {
+	opacity: 0.6;
 }

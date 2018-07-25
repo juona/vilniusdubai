@@ -1,9 +1,9 @@
-@value white from "../../global.css";
+@value white, headerHeight from "../../global.css";
 
 .header {
 	composes: absolute-position from global;
 	z-index: 10;
-	height: 70px;
+	height: headerHeight;
 	color: white;
 	background-image: url("../../resources/gradient-background.png");
 	background-size: auto 100%;
