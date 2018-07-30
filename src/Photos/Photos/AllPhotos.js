@@ -95,9 +95,11 @@ export class AllPhotos extends React.Component {
 				id={this.props.photosWrapperID}
 				className={styles.wrapper}
 			>
-				<ul className={styles.list} id={this.props.photosContentsID}>
-					{rows}
-				</ul>
+				<div className={styles.scrollContainer}>
+					<ul className={styles.list} id={this.props.photosContentsID}>
+						{rows}
+					</ul>
+				</div>
 			</div>
 		);
 	}

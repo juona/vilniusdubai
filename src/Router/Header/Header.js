@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Route } from "react-router-dom";
+import Menu from "./Menu";
 import styles from "./Header.css";
 
 const Header = ({ children, className }) => {
@@ -10,7 +12,7 @@ const Header = ({ children, className }) => {
 	return (
 		<header className={headerClassName}>
 			<span className={styles.logo}/>
-			{children}
+			<Route exact path="/photos" component={Menu} />
 		</header>
 	);
 };

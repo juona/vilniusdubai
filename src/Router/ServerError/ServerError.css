@@ -1,5 +1,5 @@
 .container {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 	z-index: 1000;
 	background: rgb(30, 30, 30);
 }
@@ -9,7 +9,7 @@
 }
 
 .error {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 	display: block;
 	height: 100px;
 	width: 100%;

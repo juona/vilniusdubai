@@ -1,9 +1,9 @@
 .container {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 }
 
 .photoList {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 	overflow: hidden;
 	background: white;
 }

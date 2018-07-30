@@ -15,7 +15,7 @@
 
 @value headerHeight: 70px;
 
-:global .absolute-position {
+:global .absolutePosition {
 	position: absolute;
 	left: 0;
 	top: 0;

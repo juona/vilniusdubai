@@ -1,7 +1,7 @@
 @value backgroundDim, headerHeight from "../../global.css";
 
 .tagList {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 	top: headerHeight;
 	text-align: center;
 	z-index: 1;

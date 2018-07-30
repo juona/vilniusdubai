@@ -1,12 +1,12 @@
-@value white from "../../global.css";
+@value white, headerHeight, backgroundDim from "../../global.css";
 
 .list {
 	list-style: none;
-	background: white;
 	padding: 0;
 	padding-top: 2px;
-	margin: 0;
-	width: 100%;
+	padding-bottom: 2px;
+	margin: 0 auto;
+	width: 960px;
 	line-height: 0;
 	text-align: center;
 }
@@ -19,7 +19,15 @@
 }
 
 .wrapper {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
 	right: -17px;
+	background: backgroundDim;
+	overflow: hidden;
+}
+
+.scrollContainer {
+	composes: absolutePosition from global;
+	top: headerHeight;
+	bottom: calc(headerHeight / 2);
 	overflow-y: scroll;
 }

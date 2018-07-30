@@ -1,7 +1,8 @@
 @value backgroundDim from "../../global.css";
 
 .background {
-	composes: absolute-position from global;
+	composes: absolutePosition from global;
+	z-index: 2;
 	background-color: backgroundDim;
 	display: flex;
 	align-items: center;
