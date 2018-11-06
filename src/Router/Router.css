@@ -1,7 +1,4 @@
 .container {
 	composes: absolutePosition from global;
-	background: url("../resources/background.jpeg");
-	background-size: 100% auto;
-	background-position: 50% 40%; 
 	overflow: hidden;
 }

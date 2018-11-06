@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Ewert|Lobster|Pacifico');
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 @value selectedShadow: 0 0 5px 5px rgba(200, 200, 200, .8);
 @value white, headerHeight from "../global.css";
@@ -6,178 +6,162 @@
 /* Background */
 
 .container {
-	composes: absolutePosition from global;
-	background: url("../resources/background.jpeg");
-	background-size: 100% auto;
-	background-position: 50% 35%;
+  composes: absolutePosition from global;
 	overflow: hidden;
+	background-image: radial-gradient(circle farthest-corner at top right, #0f2027 0%, #0f2027 49%, #203a43 75%, #2c5364 100%);
 }
 
-/* Menu container */
-
-.menuContainerBase {
-	position: absolute;
-	top: calc(headerHeight + 5%);
-	bottom: 10%;
-	z-index: 1;
-	overflow: hidden;
+.mapContainer {
+  position: absolute;
+  top: 10vmin;
+  left: 0;
+  right: 0;
+  height: 80vmin;
 }
 
-.menuContainer {
-	composes: menuContainerBase;
-	left: 10%;
-	right: 10%;
-	display: flex;
-	align-items: center;
+.showPhotosForCountry {
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-/* Hack shadows */
-
-.hackShadowContainer {
-	composes: menuContainerBase;
-	width: 10%;
-	display: none;
+.showPhotosForCountry > div:first-child {
+  transform: translateX(-60px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
 }
 
-.hackShadowContainerLeft {
-	composes: hackShadowContainer;
-	left: 0;
-	display: block;
+.showPhotosForCountry > div:last-child {
+  transform: translateX(60px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
 }
 
-.hackShadowContainerRight {
-	composes: hackShadowContainer;
+.showPhotosForCountry.hover > div:first-child,
+.showPhotosForCountry.hover > div:last-child {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.showPhotosForCountry.lt {
+  top: 15%;
+  right: 20%;
+}
+
+.showPhotosForCountry.by {
+  top: 27%;
+  right: 20%;
+}
+
+.showPhotosForCountry.ua {
+  top: 25%;
+  right: 25%;
+}
+
+.showPhotosForCountry.ro {
+  top: 12%;
+  right: 16%;
+}
+
+.showPhotosForCountry.bg {
+  top: 19%;
+  right: 23%;
+}
+
+.showPhotosForCountry.tr {
+  top: 17%;
+  right: 21%;
+}
+
+.showPhotosForCountry.ge {
+  top: 23%;
+  right: 25%;
+}
+
+.showPhotosForCountry.az {
+  top: 14%;
+  right: 18%;
+}
+
+.showPhotosForCountry.ir {
+  top: 29%;
+  right: 19%;
+}
+
+.showPhotosForCountry.ae {
+  top: 21%;
+  right: 14%;
+}
+
+.examplePhoto, .examplePhotoMask {
+  position: absolute;
+  top: 0;
 	right: 0;
-	display: block;
+	bottom: 0;
 }
 
-.hackShadow {
-	position: absolute;
-	top: 5%;
-	bottom: 5%;
-	width: 0;
-	box-shadow: selectedShadow;
-}
-
-.hackShadowContainerLeft .hackShadow {
-	right: 0;
-}
-
-.hackShadowContainerRight .hackShadow {
-	left: 0;
-}
-
-/* Menu and its main shadow */
-
-.menu {
-	position: absolute;
-	top: 5%;
-	bottom: 5%;
-	left: -20%;
-	right: -20%;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	transform: skewX(-30deg);
-}
-
-.menuShadowContainer {
-	composes: menuContainer;
-	z-index: 0;
-	overflow: visible;
-}
-
-.menuShadow {
-	position: absolute;
-	top: 5%;
-	bottom: 5%;
-	left: 0;
-	right: 0;
-	box-shadow: 0 0 5px 5px rgba(30, 30, 30, 0.5);
-}
-
-/* Default link styles */
-
-.link {
-	flex-grow: 1;
-	position: relative;
-	display: flex;
-	align-items: center;
-	height: 100.1%;
-	cursor: pointer;
-	font-size: 7rem;
-	font-weight: bold;
-	text-decoration: none;
-	color: white;
-	transition: flex-grow .3s ease-in-out;
-	overflow: hidden;
-}
-
-.linkPhotos {
-	composes: link;
-	background-color: rgba(79, 79, 20, 0.8);
-}
-
-.linkMap {
-	composes: link;
-	background-color: rgba(7, 61, 8, 0.8);
-}
-
-.linkAbout {
-	composes: link;
-	background-color: rgba(79, 0, 0, 0.8);
-}
-
-.textNode {
-	z-index: 1;
-	flex-grow: 1;
-	text-align: center;
-}
-
-.linkPhotos .textNode {
-	transform: skewX(30deg) translate(25%, -100%);
-}
-
-.linkMap .textNode {
-	transform: skewX(30deg);
-}
-
-.linkAbout .textNode {
-	transform: skewX(30deg) translate(-25%, 100%);
-}
-
-/* Hover backgrounds */
-
-.linkBackground {
-	transform: skewX(30deg);
-	position: absolute;
-	left: -50%;
-	top: -5%;
-	max-width: 200%;
-	width: 200%;
-	height: 110%;
+.examplePhoto {
+	width: 70%;
+  background-size: 100% auto;
+	background-position: top right;
+	background-repeat: no-repeat;
 	opacity: 0;
-	transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+	transition: opacity .5s ease-in-out;
 }
 
-.linkMap .linkBackground {
-	background-image: url("../resources/map.png");
-	background-position: 50% 50%;
+.examplePhotoMask {
+	left: 0;
+	background-image: radial-gradient(circle farthest-corner at top right, rgba(15, 32, 39, 0.1) 0%, rgba(15, 32, 39, 0.2) 38.5%, #0f2027 55%, #203a43 75%, #2c5364 100%);
 }
 
-.linkPhotos .linkBackground {
-	background-image: url("../resources/photos.png");
-	background-position: 50% 50%;
+.visible {
+	opacity: 1;
 }
 
-/* Hover */
-
-.link:hover {
-	box-shadow: selectedShadow;
-	flex-grow: 1.3;
-	z-index: 1;
+.examplePhoto.lt {
+	background-image: url("../resources/lithuania-example.jpeg");
 }
 
-.link:hover .linkBackground {
-	opacity: 0.6;
+.examplePhoto.by {
+	background-image: url("../resources/belarus-example.jpeg");
+}
+
+.examplePhoto.ua {
+	background-image: url("../resources/ukraine-example.jpeg");
+}
+
+.examplePhoto.ro {
+	background-image: url("../resources/romania-example.jpeg");
+}
+
+.examplePhoto.bg {
+	background-image: url("../resources/bulgaria-example.jpeg");
+}
+
+.examplePhoto.tr {
+	background-image: url("../resources/turkey-example.jpeg");
+}
+
+.examplePhoto.ge {
+	background-image: url("../resources/georgia-example.jpeg");
+}
+
+.examplePhoto.az {
+	background-image: url("../resources/azerbaijan-example.jpeg");
+}
+
+.examplePhoto.ir {
+	background-image: url("../resources/iran-example.jpeg");
+}
+
+.examplePhoto.ae {
+	background-image: url("../resources/uae-example.jpeg");
 }

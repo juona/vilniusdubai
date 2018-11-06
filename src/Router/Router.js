@@ -23,6 +23,7 @@ export const Router = ({ serverError }) => (
 				
 				<Route exact path="/" component={Home} />
 				<Route exact path="/photos" component={Photos} />
+				<Route exact path="/map" component={Map} />
 			</Switch>
 		</div>
 	</HashRouter>

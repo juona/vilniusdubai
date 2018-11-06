@@ -8,7 +8,7 @@ import logger from 'redux-logger';
 import Router from "./Router/Router";
 import reducers from "./reducers";
 import { fetchTags, fetchPhotos } from "./actions";
-import styles from "./global.css";
+import "./global.css";
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
 

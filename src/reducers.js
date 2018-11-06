@@ -12,7 +12,10 @@ export default combineReducers(Object.assign({}, tagsReducers, photosReducers, s
 		selectedTags: Set,
 		isTagListVisible: false,
 		numberOfVisiblePhotos: 25,
-		visibleFullPhotoName: "",
+		visibleFullPhoto: {
+			name: "",
+			index: 0
+		},
 		photos: {
 			isFetching: false,
 			items: [

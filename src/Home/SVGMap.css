@@ -1,0 +1,16 @@
+.svg {
+	max-height: 100%;
+}
+
+.visited-country {
+	cursor: pointer;
+	opacity: .5;
+  transition: opacity .3s ease-in-out;
+}
+
+.visited-country:hover {
+	stroke: #4286f4;
+	stroke-width: .5;
+	opacity: 1;
+	transition: opacity .3s ease-in-out;
+}

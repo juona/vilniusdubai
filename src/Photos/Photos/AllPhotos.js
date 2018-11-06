@@ -77,14 +77,14 @@ export class AllPhotos extends React.Component {
 	}
 
 	render() {
-		const rows = this.props.photos.map(photo => {
+		const rows = this.props.photos.map((photo, index) => {
 			var style = {
 				height: photo.height + "px",
 				width: photo.width + "px"
 			};
 			return (
 				<li key={photo.name} className={styles.listItem} style={style}>
-					<Photo photoURL={photo.thumbnail} onClick={this.props.onPhotoClick} fullPhotoURL={photo.name} />
+					<Photo photoURL={photo.thumbnail} onClick={this.props.onPhotoClick} fullPhotoURL={photo.name} photoIndex={index} />
 				</li>
 			);
 		});
@@ -152,8 +152,8 @@ const mapDispatchToProps = dispatch => ({
 			dispatch(displayMorePhotos());
 		}
 	},
-	onPhotoClick: (photoName) => {
-		dispatch(toggleFullPhoto(photoName));
+	onPhotoClick: (photoName, index) => {
+		dispatch(toggleFullPhoto(photoName, index));
 	}
 });
 

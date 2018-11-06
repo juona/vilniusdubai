@@ -1,12 +1,1 @@
 @value white, headerHeight from "../../global.css";
-
-.header {
-	composes: absolutePosition from global;
-	z-index: 1;
-	height: headerHeight;
-	color: white;
-	background-image: url("../../resources/gradient-background.png");
-	background-size: auto 100%;
-	background-position: 0 50%;
-	background-repeat: repeat-x;
-}
