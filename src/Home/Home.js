@@ -1,5 +1,6 @@
 import React from "react";
 import SVGMap from "./SVGMap";
+import Dust from "./Dust";
 import styles from "./Home.css";
 
 export default class Home extends React.Component {
@@ -50,6 +51,8 @@ export default class Home extends React.Component {
 				<div className={this.getClassNameForExamplePhoto("AE")} />
 				{/* Mask */}
         <div className={`${styles.examplePhotoMask}`} />
+				{/* Dust effect */}
+				<Dust/>
 				{/* Map */}
         <div className={styles.mapContainer}>
           <SVGMap onCountryHover={countryCode => this.onCountryHover(countryCode)} onCountryClick={countryCode => this.selectCountry(countryCode)} />
