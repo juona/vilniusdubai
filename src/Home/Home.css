@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
-
-@value selectedShadow: 0 0 5px 5px rgba(200, 200, 200, .8);
-@value white, headerHeight from "../global.css";
+@value white, teal from "../global.css";
 
 /* Background */
 
@@ -9,6 +6,11 @@
   composes: absolutePosition from global;
 	overflow: hidden;
 	background-image: radial-gradient(circle farthest-corner at top right, #0f2027 0%, #0f2027 49%, #203a43 75%, #2c5364 100%);
+}
+
+.animationDisabled {
+	-webkit-animation-duration: 0s !important;
+	animation-duration: 0s !important;
 }
 
 .mapContainer {
@@ -20,17 +22,19 @@
 }
 
 .showPhotosForCountry {
-  position: absolute;
+	position: absolute;
+	top: 20vmin;
+	left: 100px;
   font-size: 28px;
-  font-weight: bold;
+	text-transform: uppercase;
+	color: white;
   text-align: center;
-  transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+	user-select: none;
 }
 
 .showPhotosForCountry > div:first-child {
@@ -39,66 +43,53 @@
   transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
 }
 
-.showPhotosForCountry > div:last-child {
+.showPhotosForCountry > div.countryName {
+	position: absolute;
+	width: 100%;
+	text-align: center;
   transform: translateX(60px);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.045, 0.58, 0.275, 0.945), opacity 0.3s ease-in-out;
+	opacity: 0;
+	animation-duration: .3s;
+	-webkit-animation-duration: .3s;
+  animation-name: slideout;
+	animation-timing-function: cubic-bezier(0.045, 0.58, 0.275, 0.945);
 }
 
 .showPhotosForCountry.hover > div:first-child,
-.showPhotosForCountry.hover > div:last-child {
-  opacity: 1;
+.showPhotosForCountry.hover > div.countryName.hover {
+	opacity: .9;
   transform: translateX(0);
 }
 
-.showPhotosForCountry.lt {
-  top: 15%;
-  right: 20%;
+.showPhotosForCountry.hover > div.countryName.hover {
+	-webkit-animation-duration: .3s;
+  animation-duration: .3s;
+	animation-name: slidein;
+	animation-timing-function: cubic-bezier(0.045, 0.58, 0.275, 0.945);
 }
 
-.showPhotosForCountry.by {
-  top: 27%;
-  right: 20%;
+@keyframes slidein {
+  from {
+		opacity: 0;
+		transform: translateX(60px);
+  }
+
+  to {
+		opacity: .9;
+		transform: translateX(0);
+  }
 }
 
-.showPhotosForCountry.ua {
-  top: 25%;
-  right: 25%;
-}
+@keyframes slideout {
+  from {
+		opacity: .9;
+		transform: translateX(0);
+  }
 
-.showPhotosForCountry.ro {
-  top: 12%;
-  right: 16%;
-}
-
-.showPhotosForCountry.bg {
-  top: 19%;
-  right: 23%;
-}
-
-.showPhotosForCountry.tr {
-  top: 17%;
-  right: 21%;
-}
-
-.showPhotosForCountry.ge {
-  top: 23%;
-  right: 25%;
-}
-
-.showPhotosForCountry.az {
-  top: 14%;
-  right: 18%;
-}
-
-.showPhotosForCountry.ir {
-  top: 29%;
-  right: 19%;
-}
-
-.showPhotosForCountry.ae {
-  top: 21%;
-  right: 14%;
+  to {
+		opacity: 0;
+		transform: translateX(-60px);
+  }
 }
 
 .examplePhoto, .examplePhotoMask {

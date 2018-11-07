@@ -37,8 +37,18 @@ export default class Dust extends React.Component {
   createFlake(side) {
     const random = Math.random();
     return {
-      x: side === "left" ? 0 : (side === "right" ? this.refs.canvas.width : Math.floor(Math.random() * this.refs.canvas.width)),
-      y: side === "top" ? 0 : (side === "bottom" ? this.refs.canvas.height : Math.floor(Math.random() * this.refs.canvas.height)),
+      x:
+        side === "left"
+          ? 0
+          : side === "right"
+          ? this.refs.canvas.width
+          : Math.floor(Math.random() * this.refs.canvas.width),
+      y:
+        side === "top"
+          ? 0
+          : side === "bottom"
+          ? this.refs.canvas.height
+          : Math.floor(Math.random() * this.refs.canvas.height),
       size: Math.random() > 0.65 ? 0.6 + random * 3.4 : 0.05 + random * 0.55,
       velY: Math.random() * 0.2 - 0.1,
       velX: Math.random() * 0.2 - 0.1,
@@ -65,18 +75,28 @@ export default class Dust extends React.Component {
     flake.x += flake.velX;
 
     if (flake.y >= this.canvas.height) {
-			this.resetFlake("top");
+      this.resetFlake("top");
     } else if (flake.y <= 0) {
       this.resetFlake("bottom");
     } else if (flake.x >= this.canvas.width) {
-			this.resetFlake("left");
+      this.resetFlake("left");
     } else if (flake.x <= 0) {
       this.resetFlake("right");
     }
 
     this.canvas2DContext.fillStyle = "rgba(200,200,200," + flake.opacity + ")";
     this.canvas2DContext.beginPath();
-    this.canvas2DContext.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
+    this.canvas2DContext.moveTo(
+      flake.x + flake.size * Math.cos(0),
+      flake.y + flake.size * Math.sin(0)
+    );
+
+    for (let side = 0; side < 7; side++) {
+      this.canvas2DContext.lineTo(
+        flake.x + flake.size * Math.cos((side * 2 * Math.PI) / 6),
+        flake.y + flake.size * Math.sin((side * 2 * Math.PI) / 6)
+      );
+    }
     this.canvas2DContext.fill();
   }
 

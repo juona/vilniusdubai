@@ -604,7 +604,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5963)"
         title="United Arab Emirates"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -624,7 +624,7 @@ export default ({ onCountryHover }) => (
           fill="url(#pattern5746)"
           title="Azerbaijan"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id)}
+          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
         />
         <path
@@ -633,7 +633,7 @@ export default ({ onCountryHover }) => (
           fill="url(#pattern5572)"
           title="Bulgaria"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id)}
+          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
         />
         <path
@@ -642,7 +642,7 @@ export default ({ onCountryHover }) => (
           fill="url(#pattern5422)"
           title="Belarus"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id)}
+          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
         />
       </g>
@@ -657,7 +657,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5659)"
         title="Georgia"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -681,7 +681,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5879)"
         title="Iran"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -700,7 +700,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5492)"
         title="Lithuania"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -734,7 +734,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5538)"
         title="Romania"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -768,7 +768,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern5608)"
         title="Turkey"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
       <path
@@ -777,7 +777,7 @@ export default ({ onCountryHover }) => (
         fill="url(#pattern4611)"
         title="Ukraine"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id)}
+        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
       />
     </g>
