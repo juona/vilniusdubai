@@ -32,7 +32,9 @@ export default class Home extends React.Component {
     } ${styles[countryCode.toLowerCase()]}`;
   }
 
-  selectCountry(countryCode) {}
+  selectCountry(countryCode) {
+		this.props.history.push("/photos");
+	}
 
   render() {
     return (
