@@ -1,23 +1,29 @@
 import React from "react";
+import { Map, GoogleApiWrapper } from "google-maps-react";
+import styles from "./Map.css"
 
-export class Map extends React.Component {
-  componentWillMount() {
-    var aScript = document.createElement("script");
-    aScript.type = "text/javascript";
-    aScript.src = " /*URL Goes Here*/ ";
-    document.head.appendChild(aScript);
-  }
-
-  initMap() {
-    // The location of Uluru
-    var uluru = { lat: -25.344, lng: 131.036 };
-    // The map, centered at Uluru
-    var map = new google.maps.Map(document.getElementById("map"), { zoom: 4, center: uluru });
-    // The marker, positioned at Uluru
-    var marker = new google.maps.Marker({ position: uluru, map: map });
-  }
-
+class MapContainer extends React.Component {
   render() {
-    return <div>PYZDINK NX</div>;
+    return (
+      <Map
+        google={this.props.google}
+				style={{
+					left: "25%",
+					right: "25%",
+					top: "10%",
+					bottom: "10%"
+				}}
+        zoom={7}
+        initialCenter={{
+          lat: 49.8687472,
+          lng: 25.4021809
+        }}
+      />
+    );
   }
 }
+
+export default GoogleApiWrapper({
+	// TODO Return this from the server.
+  apiKey: 'AIzaSyAgfJ2OJacwQir3gn-qh_RCYA7Ni4ngZw8'
+})(MapContainer);

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Photo from "./Photo";
+import Map from "../../Map/Map";
 import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
 import styles from "./AllPhotos.css";
 
@@ -100,6 +101,7 @@ export class AllPhotos extends React.Component {
 						{rows}
 					</ul>
 				</div>
+				<Map/>
 			</div>
 		);
 	}
