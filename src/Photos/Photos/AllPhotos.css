@@ -1,33 +1,48 @@
 @value white, headerHeight, backgroundDim from "../../global.css";
 
 .list {
-	list-style: none;
-	padding: 0;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	margin: 0 auto;
-	width: 960px;
-	line-height: 0;
-	text-align: center;
+  list-style: none;
+  padding: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0 auto;
+  width: 960px;
+  line-height: 0;
+  text-align: center;
 }
 
 .listItem {
-	display: inline-block;
-	box-sizing: border-box;
-	overflow: hidden;
-	padding: 1px 2px;
+  display: inline-block;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 1px 2px;
 }
 
 .wrapper {
-	composes: absolutePosition from global;
-	right: -17px;
-	background: backgroundDim;
-	overflow: hidden;
+  composes: absolutePosition from global;
+  background: backgroundDim;
+  overflow: hidden;
+  display: flex;
 }
 
-.scrollContainer {
-	composes: absolutePosition from global;
-	top: headerHeight;
-	bottom: calc(headerHeight / 2);
-	overflow-y: scroll;
+.leftContainer {
+  margin-right: -17px;
+  overflow-y: scroll;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.description {
+	background: black;
+	position: relative;
+  flex-grow: 1;
+}
+
+.map {
+	position: relative;
+  flex-grow: 1;
 }
