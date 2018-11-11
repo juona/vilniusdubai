@@ -135,16 +135,21 @@ const photosWrapperID = "photosWrapper";
 const photosContentsID = "photosContents";
 
 const mapStateToProps = state => ({
-  photos: getVisiblePhotos(state.photos.items, state.selectedTags, state.numberOfVisiblePhotos),
+  photos: getVisiblePhotos(state.photos.items, state.selectedTags, state.numberOfVisiblePhotos, state.selectedCountry),
   selectedTags: state.selectedTags,
   photosWrapperID: photosWrapperID,
   photosContentsID: photosContentsID
 });
 
-const getVisiblePhotos = (photos, selectedTags, numberOfVisiblePhotos) => {
+const getVisiblePhotos = (photos, selectedTags, numberOfVisiblePhotos, selectedCountry) => {
   return photos
-    .filter(photo => photoHasSelectedTags(photo.tags, selectedTags))
+    .filter(photo => photoHasSelectedTags(photo.tags, selectedTags) && isPhotoFromSelectedCountry(photo.tags, selectedCountry))
     .slice(0, numberOfVisiblePhotos);
+};
+
+const isPhotoFromSelectedCountry = (tags, selectedCountry) => {
+	selectedCountry = selectedCountry.toLowerCase();
+	return !selectedCountry || tags.includes(selectedCountry);
 };
 
 const photoHasSelectedTags = (photoTags, selectedTags) =>

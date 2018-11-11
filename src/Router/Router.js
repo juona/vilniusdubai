@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Router as ReactRouter, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Header from "./Header/Header";
@@ -11,7 +11,7 @@ import history from "./history";
 import styles from "./Router.css";
 
 export const Router = ({ serverError }) => (
-	<ReactRouter history={history}>
+	<HashRouter history={history}>
 		<div className={styles.container}>
 			<Header />
 			<Switch>
@@ -27,7 +27,7 @@ export const Router = ({ serverError }) => (
 				<Route exact path="/map" component={Map} />
 			</Switch>
 		</div>
-	</ReactRouter>
+	</HashRouter>
 );
 
 // Logic

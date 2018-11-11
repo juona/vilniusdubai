@@ -32,9 +32,6 @@ export default class Home extends React.Component {
     } ${styles[countryCode.toLowerCase()]}`;
   }
 
-  selectCountry(countryCode) {
-	}
-
   render() {
     return (
       <div className={styles.container}>
@@ -57,6 +54,7 @@ export default class Home extends React.Component {
         <div className={styles.mapContainer}>
           <SVGMap
             onCountryHover={countryCode => this.onCountryHover(countryCode)}
+						history={this.props.history}
           />
         </div>
         {/* See photos from... text */}

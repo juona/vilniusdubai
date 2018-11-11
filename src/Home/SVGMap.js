@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { selectCountry } from "./homeActions";
 import styles from "./SVGMap.css";
 
-const SVGMap = ({ onCountryHover, onCountryClick }) => (
+const SVGMap = ({ onCountryHover, onCountryClick, history }) => (
   <svg
     viewBox="0 0 162.41 130.14"
     className={styles.svg}
@@ -606,9 +606,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5963)"
         title="United Arab Emirates"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="AF"
@@ -627,9 +627,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
           fill="url(#pattern5746)"
           title="Azerbaijan"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+          onMouseEnter={e => onCountryHover(e.target.id)}
           onMouseLeave={() => onCountryHover()}
-          onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e, history)}
         />
         <path
           id="BG"
@@ -637,9 +637,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
           fill="url(#pattern5572)"
           title="Bulgaria"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+          onMouseEnter={e => onCountryHover(e.target.id)}
           onMouseLeave={() => onCountryHover()}
-          onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e, history)}
         />
         <path
           id="BY"
@@ -647,9 +647,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
           fill="url(#pattern5422)"
           title="Belarus"
           className={styles["visited-country"]}
-          onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+          onMouseEnter={e => onCountryHover(e.target.id)}
           onMouseLeave={() => onCountryHover()}
-          onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e, history)}
         />
       </g>
       <path
@@ -663,9 +663,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5659)"
         title="Georgia"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="GR"
@@ -688,9 +688,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5879)"
         title="Iran"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="XK"
@@ -708,9 +708,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5492)"
         title="Lithuania"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="LV"
@@ -743,9 +743,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5538)"
         title="Romania"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="RS"
@@ -778,9 +778,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern5608)"
         title="Turkey"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
       <path
         id="UA"
@@ -788,9 +788,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
         fill="url(#pattern4611)"
         title="Ukraine"
         className={styles["visited-country"]}
-        onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
+        onMouseEnter={e => onCountryHover(e.target.id)}
         onMouseLeave={() => onCountryHover()}
-        onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e, history)}
       />
     </g>
   </svg>
@@ -799,8 +799,9 @@ const SVGMap = ({ onCountryHover, onCountryClick }) => (
 export default connect(
   () => ({}),
   dispatch => ({
-    onCountryClick: countryName => {
-			dispatch(selectCountry(countryName))
+    onCountryClick: (e, history) => {
+			history.push("photos");
+			dispatch(selectCountry(e.target.getAttribute("title")))
 		}
   })
 )(SVGMap);
