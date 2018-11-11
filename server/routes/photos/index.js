@@ -3,6 +3,8 @@ import { execFileSync } from "child_process";
 import logger from "../../utils/logger";
 import { EXIFTOOL_PATH, PHOTOS_PATH, THUMBS_DIRECTORY_NAME } from "../../config";
 
+const convertGPSCoordinateToDecimalDegrees = coord => parseInt(coord[1]) + parseInt(coord[2])/60 + parseFloat(coord[3])/6000;
+
 const photosData = Object.freeze(
   (() => {
     try {
@@ -11,7 +13,9 @@ const photosData = Object.freeze(
       const lines = execFileSync(EXIFTOOL_PATH, [
         "-xmp:subject",
         "-exif:exifimageheight",
-        "-exif:exifimagewidth",
+				"-exif:exifimagewidth",
+				"-gpslatitude",
+				"-gpslongitude",
         PHOTOS_PATH
       ])
         .toString("utf8")
@@ -26,22 +30,28 @@ const photosData = Object.freeze(
       };
 
       const photoNameRegex = /(IMG_\S+)$/;
-      const tagsRegex = /^Subject\s+:\s+([a-z, ]+)/;
+      const tagsRegex = /^Subject\s+:\s([a-z, ]+)/;
       const heightRegex = /^Exif Image Height\D+(\d+)/;
-      const widthRegex = /^Exif Image Width\D+(\d+)/;
+			const widthRegex = /^Exif Image Width\D+(\d+)/;
+			const latitudeRegex = /^GPS Latitude\s+:\s(\d+) deg (\d+)' (\d+.\d+)"/;
+			const longitudeRegex = /^GPS Longitude\s+:\s(\d+) deg (\d+)' (\d+.\d+)"/;
 
-      let name, tags, height, width;
-      for (var lineIndex = 0; lineIndex < lines.length - 3; lineIndex += 4) {
+      let name, tags, height, width, latitude, longitude;
+      for (var lineIndex = 0; lineIndex < lines.length - 3; lineIndex += 6) {
         name = photoNameRegex.exec(lines[lineIndex])[0];
         tags = tagsRegex.exec(lines[lineIndex + 1])[1].split(/, */);
         height = heightRegex.exec(lines[lineIndex + 2])[1];
-        width = widthRegex.exec(lines[lineIndex + 3])[1];
+				width = widthRegex.exec(lines[lineIndex + 3])[1];
+				latitude = convertGPSCoordinateToDecimalDegrees(latitudeRegex.exec(lines[lineIndex + 4]));
+				longitude = convertGPSCoordinateToDecimalDegrees(longitudeRegex.exec(lines[lineIndex + 5]));
 
         photosData.allTags = new Set([...photosData.allTags, ...tags]);
         photosData.tagsAndSizes.set(name, {
           tags,
           height,
-          width
+					width,
+					latitude,
+					longitude
         });
 
         tags.forEach(tag => {
@@ -69,7 +79,11 @@ const photoMapToArray = map => {
       name: path.join("photos", key),
       tags: value.tags,
       height: value.height,
-      width: value.width,
+			width: value.width,
+			location: {
+				lat: value.latitude,
+				long: value.longitude
+			},
       thumbnail: path.join("photos", THUMBS_DIRECTORY_NAME, key)
     });
   });

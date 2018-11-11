@@ -33,7 +33,6 @@ export default class Home extends React.Component {
   }
 
   selectCountry(countryCode) {
-		this.props.history.push("/photos");
 	}
 
   render() {
@@ -58,7 +57,6 @@ export default class Home extends React.Component {
         <div className={styles.mapContainer}>
           <SVGMap
             onCountryHover={countryCode => this.onCountryHover(countryCode)}
-            onCountryClick={countryCode => this.selectCountry(countryCode)}
           />
         </div>
         {/* See photos from... text */}

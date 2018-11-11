@@ -1,6 +1,7 @@
 import {
   TOGGLE_FULL_PHOTO,
-  DISPLAY_MORE_PHOTOS,
+	DISPLAY_MORE_PHOTOS,
+	RESET_PHOTOS_LIST,
   REQUEST_PHOTOS,
   RECEIVE_PHOTOS,
   DISPLAY_NEXT_FULL_PHOTO
@@ -35,9 +36,9 @@ export const photos = function(
 export const numberOfVisiblePhotos = function(state = PHOTO_NUMBER_INCREMENT, action) {
   switch (action.type) {
     case DISPLAY_MORE_PHOTOS:
-      return state + PHOTO_NUMBER_INCREMENT;
-    case TOGGLE_TAG:
-      return PHOTO_NUMBER_INCREMENT;
+      return action.payload.number;
+    case RESET_PHOTOS_LIST:
+      return action.payload.number;
     default:
       return state;
   }

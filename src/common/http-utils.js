@@ -1,7 +1,7 @@
 import { displayFatalError } from "../actions";
 
 export function fetchData(endpoint, requestEvent, receiveEvent) {
-	return function(dispatch, getState) {
+	return function(dispatch) {
 		dispatch(requestEvent());
 		return fetch(endpoint)
 			.then(response => handleResponse(response, dispatch))

@@ -1,5 +1,7 @@
 import HttpUtils from "../../common/http-utils";
 
+const PHOTO_NUMBER_INCREMENT = 25;
+
 export const TOGGLE_FULL_PHOTO = Symbol("TOGGLE_FULL_PHOTO");
 export const toggleFullPhoto = (photoName, photoIndex) => ({
   type: TOGGLE_FULL_PHOTO,
@@ -31,9 +33,25 @@ export const displayNextFullPhoto = () => function(dispatch, getState) {
 };
 
 export const DISPLAY_MORE_PHOTOS = Symbol("DISPLAY_MORE_PHOTOS");
-export const displayMorePhotos = () => ({
-  type: DISPLAY_MORE_PHOTOS
-});
+export const displayMorePhotos = () => function(dispatch, getState) {
+  let {
+    numberOfVisiblePhotos
+	} = getState();
+  dispatch({
+		type: DISPLAY_MORE_PHOTOS,
+		payload: {
+			number: numberOfVisiblePhotos + PHOTO_NUMBER_INCREMENT
+		}
+	});
+};
+
+export const RESET_PHOTOS_LIST = Symbol("RESET_PHOTOS_LIST");
+export const resetPhotosList = () => ({
+		type: RESET_PHOTOS_LIST,
+		payload: {
+			number: PHOTO_NUMBER_INCREMENT
+		}
+	});
 
 export const REQUEST_PHOTOS = Symbol("REQUEST_PHOTOS");
 const requestPhotos = () => ({

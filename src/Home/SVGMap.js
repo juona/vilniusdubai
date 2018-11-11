@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { selectCountry } from "./homeActions";
 import styles from "./SVGMap.css";
 
-export default ({ onCountryHover, onCountryClick }) => (
+const SVGMap = ({ onCountryHover, onCountryClick }) => (
   <svg
     viewBox="0 0 162.41 130.14"
     className={styles.svg}
@@ -606,7 +608,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="AF"
@@ -627,7 +629,7 @@ export default ({ onCountryHover, onCountryClick }) => (
           className={styles["visited-country"]}
           onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e.target.id)}
         />
         <path
           id="BG"
@@ -637,7 +639,7 @@ export default ({ onCountryHover, onCountryClick }) => (
           className={styles["visited-country"]}
           onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e.target.id)}
         />
         <path
           id="BY"
@@ -647,7 +649,7 @@ export default ({ onCountryHover, onCountryClick }) => (
           className={styles["visited-country"]}
           onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
           onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+          onClick={e => onCountryClick(e.target.id)}
         />
       </g>
       <path
@@ -663,7 +665,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="GR"
@@ -688,7 +690,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="XK"
@@ -708,7 +710,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="LV"
@@ -743,7 +745,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="RS"
@@ -778,7 +780,7 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
       <path
         id="UA"
@@ -788,8 +790,17 @@ export default ({ onCountryHover, onCountryClick }) => (
         className={styles["visited-country"]}
         onMouseEnter={e => onCountryHover(e.target.id, e.target.getAttribute("title"))}
         onMouseLeave={() => onCountryHover()}
-				onClick={e => onCountryClick(e.target.id)}
+        onClick={e => onCountryClick(e.target.id)}
       />
     </g>
   </svg>
 );
+
+export default connect(
+  () => ({}),
+  dispatch => ({
+    onCountryClick: countryName => {
+			dispatch(selectCountry(countryName))
+		}
+  })
+)(SVGMap);

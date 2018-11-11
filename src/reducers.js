@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
+import * as homeReducers from "./Home/homeReducers";
 import * as tagsReducers from "./Photos/Tags/tagsReducers";
 import * as photosReducers from "./Photos/Photos/photosReducers";
 import * as serverErrorReducers from "./Router/ServerError/serverErrorReducers";
 
-export default combineReducers(Object.assign({}, tagsReducers, photosReducers, serverErrorReducers));
+export default combineReducers(Object.assign({}, homeReducers, tagsReducers, photosReducers, serverErrorReducers));
 
 /*
 	State structure
@@ -16,6 +17,7 @@ export default combineReducers(Object.assign({}, tagsReducers, photosReducers, s
 			name: "",
 			index: 0
 		},
+		selectedCountry: "",
 		photos: {
 			isFetching: false,
 			items: [
