@@ -20,6 +20,7 @@ export default class Dust extends React.Component {
   }
 
   componentWillUnmount() {
+		window.cancelAnimationFrame(this.animationFrameRequestID);
     window.removeEventListener("resize", this.updateCanvasDimensions);
   }
 
@@ -61,7 +62,7 @@ export default class Dust extends React.Component {
   snow() {
     this.canvas2DContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.flakes.forEach(this.drawFlake.bind(this));
-    window.requestAnimationFrame(this.snow.bind(this));
+    this.animationFrameRequestID = window.requestAnimationFrame(this.snow.bind(this));
   }
 
   resetFlake(flake) {
