@@ -20,22 +20,22 @@ export default combineReducers(Object.assign({}, homeReducers, tagsReducers, pho
 		selectedCountry: "",
 		photos: {
 			isFetching: false,
-			items: [
-				{
+			items: Map<> {
+				_photoName1_: {
 					name: _photoName1_,
 					tags: [_tag1_, _tag2_],
 					height: 1200,
 					width: 1600,
 					thumbnail: "thumbs/_photoName1_"
 				},
-				{
+				_photoName2_: {
 					name: _photoName2_,
 					tags: [_tag1_, _tag4_],
 					height: 1200,
 					width: 1600,
 					thumbnail: "thumbs/_photoName2_"
 				}
-			],
+			},
 			photosByTags: {
 				_tag1_: [_photoName1_, _photoName2_]
 			}

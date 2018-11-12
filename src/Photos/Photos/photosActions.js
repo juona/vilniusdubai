@@ -62,7 +62,7 @@ export const RECEIVE_PHOTOS = Symbol("RECEIVE_PHOTOS");
 const receivePhotos = json => ({
   type: RECEIVE_PHOTOS,
   payload: {
-    tagsAndSizes: json.tagsAndSizes,
+    tagsAndSizes: json.tagsAndSizes.reduce((map, item) => map.set(item.name, item), new Map()),
     photosByTags: json.photosByTags
   }
 });

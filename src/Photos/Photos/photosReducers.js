@@ -1,9 +1,9 @@
 import {
   TOGGLE_FULL_PHOTO,
-	DISPLAY_MORE_PHOTOS,
-	RESET_PHOTOS_LIST,
+  DISPLAY_MORE_PHOTOS,
+  RESET_PHOTOS_LIST,
   REQUEST_PHOTOS,
-  RECEIVE_PHOTOS,
+	RECEIVE_PHOTOS,
   DISPLAY_NEXT_FULL_PHOTO
 } from "./photosActions";
 
@@ -12,7 +12,7 @@ const PHOTO_NUMBER_INCREMENT = 25;
 export const photos = function(
   state = {
     isFetching: false,
-    items: []
+    items: new Map()
   },
   action
 ) {
@@ -45,8 +45,8 @@ export const numberOfVisiblePhotos = function(state = PHOTO_NUMBER_INCREMENT, ac
 
 export const visibleFullPhoto = function(state = null, action) {
   switch (action.type) {
-		case TOGGLE_FULL_PHOTO:
-		case DISPLAY_NEXT_FULL_PHOTO:
+    case TOGGLE_FULL_PHOTO:
+    case DISPLAY_NEXT_FULL_PHOTO:
       return {
         name: action.payload.photoName || null,
         index: action.payload.photoIndex || null

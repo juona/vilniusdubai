@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Photo from "./Photo";
 import Map from "../../Map/Map";
 import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
+import { getVisiblePhotos } from "./photosSelectors";
 import styles from "./AllPhotos.css";
 
 // Presentation
@@ -52,7 +53,7 @@ export class AllPhotos extends React.Component {
       totalWidth += elementWidth; // Plus margins from css
 
       if (totalWidth > wrapperWidth) {
-        row.forEach((rowItem, index) => {
+        row.forEach(rowItem => {
           let ratio = ((wrapperWidth / totalWidth) * rowMaxHeight) / rowItem.offsetHeight;
           let newHeight = Math.floor(rowItem.offsetHeight * ratio);
           let newWidth = Math.floor(rowItem.offsetWidth * ratio);
@@ -135,25 +136,11 @@ const photosWrapperID = "photosWrapper";
 const photosContentsID = "photosContents";
 
 const mapStateToProps = state => ({
-  photos: getVisiblePhotos(state.photos.items, state.selectedTags, state.numberOfVisiblePhotos, state.selectedCountry),
+  photos: getVisiblePhotos(state),
   selectedTags: state.selectedTags,
   photosWrapperID: photosWrapperID,
   photosContentsID: photosContentsID
 });
-
-const getVisiblePhotos = (photos, selectedTags, numberOfVisiblePhotos, selectedCountry) => {
-  return photos
-    .filter(photo => photoHasSelectedTags(photo.tags, selectedTags) && isPhotoFromSelectedCountry(photo.tags, selectedCountry))
-    .slice(0, numberOfVisiblePhotos);
-};
-
-const isPhotoFromSelectedCountry = (tags, selectedCountry) => {
-	selectedCountry = selectedCountry.toLowerCase();
-	return !selectedCountry || tags.includes(selectedCountry);
-};
-
-const photoHasSelectedTags = (photoTags, selectedTags) =>
-  Array.from(selectedTags).every(tag => photoTags.includes(tag));
 
 const mapDispatchToProps = dispatch => ({
   handleScroll: () => {

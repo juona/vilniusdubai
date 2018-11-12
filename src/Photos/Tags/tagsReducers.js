@@ -34,7 +34,6 @@ export const tags = function(
 		default:
 			return state;
 	}
-	return state;
 };
 
 export const isTagListVisible = function(state = false, action) {
