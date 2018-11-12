@@ -7,11 +7,10 @@ import Header from "./Header/Header";
 import ServerError from "./ServerError/ServerError";
 import Photos from "../Photos/Main";
 import Home from "../Home/Home";
-import history from "./history";
 import styles from "./Router.css";
 
 export const Router = ({ serverError }) => (
-	<HashRouter history={history}>
+	<HashRouter>
 		<div className={styles.container}>
 			<Header />
 			<Switch>
