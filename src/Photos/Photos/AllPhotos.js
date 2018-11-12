@@ -18,7 +18,7 @@ export class AllPhotos extends React.Component {
   }
 
   scrollToTop() {
-    document.getElementById(this.props.photosWrapperID).scrollTop = 0;
+    this.refs.photosWrapper.scrollTop = 0;
   }
 
   componentDidUpdate(oldProps) {
@@ -36,7 +36,7 @@ export class AllPhotos extends React.Component {
 
   scalePhotos() {
     this.isScalingPhotos = true;
-    let wrapper = document.getElementById(this.props.photosContentsID);
+    let wrapper = this.refs.photosContents;
 
     if (!wrapper) {
       this.isScalingPhotos = false;
@@ -83,27 +83,27 @@ export class AllPhotos extends React.Component {
         width: photo.width + "px"
       };
       return (
-        <li key={photo.name} className={styles.listItem} style={style}>
+        <div key={photo.name} className={styles.listItem} style={style}>
           <Photo
             photoURL={photo.thumbnail}
             onClick={this.props.onPhotoClick}
             fullPhotoURL={photo.name}
             photoIndex={index}
           />
-        </li>
+        </div>
       );
     });
 
     return (
       <div
-        onScroll={this.props.handleScroll.bind(this)}
-        id={this.props.photosWrapperID}
+        onScroll={() => this.props.handleScroll(this.refs.photosContents, this.refs.photosWrapper)}
+        ref="photosWrapper"
         className={styles.wrapper}
       >
         <div className={styles.leftContainer}>
-          <ul className={styles.list} id={this.props.photosContentsID}>
+          <div className={styles.list} ref="photosContents">
             {rows}
-          </ul>
+          </div>
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.description} />
@@ -125,28 +125,20 @@ AllPhotos.propTypes = {
   ).isRequired,
   selectedTags: PropTypes.instanceOf(Set).isRequired,
   onPhotoClick: PropTypes.func,
-  photosWrapperID: PropTypes.string,
-  photosContentsID: PropTypes.string,
   handleScroll: PropTypes.func
 };
 
 // Logic
 
-const photosWrapperID = "photosWrapper";
-const photosContentsID = "photosContents";
-
 const mapStateToProps = state => ({
   photos: getVisiblePhotos(state),
-  selectedTags: state.selectedTags,
-  photosWrapperID: photosWrapperID,
-  photosContentsID: photosContentsID
+  selectedTags: state.selectedTags
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleScroll: () => {
-    const wrappedElement = document.getElementById(photosContentsID);
-    const elementWrapper = document.getElementById(photosWrapperID);
+  handleScroll: (wrappedElement, elementWrapper) => {
     if (isBottom(wrappedElement, elementWrapper)) {
+      console.log("dispatching");
       dispatch(displayMorePhotos());
     }
   },
@@ -155,8 +147,14 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const isBottom = (element, wrapper) =>
-  element.getBoundingClientRect().bottom <= wrapper.getBoundingClientRect().bottom;
+let lastScrollPosition = 9999;
+
+const isBottom = (element, wrapper) => {
+  const newScrollPosition = element.getBoundingClientRect().bottom;
+  const isDownScroll = newScrollPosition < lastScrollPosition;
+  lastScrollPosition = newScrollPosition;
+  return isDownScroll && newScrollPosition <= wrapper.getBoundingClientRect().bottom;
+};
 
 export default connect(
   mapStateToProps,

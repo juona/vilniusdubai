@@ -35,7 +35,6 @@ export const photos = function(
 export const numberOfVisiblePhotos = function(state = PHOTO_NUMBER_INCREMENT, action) {
   switch (action.type) {
     case DISPLAY_MORE_PHOTOS:
-      return action.payload.number;
     case RESET_PHOTOS_LIST:
       return action.payload.number;
     default:
