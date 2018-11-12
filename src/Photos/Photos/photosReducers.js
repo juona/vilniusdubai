@@ -6,7 +6,6 @@ import {
   RECEIVE_PHOTOS,
   DISPLAY_NEXT_FULL_PHOTO
 } from "./photosActions";
-import { TOGGLE_TAG } from "../../actions";
 
 const PHOTO_NUMBER_INCREMENT = 25;
 

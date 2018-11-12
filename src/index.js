@@ -7,7 +7,8 @@ import logger from "redux-logger";
 
 import Router from "./Router/Router";
 import reducers from "./reducers";
-import { fetchTags, fetchPhotos } from "./actions";
+import { fetchPhotos } from "./Photos/Photos/photosActions";
+import { fetchTags } from "./Photos/Tags/tagsActions";
 import "./global.css";
 
 window.requestAnimationFrame =

@@ -1,4 +1,4 @@
-import { displayFatalError } from "../actions";
+import { displayFatalError } from "../Router/ServerError/serverErrorActions";
 
 export function fetchData(endpoint, requestEvent, receiveEvent) {
 	return function(dispatch) {
