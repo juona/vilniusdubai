@@ -76,13 +76,13 @@ export default class Dust extends React.Component {
     flake.x += flake.velX;
 
     if (flake.y >= this.canvas.height) {
-      this.resetFlake("top");
+      this.resetFlake(flake, "top");
     } else if (flake.y <= 0) {
-      this.resetFlake("bottom");
+      this.resetFlake(flake, "bottom");
     } else if (flake.x >= this.canvas.width) {
-      this.resetFlake("left");
+      this.resetFlake(flake, "left");
     } else if (flake.x <= 0) {
-      this.resetFlake("right");
+      this.resetFlake(flake, "right");
     }
 
     this.canvas2DContext.fillStyle = "rgba(200,200,200," + flake.opacity + ")";
