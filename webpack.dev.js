@@ -17,6 +17,7 @@ module.exports = merge(common, {
 		rules: [
 			{
 				test: /\.css$/,
+				exclude: /node_modules/,
 				use: [
 					"style-loader",
 					{
@@ -25,6 +26,16 @@ module.exports = merge(common, {
 							modules: true,
 							localIdentName: "[name]__[local]___[hash:base64:5]"
 						}
+					}
+				]
+			},
+			{
+				test: /\.css$/,
+				include: /node_modules/,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader"
 					}
 				]
 			},

@@ -1,3 +1,27 @@
+.listItem {
+  display: inline-block;
+  box-sizing: border-box;
+  overflow: hidden;
+	padding: 1px 2px;
+	position: relative;
+}
+
+.overlay {
+	position: absolute;
+	top: 1px;
+	bottom: 1px;
+	left: 2px;
+	right: 2px;
+	background: #fff;
+	opacity: 0;
+	cursor: pointer;
+	transition: opacity .1s ease-out;
+}
+
+.overlay:hover {
+	opacity: 0.1;
+}
+
 .photo {
 	cursor: pointer;
 	width: 100%;

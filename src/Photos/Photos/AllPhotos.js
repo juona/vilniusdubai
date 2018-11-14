@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import Photo from "./Photo";
 import Map from "../../Map/Map";
 import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
 import { getVisiblePhotos } from "./photosSelectors";
 import styles from "./AllPhotos.css";
+import "!style-loader!css-loader!react-perfect-scrollbar/dist/css/styles.css";
 
 // Presentation
 
@@ -30,8 +32,9 @@ export class AllPhotos extends React.Component {
   }
 
   componentDidMount() {
-    //window.onresize = this.scalePhotos.bind(this);
+		//window.onresize = this.scalePhotos.bind(this);
     this.scalePhotos();
+		this.refs.scrollbar.updateScroll();
   }
 
   scalePhotos() {
@@ -78,32 +81,33 @@ export class AllPhotos extends React.Component {
 
   render() {
     const rows = this.props.photos.map((photo, index) => {
-      var style = {
-        height: photo.height + "px",
-        width: photo.width + "px"
-      };
       return (
-        <div key={photo.name} className={styles.listItem} style={style}>
-          <Photo
-            photoURL={photo.thumbnail}
-            onClick={this.props.onPhotoClick}
-            fullPhotoURL={photo.name}
-            photoIndex={index}
-          />
-        </div>
+        <Photo
+          key={photo.name}
+          style={{
+            height: photo.height + "px",
+            width: photo.width + "px"
+          }}
+          photoURL={photo.thumbnail}
+          onClick={this.props.onPhotoClick}
+          fullPhotoURL={photo.name}
+          photoIndex={index}
+        />
       );
     });
 
     return (
-      <div
-        onScroll={() => this.props.handleScroll(this.refs.photosContents, this.refs.photosWrapper)}
-        ref="photosWrapper"
-        className={styles.wrapper}
-      >
-        <div className={styles.leftContainer}>
-          <div className={styles.list} ref="photosContents">
-            {rows}
-          </div>
+      <div className={styles.wrapper}>
+        <div ref="photosWrapper" className={styles.leftContainer}>
+          <PerfectScrollbar
+						ref="scrollbar"
+            className={styles.scrollbar}
+            onYReachEnd={() => this.props.onScrollEnd()}
+          >
+            <ul className={styles.list} ref="photosContents">
+              {rows}
+            </ul>
+          </PerfectScrollbar>
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.description} />
@@ -125,7 +129,7 @@ AllPhotos.propTypes = {
   ).isRequired,
   selectedTags: PropTypes.instanceOf(Set).isRequired,
   onPhotoClick: PropTypes.func,
-  handleScroll: PropTypes.func
+  onScrollEnd: PropTypes.func
 };
 
 // Logic
@@ -136,25 +140,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleScroll: (wrappedElement, elementWrapper) => {
-    if (isBottom(wrappedElement, elementWrapper)) {
-      console.log("dispatching");
-      dispatch(displayMorePhotos());
-    }
+  onScrollEnd: () => {
+		console.log("dispatching");
+    dispatch(displayMorePhotos());
   },
   onPhotoClick: (photoName, index) => {
     dispatch(toggleFullPhoto(photoName, index));
   }
 });
-
-let lastScrollPosition = 9999;
-
-const isBottom = (element, wrapper) => {
-  const newScrollPosition = element.getBoundingClientRect().bottom;
-  const isDownScroll = newScrollPosition < lastScrollPosition;
-  lastScrollPosition = newScrollPosition;
-  return isDownScroll && newScrollPosition <= wrapper.getBoundingClientRect().bottom;
-};
 
 export default connect(
   mapStateToProps,

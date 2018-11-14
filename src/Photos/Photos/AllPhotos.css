@@ -1,23 +1,5 @@
 @value white, headerHeight, backgroundDim from "../../global.css";
 
-.list {
-  list-style: none;
-  padding: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  margin: 0 auto;
-  width: 960px;
-  line-height: 0;
-  text-align: center;
-}
-
-.listItem {
-  display: inline-block;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 1px 2px;
-}
-
 .wrapper {
   composes: absolutePosition from global;
   background: backgroundDim;
@@ -26,8 +8,25 @@
 }
 
 .leftContainer {
-  margin-right: -17px;
-  overflow-y: scroll;
+  position: relative;
+	display: flex;
+}
+
+.scrollbar {
+	height: 100%;
+	position: relative;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0 auto;
+  width: 960px;
+  line-height: 0;
+	text-align: center;
+	font-size: 0;
 }
 
 .rightContainer {
