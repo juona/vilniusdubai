@@ -13,25 +13,42 @@ class MapContainer extends React.Component {
     return bounds;
   }
 
-  getMarkers() {
-    return (this.props.photoLocations || []).map((photoLocation, index) => (
-      <Marker
-        key={`${index} ${photoLocation.lat} ${photoLocation.long}`}
-        position={{ lat: photoLocation.lat, lng: photoLocation.long }}
-      />
-    ));
-  }
+  createMarkers() {
+    const { lat, long } = this.props.highlightedPhotoLocation || {};
+    this.markers = (this.props.photoLocations || []).map((photoLocation, index) => {
+      const props = {};
+      if (photoLocation.lat === lat && photoLocation.long === long) {
+        props.icon = {
+          url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE7569"
+				};
+				props.zIndex = this.props.google.maps.Marker.MAX_ZINDEX + 1;
+      }
+      return (
+        <Marker
+          key={`${index} ${photoLocation.lat} ${photoLocation.long}`}
+          position={{ lat: photoLocation.lat, lng: photoLocation.long }}
+          {...props}
+        />
+      );
+    });
+	}
+	
+	shouldComponentUpdate(nextProps) {
+		// I have to avoid rerenders on every small change of the state
+		// Perhaps drop this lib altogether
+		//return false;
+	}
 
   render() {
-    const markers = this.getMarkers();
+    this.createMarkers();
     return (
       <Map
         google={this.props.google}
         minZoom={4}
-        bounds={this.getMapBounds(markers)}
+        bounds={this.getMapBounds(this.markers)}
         onReady={() => this.forceUpdate()}
       >
-        {markers}
+        {this.markers}
       </Map>
     );
   }
@@ -43,11 +60,16 @@ MapContainer.propTypes = {
       lat: PropTypes.number.isRequired,
       long: PropTypes.number.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  highlightedPhotoLocation: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    long: PropTypes.number.isRequired
+  })
 };
 
 export default connect(state => ({
-  photoLocations: getVisiblePhotos(state).map(photo => photo.location)
+  photoLocations: getVisiblePhotos(state).map(photo => photo.location),
+  highlightedPhotoLocation: (state.photos.items.get(state.hoveringPhoto) || {}).location
 }))(
   GoogleApiWrapper({
     // NOTE Too much hassle returning this key from the server.

@@ -18,6 +18,7 @@ export default combineReducers(Object.assign({}, homeReducers, tagsReducers, pho
 			index: 0
 		},
 		selectedCountry: "",
+		hoveringPhoto: "",
 		photos: {
 			isFetching: false,
 			items: Map<> {

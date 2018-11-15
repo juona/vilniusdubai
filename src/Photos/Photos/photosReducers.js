@@ -1,4 +1,5 @@
 import {
+	TOGGLE_HOVERING_PHOTO,
   TOGGLE_FULL_PHOTO,
   DISPLAY_MORE_PHOTOS,
   RESET_PHOTOS_LIST,
@@ -8,6 +9,15 @@ import {
 } from "./photosActions";
 
 const PHOTO_NUMBER_INCREMENT = 25;
+
+export const hoveringPhoto = function(state = null, action) {
+	switch (action.type) {
+		case TOGGLE_HOVERING_PHOTO:
+			return action.payload.photoName || null;
+		default:
+			return state;
+	}
+}
 
 export const photos = function(
   state = {
