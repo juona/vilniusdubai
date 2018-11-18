@@ -20,7 +20,7 @@ window.requestAnimationFrame =
     window.setTimeout(callback, 1000 / 60);
   };
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 store.dispatch(fetchTags());
 
