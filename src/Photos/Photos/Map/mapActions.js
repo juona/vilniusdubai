@@ -15,16 +15,14 @@ const receiveGoogleMapsLib = () => ({
 
 export const FETCH_GOOGLE_MAPS_LIB = Symbol("FETCH_GOOGLE_MAPS_LIB");
 export const fetchGoogleMapsLib = () => dispatch => {
-	dispatch(requestGoogleMapsLib());
-	if (window.google) {
-		dispatch(receiveGoogleMapsLib())
-	} else {
-		const script = document.createElement("script");
-		script.type = "text/javascript";
-		script.src = MAPS_API_URL;
-		document.body.appendChild(script);
-		script.addEventListener("load", () => {
-			dispatch(receiveGoogleMapsLib())
-		});
-	}
+  dispatch(requestGoogleMapsLib());
+  if (window.google) {
+    dispatch(receiveGoogleMapsLib());
+  } else {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = MAPS_API_URL;
+    document.body.appendChild(script);
+    script.addEventListener("load", () => dispatch(receiveGoogleMapsLib()));
+  }
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import animateScrollTo from "animated-scroll-to";
 import Photo from "./Photo";
 import Map from "./Map/Map";
 import Description from "./Description/Description";
@@ -17,8 +18,10 @@ const rowMaxHeight = 250;
 export class AllPhotos extends React.Component {
   constructor() {
     super();
+    this.markedPhotoTimer = null;
     this.state = {
-      hoveringPhoto: null
+      hoveringPhoto: null,
+      markedPhotoName: null
     };
   }
 
@@ -32,10 +35,18 @@ export class AllPhotos extends React.Component {
     }
 
     this.scalePhotos();
+
+    if (this.state.markedPhotoName) {
+      // The element is an ugly hack but I am forced to use it...
+      const { element } = this.refs.scrollbar._ps;
+      animateScrollTo(this.refs[this.state.markedPhotoName], {
+        element,
+				offset: -(element.offsetHeight - rowMaxHeight) / 2
+      });
+    }
   }
 
   componentDidMount() {
-    //window.onresize = this.scalePhotos.bind(this);
     this.scalePhotos();
     this.refs.scrollbar.updateScroll();
   }
@@ -81,8 +92,35 @@ export class AllPhotos extends React.Component {
 
   setHoveringPhoto(photoName) {
     this.setState({
-      hoveringPhoto: this.props.photosMap.get(photoName)
+      hoveringPhoto: this.props.photosMap.get(photoName),
+      markedPhoto: null
     });
+  }
+
+  doesPhotoMatchLocation(photo, { lat, long } = {}) {
+    return (
+      Math.abs(photo.location.lat) - lat < 0.00001 && Math.abs(photo.location.long - long) < 0.00001
+    );
+  }
+
+  getPhotoAtLocation(photoLocation) {
+    return this.props.photos.find(photo => this.doesPhotoMatchLocation(photo, photoLocation));
+  }
+
+  unmarkPhoto() {
+    this.setState({
+      markedPhotoName: null
+    });
+  }
+
+  markPhotoAtLocation(photoLocation) {
+    this.setState({
+      markedPhotoName: (this.getPhotoAtLocation(photoLocation) || {}).name
+    });
+    if (this.markedPhotoTimer) {
+      clearTimeout(this.markedPhotoTimer);
+    }
+    this.markedPhotoTimer = setTimeout(() => this.unmarkPhoto(), 1500);
   }
 
   render() {
@@ -90,6 +128,7 @@ export class AllPhotos extends React.Component {
       return (
         <Photo
           key={photo.name}
+          ref={photo.name}
           style={{
             height: photo.height + "px",
             width: photo.width + "px"
@@ -99,6 +138,7 @@ export class AllPhotos extends React.Component {
           fullPhotoURL={photo.name}
           photoIndex={index}
           onHover={photoName => this.setHoveringPhoto(photoName)}
+          isMarked={this.state.markedPhotoName === photo.name}
         />
       );
     });
@@ -126,6 +166,7 @@ export class AllPhotos extends React.Component {
                 this.state.hoveringPhoto && this.state.hoveringPhoto.location
               }
               photoLocations={this.props.photos.map(photo => photo.location)}
+              onMarkerClick={photoLocation => this.markPhotoAtLocation(photoLocation)}
             />
           </div>
         </div>
@@ -161,7 +202,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onPhotoClick: (photoName, index) => {
     dispatch(toggleFullPhoto(photoName, index));
-	}
+  }
 });
 
 export default connect(

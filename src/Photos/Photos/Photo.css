@@ -1,3 +1,5 @@
+@value red from "../../global.css";
+
 .listItem {
   display: inline-block;
   box-sizing: border-box;
@@ -12,14 +14,26 @@
 	bottom: 1px;
 	left: 2px;
 	right: 2px;
-	background: #fff;
 	opacity: 0;
 	cursor: pointer;
+}
+
+.hover {
+	background: #fff;
 	transition: opacity .1s ease-out;
+}
+
+.marked {
+	background: #e0e6ff;
+	transition: opacity .4s ease-in-out;
 }
 
 .overlay:hover {
 	opacity: 0.1;
+}
+
+.overlayHover {
+	opacity: 0.5;
 }
 
 .photo {
