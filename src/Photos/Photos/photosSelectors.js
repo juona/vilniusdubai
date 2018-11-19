@@ -10,18 +10,23 @@ const hasPhotoSelectedTags = (photoTags, selectedTags) =>
 
 const getAllSelectedPhotos = createSelector(
   [getAllPhotos, getSelectedTags, getSelectedCountry],
-  (allPhotos, selectedTags, selectedCountry) =>
-    Array.from(allPhotos.values()).filter(photo =>
+  (allPhotos, selectedTags, selectedCountry) => {
+		allPhotos = Array.from(allPhotos.values());
+		selectedTags = Array.from(selectedTags);
+		return selectedTags.length > 0 || selectedCountry ? allPhotos.filter(photo =>
       hasPhotoSelectedTags(
         photo.tags,
-        Array.from(selectedTags).concat(selectedCountry.toLowerCase())
+        selectedTags.concat(selectedCountry.toLowerCase())
       )
-    )
+    ) : allPhotos;
+	}
 );
 
 export const getVisiblePhotos = createSelector(
   [getAllSelectedPhotos, getNumberOfVisiblePhotos],
-  (allSelectedPhotos, numberOfVisiblePhotos) => allSelectedPhotos.slice(0, numberOfVisiblePhotos)
+  (allSelectedPhotos, numberOfVisiblePhotos) => {
+    return allSelectedPhotos.slice(0, numberOfVisiblePhotos);
+  }
 );
 
 export const morePhotosAvailable = createSelector(

@@ -1,30 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getVisiblePhotos } from "../Photos/Photos/photosSelectors";
+import { fetchGoogleMapsLib } from "./mapActions";
 import mapStyle from "./MapStyle.json";
-import cameraIcon from "../resources/icons/camera.svg";
-import cameraHoverIcon from "../resources/icons/camera-hover.svg";
-
-// NOTE Too much hassle returning this key from the server.
-// And since it is UI code anyway, it does not really matter.
-const API_KEY = "AIzaSyAgfJ2OJacwQir3gn-qh_RCYA7Ni4ngZw8";
-const MAPS_API_URL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+import cameraIcon from "../../../resources/icons/camera.svg";
+import cameraHoverIcon from "../../../resources/icons/camera-hover.svg";
 
 const getIcon = (svg, { height, width }) => ({
   url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
   scaledSize: new google.maps.Size(height, width)
 });
 
-const getCameraIcon = () => getIcon(cameraIcon, {
-	height: 30,
-	width: 30
-});
+const getCameraIcon = () =>
+  getIcon(cameraIcon, {
+    height: 30,
+    width: 30
+  });
 
-const getCameraHoverIcon = () => getIcon(cameraHoverIcon, {
-	height: 35,
-	width: 35
-});
+const getCameraHoverIcon = () =>
+  getIcon(cameraHoverIcon, {
+    height: 35,
+    width: 35
+  });
 
 const convertToLatLng = ({ lat, long }) => ({
   lat,
@@ -39,30 +36,19 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    (window.google ? Promise.resolve() : this.loadScript()).then(() => {
-      this.initializeMap();
-    });
-  }
-
-  loadScript() {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = MAPS_API_URL;
-    document.body.appendChild(script);
-    return new Promise(resolve => script.addEventListener("load", resolve));
+    this.props.onComponentMounted();
   }
 
   initializeMap() {
-    this.map = new window.google.maps.Map(this.refs.mapContainer, {
+    this.map = new this.props.googleMaps.Map(this.refs.mapContainer, {
       zoom: 4,
       center: { lat: 0, lng: 0 },
       styles: mapStyle
     });
-    this.updateComponent();
   }
 
   getMapBounds() {
-    const bounds = new window.google.maps.LatLngBounds();
+    const bounds = new this.props.googleMaps.LatLngBounds();
     this.markers.forEach(marker => {
       bounds.extend(marker.getPosition());
     });
@@ -85,7 +71,7 @@ class MapContainer extends React.Component {
       };
 
       marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
-      marker.setZIndex(window.google.maps.Marker.MAX_ZINDEX + 1);
+      marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + 1);
       this.map.panTo(convertToLatLng(this.props.highlightedPhotoLocation));
     } else if (this.doesMarkerMatchLocation(marker, lastHighlightedMarker)) {
       marker.setIcon(lastHighlightedMarker.icon);
@@ -104,7 +90,7 @@ class MapContainer extends React.Component {
     this.markers = this.props.photoLocations.map(photoLocation =>
       this.highlightMarker(
         this.getMarkerForLocation(photoLocation) ||
-          new window.google.maps.Marker({
+          new this.props.googleMaps.Marker({
             position: convertToLatLng(photoLocation),
             map: this.map,
             icon: getCameraIcon(cameraIcon)
@@ -115,7 +101,14 @@ class MapContainer extends React.Component {
   }
 
   componentDidUpdate() {
+    if (!this.map) {
+      this.initializeMap();
+    }
     this.updateComponent();
+  }
+
+  shouldComponentUpdate() {
+    return !!this.props.googleMaps;
   }
 
   updateComponent() {
@@ -153,14 +146,20 @@ MapContainer.propTypes = {
   highlightedPhotoLocation: PropTypes.shape({
     lat: PropTypes.number.isRequired,
     long: PropTypes.number.isRequired
-  })
+  }),
+  onComponentMounted: PropTypes.func.isRequired,
+  googleMaps: PropTypes.object
 };
 
 MapContainer.defaultProps = {
-  photoLocations: []
+  photos: []
 };
 
-export default connect(state => ({
-  photoLocations: getVisiblePhotos(state).map(photo => photo.location),
-  highlightedPhotoLocation: (state.photos.items.get(state.hoveringPhoto) || {}).location
-}))(MapContainer);
+export default connect(
+  state => ({
+    googleMaps: state.googleMaps && state.googleMaps.lib && state.googleMaps.lib.maps
+  }),
+  dispatch => ({
+    onComponentMounted: () => dispatch(fetchGoogleMapsLib())
+  })
+)(MapContainer);

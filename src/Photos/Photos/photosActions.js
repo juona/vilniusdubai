@@ -3,14 +3,6 @@ import { morePhotosAvailable } from "./photosSelectors";
 
 const PHOTO_NUMBER_INCREMENT = 25;
 
-export const TOGGLE_HOVERING_PHOTO = Symbol("TOGGLE_HOVERING_PHOTO");
-export const toggleHoveringPhoto = photoName => ({
-	type: TOGGLE_HOVERING_PHOTO,
-	payload: {
-		photoName
-	}
-})
-
 export const TOGGLE_FULL_PHOTO = Symbol("TOGGLE_FULL_PHOTO");
 export const toggleFullPhoto = (photoName, photoIndex) => ({
   type: TOGGLE_FULL_PHOTO,

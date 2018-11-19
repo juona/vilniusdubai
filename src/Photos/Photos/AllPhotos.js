@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import Photo from "./Photo";
-import Map from "../../Map/Map";
+import Map from "./Map/Map";
+import Description from "./Description/Description";
 import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
 import { getVisiblePhotos } from "./photosSelectors";
 import styles from "./AllPhotos.css";
@@ -16,7 +17,9 @@ const rowMaxHeight = 250;
 export class AllPhotos extends React.Component {
   constructor() {
     super();
-    this.isScalingPhotos = false;
+    this.state = {
+      hoveringPhoto: null
+    };
   }
 
   scrollToTop() {
@@ -32,17 +35,15 @@ export class AllPhotos extends React.Component {
   }
 
   componentDidMount() {
-		//window.onresize = this.scalePhotos.bind(this);
+    //window.onresize = this.scalePhotos.bind(this);
     this.scalePhotos();
-		this.refs.scrollbar.updateScroll();
+    this.refs.scrollbar.updateScroll();
   }
 
   scalePhotos() {
-    this.isScalingPhotos = true;
     let wrapper = this.refs.photosContents;
 
     if (!wrapper) {
-      this.isScalingPhotos = false;
       return;
     }
 
@@ -76,7 +77,12 @@ export class AllPhotos extends React.Component {
       row = [];
       totalWidth = 0;
     }
-    this.isScalingPhotos = false;
+  }
+
+  setHoveringPhoto(photoName) {
+    this.setState({
+      hoveringPhoto: this.props.photosMap.get(photoName)
+    });
   }
 
   render() {
@@ -92,6 +98,7 @@ export class AllPhotos extends React.Component {
           onClick={this.props.onPhotoClick}
           fullPhotoURL={photo.name}
           photoIndex={index}
+          onHover={photoName => this.setHoveringPhoto(photoName)}
         />
       );
     });
@@ -100,7 +107,7 @@ export class AllPhotos extends React.Component {
       <div className={styles.wrapper}>
         <div ref="photosWrapper" className={styles.leftContainer}>
           <PerfectScrollbar
-						ref="scrollbar"
+            ref="scrollbar"
             className={styles.scrollbar}
             onYReachEnd={() => this.props.onScrollEnd()}
           >
@@ -110,9 +117,16 @@ export class AllPhotos extends React.Component {
           </PerfectScrollbar>
         </div>
         <div className={styles.rightContainer}>
-          <div className={styles.description} />
+          <div className={styles.description}>
+            <Description photo={this.state.hoveringPhoto} />
+          </div>
           <div className={styles.map}>
-            <Map />
+            <Map
+              highlightedPhotoLocation={
+                this.state.hoveringPhoto && this.state.hoveringPhoto.location
+              }
+              photoLocations={this.props.photos.map(photo => photo.location)}
+            />
           </div>
         </div>
       </div>
@@ -124,7 +138,8 @@ AllPhotos.propTypes = {
   photos: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      tags: PropTypes.arrayOf(PropTypes.string).isRequired
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+      description: PropTypes.string
     })
   ).isRequired,
   selectedTags: PropTypes.instanceOf(Set).isRequired,
@@ -136,17 +151,17 @@ AllPhotos.propTypes = {
 
 const mapStateToProps = state => ({
   photos: getVisiblePhotos(state),
-  selectedTags: state.selectedTags
+  selectedTags: state.selectedTags,
+  photosMap: state.photos.items
 });
 
 const mapDispatchToProps = dispatch => ({
   onScrollEnd: () => {
-		console.log("dispatching");
     dispatch(displayMorePhotos());
   },
   onPhotoClick: (photoName, index) => {
     dispatch(toggleFullPhoto(photoName, index));
-  }
+	}
 });
 
 export default connect(

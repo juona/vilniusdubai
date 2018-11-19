@@ -2,9 +2,12 @@ import { combineReducers } from "redux";
 import * as homeReducers from "./Home/homeReducers";
 import * as tagsReducers from "./Photos/Tags/tagsReducers";
 import * as photosReducers from "./Photos/Photos/photosReducers";
+import * as mapReducers from "./Photos/Photos/Map/mapReducers";
 import * as serverErrorReducers from "./Router/ServerError/serverErrorReducers";
 
-export default combineReducers(Object.assign({}, homeReducers, tagsReducers, photosReducers, serverErrorReducers));
+export default combineReducers(
+  Object.assign({}, homeReducers, tagsReducers, photosReducers, mapReducers, serverErrorReducers)
+);
 
 /*
 	State structure
@@ -18,7 +21,6 @@ export default combineReducers(Object.assign({}, homeReducers, tagsReducers, pho
 			index: 0
 		},
 		selectedCountry: "",
-		hoveringPhoto: "",
 		photos: {
 			isFetching: false,
 			items: Map<> {
@@ -44,6 +46,10 @@ export default combineReducers(Object.assign({}, homeReducers, tagsReducers, pho
 		tags: {
 			isFetching: false,
 			items: [_tag1_, _tag2_, _tag3_, _tag4_]
+		},
+		googleMaps: {
+			isFetching: false,
+			lib: {}
 		},
 		fatalError: ""
 	}

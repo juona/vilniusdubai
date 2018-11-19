@@ -1,25 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { toggleHoveringPhoto } from "./photosActions";
 import styles from "./Photo.css";
 
-const Photo = ({
-  style,
-  photoURL,
-  fullPhotoURL,
-  photoIndex,
-  onClick,
-  onPhotoMouseEnter,
-  onPhotoMouseLeave
-}) => (
+const Photo = ({ style, photoURL, fullPhotoURL, photoIndex, onClick, onHover }) => (
   <li className={styles.listItem} style={style}>
     <img src={photoURL} className={styles.photo} />
     <div
       className={styles.overlay}
       onClick={onClick.bind(this, fullPhotoURL, photoIndex)}
-      onMouseEnter={() => onPhotoMouseEnter(fullPhotoURL)}
-      onMouseLeave={() => onPhotoMouseLeave()}
+      onMouseEnter={() => onHover(fullPhotoURL)}
+      onMouseLeave={() => onHover()}
     />
   </li>
 );
@@ -32,13 +22,8 @@ Photo.propTypes = {
   photoURL: PropTypes.string.isRequired,
   fullPhotoURL: PropTypes.string.isRequired,
   photoIndex: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired
 };
 
-export default connect(
-  () => ({}),
-  dispatch => ({
-    onPhotoMouseEnter: photoName => dispatch(toggleHoveringPhoto(photoName)),
-    onPhotoMouseLeave: () => dispatch(toggleHoveringPhoto())
-  })
-)(Photo);
+export default Photo;

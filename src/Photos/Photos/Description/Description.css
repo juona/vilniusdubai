@@ -1,0 +1,20 @@
+@value white from "../../../global.css";
+
+.container {
+	composes: absolutePosition from global;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+	flex-grow: 1;
+	text-align: center;
+	color: white;
+	opacity: 0;
+	transition: opacity .5s ease-in-out;
+}
+
+.text.contents {
+	opacity: 1;
+}
