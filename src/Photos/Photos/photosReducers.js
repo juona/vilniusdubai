@@ -4,7 +4,8 @@ import {
   RESET_PHOTOS_LIST,
   REQUEST_PHOTOS,
 	RECEIVE_PHOTOS,
-  DISPLAY_NEXT_FULL_PHOTO
+	DISPLAY_NEXT_FULL_PHOTO,
+	DISPLAY_PREVIOUS_FULL_PHOTO
 } from "./photosActions";
 
 const PHOTO_NUMBER_INCREMENT = 25;
@@ -45,7 +46,8 @@ export const numberOfVisiblePhotos = function(state = PHOTO_NUMBER_INCREMENT, ac
 export const visibleFullPhoto = function(state = null, action) {
   switch (action.type) {
     case TOGGLE_FULL_PHOTO:
-    case DISPLAY_NEXT_FULL_PHOTO:
+		case DISPLAY_NEXT_FULL_PHOTO:
+		case DISPLAY_PREVIOUS_FULL_PHOTO:
       return {
         name: action.payload.photoName || null,
         index: action.payload.photoIndex || null

@@ -6,4 +6,13 @@
 	margin-top: -28px;
 	height: 56px;
 	width: 56px;
+	cursor: pointer;
+}
+
+.previous {
+	left: 20px;
+}
+
+.next {
+	right: 20px;
 }

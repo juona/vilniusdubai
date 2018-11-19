@@ -1,5 +1,5 @@
 import HttpUtils from "../../common/http-utils";
-import { morePhotosAvailable } from "./photosSelectors";
+import { morePhotosAvailable, getVisiblePhotos } from "./photosSelectors";
 
 const PHOTO_NUMBER_INCREMENT = 25;
 
@@ -15,10 +15,11 @@ export const toggleFullPhoto = (photoName, photoIndex) => ({
 export const DISPLAY_NEXT_FULL_PHOTO = Symbol("DISPLAY_NEXT_FULL_PHOTO");
 export const displayNextFullPhoto = () =>
   function(dispatch, getState) {
+    const state = getState();
     let {
-      visibleFullPhoto: { index },
-      photos: { items: photoList }
-    } = getState();
+      visibleFullPhoto: { index }
+    } = state;
+    const photoList = getVisiblePhotos(state);
     index++;
     let nextPhoto = photoList[index];
     if (!nextPhoto) {
@@ -27,6 +28,29 @@ export const displayNextFullPhoto = () =>
     }
     dispatch({
       type: DISPLAY_NEXT_FULL_PHOTO,
+      payload: {
+        photoName: nextPhoto.name,
+        photoIndex: index
+      }
+    });
+  };
+
+export const DISPLAY_PREVIOUS_FULL_PHOTO = Symbol("DISPLAY_PREVIOUS_FULL_PHOTO");
+export const displayPreviousFullPhoto = () =>
+  function(dispatch, getState) {
+    const state = getState();
+    let {
+      visibleFullPhoto: { index }
+    } = state;
+    const photoList = getVisiblePhotos(state);
+    index--;
+    let nextPhoto = photoList[index];
+    if (!nextPhoto) {
+      index = photoList.length - 1;
+      nextPhoto = photoList[index];
+    }
+    dispatch({
+      type: DISPLAY_PREVIOUS_FULL_PHOTO,
       payload: {
         photoName: nextPhoto.name,
         photoIndex: index

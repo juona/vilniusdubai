@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const getAllPhotos = state => state.photos.items;
+const getAllPhotosArray = state => Array.from(state.photos.items.values());
 const getSelectedTags = state => state.selectedTags;
 const getNumberOfVisiblePhotos = state => state.numberOfVisiblePhotos;
 const getSelectedCountry = state => state.selectedCountry;
@@ -9,9 +9,8 @@ const hasPhotoSelectedTags = (photoTags, selectedTags) =>
   selectedTags.every(tag => photoTags.includes(tag));
 
 const getAllSelectedPhotos = createSelector(
-  [getAllPhotos, getSelectedTags, getSelectedCountry],
+  [getAllPhotosArray, getSelectedTags, getSelectedCountry],
   (allPhotos, selectedTags, selectedCountry) => {
-		allPhotos = Array.from(allPhotos.values());
 		selectedTags = Array.from(selectedTags);
 		return selectedTags.length > 0 || selectedCountry ? allPhotos.filter(photo =>
       hasPhotoSelectedTags(

@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggleFullPhoto } from "../photosActions";
+import { toggleFullPhoto, displayNextFullPhoto, displayPreviousFullPhoto } from "../photosActions";
 import styles from "./FullPhoto.css";
-import NextButton from "./NextButton";
+import GalleryNavigationButton from "./GalleryNavigationButton";
 
-export const FullPhoto = ({ photoURL, description, onBackgroundClick }) => (
+export const FullPhoto = ({ photoURL, description, onBackgroundClick, onPreviousClick, onNextClick }) => (
   <div className={photoURL ? styles.background : styles.hidden} onClick={onBackgroundClick}>
     <img src={photoURL} className={styles.photo} />
     <span className={styles.caption}>{description}</span>
-    <NextButton />
+    <GalleryNavigationButton onClick={() => onPreviousClick()} />
+		<GalleryNavigationButton onClick={() => onNextClick()} next={true}/>
   </div>
 );
 
@@ -26,9 +27,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onBackgroundClick: () => {
-    dispatch(toggleFullPhoto());
-  }
+  onBackgroundClick: () => 
+    dispatch(toggleFullPhoto())
+	,
+	onNextClick: () => dispatch(displayNextFullPhoto()),
+	onPreviousClick: () => dispatch(displayPreviousFullPhoto())
 });
 
 export default connect(
