@@ -68,6 +68,14 @@ class MapContainer extends React.Component {
     return Math.abs(markerLat) - lat < 0.00001 && Math.abs(markerLong - long) < 0.00001;
   }
 
+  panMapToHighlightedLocation() {
+    clearTimeout(this.panDelay);
+    this.panDelay = setTimeout(
+      () => this.map.panTo(convertToLatLng(this.props.highlightedPhotoLocation)),
+      500
+    );
+  }
+
   highlightMarker(marker, lastHighlightedMarker) {
     if (this.doesMarkerMatchLocation(marker, this.props.highlightedPhotoLocation || {})) {
       const { lat, long } = getLatLongFromMarker(marker);
@@ -80,7 +88,7 @@ class MapContainer extends React.Component {
 
       marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
       marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + 1);
-      this.map.panTo(convertToLatLng(this.props.highlightedPhotoLocation));
+      this.panMapToHighlightedLocation();
     } else if (this.doesMarkerMatchLocation(marker, lastHighlightedMarker)) {
       marker.setIcon(lastHighlightedMarker.icon);
       marker.setZIndex(lastHighlightedMarker.zIndex);
