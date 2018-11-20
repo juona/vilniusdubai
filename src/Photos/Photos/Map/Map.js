@@ -28,19 +28,12 @@ const convertToLatLng = ({ lat, long }) => ({
   lng: long
 });
 
-const getLatLongFromMarker = marker => {
-  const { lat, lng } = marker.getPosition();
-  return {
-    lat: lat(),
-    long: lng()
-  };
-};
-
 class MapContainer extends React.Component {
   constructor(...args) {
     super(...args);
     this.markers = new Map();
-    this.highlightedMarker = {};
+		this.highlightedMarker = {};
+		this.markedMarker = {};
   }
 
   componentDidMount() {
@@ -66,35 +59,49 @@ class MapContainer extends React.Component {
   panMapToHighlightedLocation() {
     clearTimeout(this.panDelay);
     this.panDelay = setTimeout(() => {
-      if (this.highlightedMarker) {
+      if (this.highlightedMarker && this.highlightedMarker.marker) {
         this.map.panTo(this.highlightedMarker.marker.getPosition());
       }
     }, 500);
-  }
-
-  highlightMarker() {
-    const {
+	}
+	
+	highlightMarker(markerName, photoNameProp, zIndex) {
+		const {
       photoName: lastHighlightedPhotoName,
       icon: lastHighlightedIcon,
       zIndex: lastHighlightedZIndex
-    } = this.highlightedMarker || {};
-    this.highlightedMarker = {};
-    this.markers.forEach((marker, photoName) => {
-      if (photoName === this.props.highlightedPhotoName && photoName !== lastHighlightedPhotoName) {
-        this.highlightedMarker = {
-          photoName,
-          marker,
-          icon: marker.getIcon(),
-          zIndex: marker.getZIndex()
-        };
-        marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
-        marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + 1);
-        this.panMapToHighlightedLocation();
-      } else if (photoName === lastHighlightedPhotoName) {
-        marker.setIcon(lastHighlightedIcon)
-        marker.setZIndex(lastHighlightedZIndex);
-      }
-    });
+		} = this[markerName] || {};
+		
+		const highlightedPhotoName = this.props[photoNameProp];
+
+		const hasHighlightChanged = highlightedPhotoName !== lastHighlightedPhotoName;
+		
+		if (lastHighlightedPhotoName && hasHighlightChanged) {
+			const marker = this.markers.get(lastHighlightedPhotoName);
+      marker.setIcon(lastHighlightedIcon);
+			marker.setZIndex(lastHighlightedZIndex);
+			this[markerName] = {};
+		}
+
+    if (highlightedPhotoName && hasHighlightChanged) {
+      const marker = this.markers.get(highlightedPhotoName);
+      this[markerName] = {
+        photoName: highlightedPhotoName,
+        marker,
+        icon: marker.getIcon(),
+        zIndex: marker.getZIndex()
+      };
+      marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
+      marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + zIndex);
+      this.panMapToHighlightedLocation();
+		}
+	}
+
+  highlightMarkers() {
+		this.highlightMarker("markedMarker", "markedPhotoName", 1);
+		if (this.props.highlightedPhotoName !== this.props.markedPhotoName) {
+			this.highlightMarker("highlightedMarker", "highlightedPhotoName", 2);
+		}
   }
 
   createNewMarker(photoName) {
@@ -104,7 +111,10 @@ class MapContainer extends React.Component {
       icon: getCameraIcon(cameraIcon)
     });
     if (this.props.onMarkerClick) {
-      marker.addListener("click", () => this.props.onMarkerClick(photoName));
+      marker.addListener("click", () => {
+        this.map.panTo(marker.getPosition());
+        this.props.onMarkerClick(photoName);
+      });
     }
     return marker;
   }
@@ -114,7 +124,7 @@ class MapContainer extends React.Component {
       markersMap.set(photoName, this.markers.get(photoName) || this.createNewMarker(photoName));
       return markersMap;
     }, new Map());
-    this.highlightMarker();
+    this.highlightMarkers();
   }
 
   componentDidUpdate() {
@@ -162,6 +172,7 @@ class MapContainer extends React.Component {
 MapContainer.propTypes = {
   photosMap: PropTypes.object.isRequired,
   highlightedPhotoName: PropTypes.string,
+  markedPhotoName: PropTypes.string,
   onMarkerClick: PropTypes.func,
   onComponentMounted: PropTypes.func.isRequired,
   googleMaps: PropTypes.object

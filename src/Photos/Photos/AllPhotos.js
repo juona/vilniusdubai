@@ -41,7 +41,7 @@ export class AllPhotos extends React.Component {
       const { element } = this.refs.scrollbar._ps;
       animateScrollTo(this.refs[this.state.markedPhotoName], {
         element,
-				offset: -(element.offsetHeight - rowMaxHeight) / 2
+        offset: -(element.offsetHeight - rowMaxHeight) / 2
       });
     }
   }
@@ -152,13 +152,12 @@ export class AllPhotos extends React.Component {
           </div>
           <div className={styles.map}>
             <Map
-              highlightedPhotoName={
-                this.state.hoveringPhoto && this.state.hoveringPhoto.name
-              }
+              highlightedPhotoName={this.state.hoveringPhoto && this.state.hoveringPhoto.name}
+              markedPhotoName={this.state.markedPhotoName}
               photosMap={this.props.photos.reduce((locationsMap, photo) => {
-								locationsMap[photo.name] = photo.location;
-								return locationsMap;
-							}, {})}
+                locationsMap[photo.name] = photo.location;
+                return locationsMap;
+              }, {})}
               onMarkerClick={photoName => this.markPhoto(photoName)}
             />
           </div>
