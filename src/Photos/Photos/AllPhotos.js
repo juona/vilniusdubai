@@ -97,25 +97,15 @@ export class AllPhotos extends React.Component {
     });
   }
 
-  doesPhotoMatchLocation(photo, { lat, long } = {}) {
-    return (
-      Math.abs(photo.location.lat) - lat < 0.00001 && Math.abs(photo.location.long - long) < 0.00001
-    );
-  }
-
-  getPhotoAtLocation(photoLocation) {
-    return this.props.photos.find(photo => this.doesPhotoMatchLocation(photo, photoLocation));
-  }
-
   unmarkPhoto() {
     this.setState({
       markedPhotoName: null
     });
   }
 
-  markPhotoAtLocation(photoLocation) {
+  markPhoto(photoName) {
     this.setState({
-      markedPhotoName: (this.getPhotoAtLocation(photoLocation) || {}).name
+      markedPhotoName: photoName
     });
     if (this.markedPhotoTimer) {
       clearTimeout(this.markedPhotoTimer);
@@ -162,11 +152,14 @@ export class AllPhotos extends React.Component {
           </div>
           <div className={styles.map}>
             <Map
-              highlightedPhotoLocation={
-                this.state.hoveringPhoto && this.state.hoveringPhoto.location
+              highlightedPhotoName={
+                this.state.hoveringPhoto && this.state.hoveringPhoto.name
               }
-              photoLocations={this.props.photos.map(photo => photo.location)}
-              onMarkerClick={photoLocation => this.markPhotoAtLocation(photoLocation)}
+              photosMap={this.props.photos.reduce((locationsMap, photo) => {
+								locationsMap[photo.name] = photo.location;
+								return locationsMap;
+							}, {})}
+              onMarkerClick={photoName => this.markPhoto(photoName)}
             />
           </div>
         </div>

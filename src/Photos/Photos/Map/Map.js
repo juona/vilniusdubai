@@ -39,7 +39,7 @@ const getLatLongFromMarker = marker => {
 class MapContainer extends React.Component {
   constructor(...args) {
     super(...args);
-    this.markers = [];
+    this.markers = new Map();
     this.highlightedMarker = {};
   }
 
@@ -57,70 +57,64 @@ class MapContainer extends React.Component {
 
   getMapBounds() {
     const bounds = new this.props.googleMaps.LatLngBounds();
-    this.markers.forEach(marker => {
+    for (let marker of this.markers.values()) {
       bounds.extend(marker.getPosition());
-    });
+    }
     return bounds;
-  }
-
-  doesMarkerMatchLocation(marker, { lat, long } = {}) {
-    const { lat: markerLat, long: markerLong } = getLatLongFromMarker(marker);
-    return Math.abs(markerLat) - lat < 0.00001 && Math.abs(markerLong - long) < 0.00001;
   }
 
   panMapToHighlightedLocation() {
     clearTimeout(this.panDelay);
-    this.panDelay = setTimeout(
-      () => this.map.panTo(convertToLatLng(this.props.highlightedPhotoLocation)),
-      500
-    );
+    this.panDelay = setTimeout(() => {
+      if (this.highlightedMarker) {
+        this.map.panTo(this.highlightedMarker.marker.getPosition());
+      }
+    }, 500);
   }
 
-  highlightMarker(marker, lastHighlightedMarker) {
-    if (this.doesMarkerMatchLocation(marker, this.props.highlightedPhotoLocation || {})) {
-      const { lat, long } = getLatLongFromMarker(marker);
-      this.highlightedMarker = {
-        icon: marker.getIcon(),
-        zIndex: marker.getZIndex(),
-        lat,
-        long
-      };
-
-      marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
-      marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + 1);
-      this.panMapToHighlightedLocation();
-    } else if (this.doesMarkerMatchLocation(marker, lastHighlightedMarker)) {
-      marker.setIcon(lastHighlightedMarker.icon);
-      marker.setZIndex(lastHighlightedMarker.zIndex);
-    }
-    return marker;
+  highlightMarker() {
+    const {
+      photoName: lastHighlightedPhotoName,
+      icon: lastHighlightedIcon,
+      zIndex: lastHighlightedZIndex
+    } = this.highlightedMarker || {};
+    this.highlightedMarker = {};
+    this.markers.forEach((marker, photoName) => {
+      if (photoName === this.props.highlightedPhotoName && photoName !== lastHighlightedPhotoName) {
+        this.highlightedMarker = {
+          photoName,
+          marker,
+          icon: marker.getIcon(),
+          zIndex: marker.getZIndex()
+        };
+        marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
+        marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + 1);
+        this.panMapToHighlightedLocation();
+      } else if (photoName === lastHighlightedPhotoName) {
+        marker.setIcon(lastHighlightedIcon)
+        marker.setZIndex(lastHighlightedZIndex);
+      }
+    });
   }
 
-  getMarkerForLocation(location) {
-    return this.markers.find(marker => this.doesMarkerMatchLocation(marker, location));
-  }
-
-  createNewMarker(photoLocation) {
+  createNewMarker(photoName) {
     const marker = new this.props.googleMaps.Marker({
-      position: convertToLatLng(photoLocation),
+      position: convertToLatLng(this.props.photosMap[photoName]),
       map: this.map,
       icon: getCameraIcon(cameraIcon)
     });
     if (this.props.onMarkerClick) {
-      marker.addListener("click", () => this.props.onMarkerClick(getLatLongFromMarker(marker)));
+      marker.addListener("click", () => this.props.onMarkerClick(photoName));
     }
     return marker;
   }
 
   createMarkers() {
-    const lastHighlightedMarker = this.highlightedMarker;
-    this.highlightedMarker = {};
-    this.markers = this.props.photoLocations.map(photoLocation =>
-      this.highlightMarker(
-        this.getMarkerForLocation(photoLocation) || this.createNewMarker(photoLocation),
-        lastHighlightedMarker
-      )
-    );
+    this.markers = Object.keys(this.props.photosMap).reduce((markersMap, photoName) => {
+      markersMap.set(photoName, this.markers.get(photoName) || this.createNewMarker(photoName));
+      return markersMap;
+    }, new Map());
+    this.highlightMarker();
   }
 
   componentDidUpdate() {
@@ -135,7 +129,7 @@ class MapContainer extends React.Component {
   }
 
   updateComponent() {
-    const hasMorePhotosLoaded = this.markers.length !== this.props.photoLocations.length;
+    const hasMorePhotosLoaded = this.markers.size !== Object.keys(this.props.photosMap).length;
     this.createMarkers();
     // Can't do the comparison here because at this point markers.length is always equal to
     // photoLocations.length
@@ -145,7 +139,9 @@ class MapContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.markers.forEach(marker => this.props.googleMaps.event.clearInstanceListeners(marker));
+    for (let marker of this.markers.values()) {
+      this.props.googleMaps.event.clearInstanceListeners(marker);
+    }
   }
 
   render() {
@@ -164,16 +160,8 @@ class MapContainer extends React.Component {
 }
 
 MapContainer.propTypes = {
-  photoLocations: PropTypes.arrayOf(
-    PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired
-    })
-  ).isRequired,
-  highlightedPhotoLocation: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    long: PropTypes.number.isRequired
-  }),
+  photosMap: PropTypes.object.isRequired,
+  highlightedPhotoName: PropTypes.string,
   onMarkerClick: PropTypes.func,
   onComponentMounted: PropTypes.func.isRequired,
   googleMaps: PropTypes.object
