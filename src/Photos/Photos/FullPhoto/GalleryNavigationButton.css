@@ -26,6 +26,8 @@
 	background-repeat: no-repeat;
 	border-radius: 28px;
 	border: none;
+	cursor: pointer;
+	outline: none;
 	position: absolute;
 	top: 50%;
 	margin-top: -28px;
