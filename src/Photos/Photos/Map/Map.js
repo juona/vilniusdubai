@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchGoogleMapsLib } from "./mapActions";
 import mapStyle from "./MapStyle.json";
-import cameraIcon from "../../../resources/icons/camera.svg";
-import cameraHoverIcon from "../../../resources/icons/camera-hover.svg";
+import cameraIcon from "../../../resources/icons/camera.inline.svg";
+import cameraHoverIcon from "../../../resources/icons/camera-hover.inline.svg";
 
 const getIcon = (svg, { height, width }) => ({
   url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,

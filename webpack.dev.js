@@ -45,15 +45,15 @@ module.exports = merge(common, {
         loader: "babel-loader"
       },
       {
-        test: /\.(png|jpg|jpeg)$/,
+        test: /\.inline\.svg$/,
+        loader: "svg-inline-loader?classPrefix"
+      },
+      {
+        test: /\.(png|jpg|jpeg|css\.svg)$/,
         loader: "url-loader",
         options: {
           limit: 100000
         }
-      },
-      {
-        test: /\.svg$/,
-        loader: "svg-inline-loader?classPrefix"
       }
     ]
   }

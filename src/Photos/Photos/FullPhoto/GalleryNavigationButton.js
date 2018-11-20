@@ -4,12 +4,14 @@ import styles from "./GalleryNavigationButton.css";
 
 const Button = ({ next, onClick }) => (
   <div
-    className={`${styles.button} ${next ? styles.next : styles.previous}`}
+    className={`${styles.container} ${next ? styles.next : styles.previous}`}
     onClick={e => {
       e.stopPropagation();
       onClick();
     }}
-  />
+  >
+    <button className={`${styles.button} ${next ? styles.next : styles.previous}`} />
+  </div>
 );
 
 Button.propTypes = {

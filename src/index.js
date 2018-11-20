@@ -18,9 +18,11 @@ window.requestAnimationFrame =
   window.msRequestAnimationFrame ||
   function(callback) {
     window.setTimeout(callback, 1000 / 60);
-  };
+	};
+	
+const middleware = [thunkMiddleware]
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const store = createStore(reducers, applyMiddleware(...middleware));
 
 store.dispatch(fetchTags());
 
