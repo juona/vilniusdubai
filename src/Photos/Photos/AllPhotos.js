@@ -21,7 +21,7 @@ export class AllPhotos extends React.Component {
     this.markedPhotoTimer = null;
     this.state = {
       hoveringPhoto: null,
-      markedPhotoName: null
+      markedPhoto: null
     };
   }
 
@@ -36,10 +36,10 @@ export class AllPhotos extends React.Component {
 
     this.scalePhotos();
 
-    if (this.state.markedPhotoName) {
+    if (this.state.markedPhoto) {
       // The element is an ugly hack but I am forced to use it...
       const { element } = this.refs.scrollbar._ps;
-      animateScrollTo(this.refs[this.state.markedPhotoName], {
+      animateScrollTo(this.refs[this.state.markedPhoto.name], {
         element,
         offset: -(element.offsetHeight - rowMaxHeight) / 2
       });
@@ -92,20 +92,19 @@ export class AllPhotos extends React.Component {
 
   setHoveringPhoto(photoName) {
     this.setState({
-      hoveringPhoto: this.props.photosMap.get(photoName),
-      markedPhoto: null
+      hoveringPhoto: this.props.photosMap.get(photoName)
     });
   }
 
   unmarkPhoto() {
     this.setState({
-      markedPhotoName: null
+      markedPhoto: null
     });
   }
 
   markPhoto(photoName) {
     this.setState({
-      markedPhotoName: photoName
+      markedPhoto: this.props.photosMap.get(photoName)
     });
     if (this.markedPhotoTimer) {
       clearTimeout(this.markedPhotoTimer);
@@ -128,7 +127,7 @@ export class AllPhotos extends React.Component {
           fullPhotoURL={photo.name}
           photoIndex={index}
           onHover={photoName => this.setHoveringPhoto(photoName)}
-          isMarked={this.state.markedPhotoName === photo.name}
+          isMarked={this.state.markedPhoto && this.state.markedPhoto.name === photo.name}
         />
       );
     });
@@ -148,12 +147,12 @@ export class AllPhotos extends React.Component {
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.description}>
-            <Description photo={this.state.hoveringPhoto} />
+            <Description photo={this.state.hoveringPhoto || this.state.markedPhoto} />
           </div>
           <div className={styles.map}>
             <Map
               highlightedPhotoName={this.state.hoveringPhoto && this.state.hoveringPhoto.name}
-              markedPhotoName={this.state.markedPhotoName}
+              markedPhotoName={this.state.markedPhoto && this.state.markedPhoto.name}
               photosMap={this.props.photos.reduce((locationsMap, photo) => {
                 locationsMap[photo.name] = photo.location;
                 return locationsMap;
