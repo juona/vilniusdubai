@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import animateScrollTo from "animated-scroll-to";
 import Photo from "./Photo";
-import Map from "./Map/Map";
+import Map from "./PhotoMap/PhotoMap";
 import Description from "./Description/Description";
 import { displayMorePhotos, toggleFullPhoto } from "./photosActions";
 import { getVisiblePhotos } from "./photosSelectors";

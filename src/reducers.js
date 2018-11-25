@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import * as homeReducers from "./Home/homeReducers";
 import * as tagsReducers from "./Photos/Tags/tagsReducers";
 import * as photosReducers from "./Photos/Photos/photosReducers";
-import * as mapReducers from "./Photos/Photos/Map/mapReducers";
+import * as mapReducers from "./common/Map/mapReducers";
 import * as serverErrorReducers from "./Router/ServerError/serverErrorReducers";
 
 export default combineReducers(

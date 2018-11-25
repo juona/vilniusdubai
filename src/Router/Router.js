@@ -8,6 +8,7 @@ import ServerError from "./ServerError/ServerError";
 import Photos from "../Photos/Main";
 import Home from "../Home/Home";
 import styles from "./Router.css";
+import FullMap from "../FullMap/FullMap";
 
 export const Router = ({ serverError }) => (
 	<HashRouter>
@@ -23,7 +24,7 @@ export const Router = ({ serverError }) => (
 				
 				<Route exact path="/" component={Home} />
 				<Route exact path="/photos" component={Photos} />
-				<Route exact path="/map" component={Map} />
+				<Route exact path="/map" component={FullMap} />
 			</Switch>
 		</div>
 	</HashRouter>

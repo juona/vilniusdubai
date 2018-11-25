@@ -96,7 +96,7 @@ const photoMapToArray = map => {
 			width: value.width,
 			location: {
 				lat: value.latitude,
-				long: value.longitude
+				lng: value.longitude
 			},
       thumbnail: path.join("photos", THUMBS_DIRECTORY_NAME, key)
     });

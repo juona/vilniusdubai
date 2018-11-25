@@ -1,0 +1,964 @@
+[
+  {
+    "name": "Main trip",
+    "markers": [
+      {
+        "name": "Namai",
+        "type": "home",
+        "coordinates": { "lng": 25.2824358, "lat": 54.7025184 }
+      },
+      {
+        "name": "N1",
+        "description": "Tent behind the barn of some friendly locals.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.8419333, "lat": 54.4787717 }
+      },
+      {
+        "name": "N2",
+        "description": "Tent in the yard of some friendly local.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.5190087, "lat": 54.2024223 }
+      },
+      {
+        "name": "N3",
+        "description": "Tent at a campsite near an old soviet style lake resort.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.1066968, "lat": 53.9843041 }
+      },
+      {
+        "name": "N4",
+        "description": "Couchsurfing with Irina.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 23.8493818, "lat": 53.648921 }
+      },
+      {
+        "name": "N5",
+        "description": "Couchsurfing with Valeryi Treigis (Lithuanian surname!)",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 24.4756079, "lat": 53.1653243 }
+      },
+      {
+        "name": "N6-7",
+        "description": "Tent in the yard of some friends of Irina from Grodno.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.2913294, "lat": 52.7318221 }
+      },
+      {
+        "name": "N8-9",
+        "description": "Couchsurfing with Alina, a friend of Irina's.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 23.6884922, "lat": 52.1000996 }
+      },
+      {
+        "name": "N10",
+        "description": "Tent near a lake after figuring out I can't cross the border at Oltush.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 23.7545013, "lat": 51.707034 }
+      },
+      {
+        "name": "N11",
+        "description": "Tent in a cow field.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 23.8861656, "lat": 51.4805009 }
+      },
+      {
+        "name": "N12",
+        "description": "Couchsurfing with Iurii.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 24.0547371, "lat": 51.2298122 }
+      },
+      {
+        "name": "N13",
+        "description": "Staying with Pavel who worked at this cafe.",
+        "type": "random-people",
+        "coordinates": { "lng": 24.1597295, "lat": 50.7286866 }
+      },
+      {
+        "name": "N14-15",
+        "description": "Couchsurfing with the messy Max.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 23.989656, "lat": 49.8290692 }
+      },
+      {
+        "name": "N16-18",
+        "description": "Mister Hostel.",
+        "type": "lodging",
+        "coordinates": { "lng": 24.0267402, "lat": 49.839497 }
+      },
+      {
+        "name": "N19-25",
+        "description": "Staying/couchsurfing with Sveta :)",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 24.0028632, "lat": 49.806592 }
+      },
+      {
+        "name": "N26",
+        "description": "Hotel Magnat",
+        "type": "lodging",
+        "coordinates": { "lng": 24.3126369, "lat": 49.4072176 }
+      },
+      {
+        "name": "N26-30",
+        "description": "Couchsurfing with Nadia!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 24.7149736, "lat": 48.923807 }
+      },
+      {
+        "name": "N31",
+        "description": "Staying with some distant relatives of Nadia's.",
+        "type": "random-people",
+        "coordinates": { "lng": 24.5621091, "lat": 48.4595685 }
+      },
+      {
+        "name": "N32",
+        "description": "Sleeping in a dirty public cabin in a public park.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.1961002, "lat": 48.0544223 }
+      },
+      {
+        "name": "N33",
+        "description": "Tent in a private camping.",
+        "type": "private-camping",
+        "coordinates": { "lng": 23.9037931, "lat": 47.933895 }
+      },
+      {
+        "name": "N34",
+        "description": "Casa Green Garden. The most expensive place I had to stay.",
+        "type": "lodging",
+        "coordinates": { "lng": 24.4259655, "lat": 47.7129885 }
+      },
+      {
+        "name": "N36",
+        "description": "Casa Green Garden again.",
+        "type": "lodging",
+        "coordinates": { "lng": 24.4259548, "lat": 47.7129452 }
+      },
+      {
+        "name": "N37",
+        "description": "Staying with Horatiu from the CLEO Art Cafe!",
+        "type": "random-people",
+        "coordinates": { "lng": 24.414947, "lat": 47.2824789 }
+      },
+      {
+        "name": "N38-39",
+        "description": "Staying at a hotel, which belonged to a friend of Horatiu's, Adi.",
+        "type": "random-people",
+        "coordinates": { "lng": 24.8885608, "lat": 47.1750737 }
+      },
+      {
+        "name": "N40",
+        "description": "Some hotel...",
+        "type": "lodging",
+        "coordinates": { "lng": 24.6972924, "lat": 46.7804298 }
+      },
+      {
+        "name": "N41",
+        "description": "Tent by the road to Sighisoara.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 24.7119855, "lat": 46.3377138 }
+      },
+      {
+        "name": "N42-43",
+        "description": "Burg Hostel.",
+        "type": "lodging",
+        "coordinates": { "lng": 24.7926396, "lat": 46.2204147 }
+      },
+      {
+        "name": "N44",
+        "description": "Tent in a private camping.",
+        "type": "private-camping",
+        "coordinates": { "lng": 24.9950391, "lat": 45.8310607 }
+      },
+      {
+        "name": "N45-46",
+        "description": "Staying with Silvia, a relative of Birgit's, and old friend from Erasmus.",
+        "type": "random-people",
+        "coordinates": { "lng": 25.4498211, "lat": 45.7031785 }
+      },
+      {
+        "name": "N51",
+        "description": "One more night at Silvia's.",
+        "type": "random-people",
+        "coordinates": { "lng": 25.449864, "lat": 45.7031916 }
+      },
+      {
+        "name": "N52-53",
+        "description": "Tent in a shitty camping. First ice on tent.",
+        "type": "private-camping",
+        "coordinates": { "lng": 25.5400264, "lat": 45.3929051 }
+      },
+      {
+        "name": "N54-55",
+        "description": "Staying with a friend of Adi's (from Nasaud).",
+        "type": "random-people",
+        "coordinates": { "lng": 26.1188686, "lat": 44.3906246 }
+      },
+      {
+        "name": "N56-61",
+        "description": "X Hostel.",
+        "type": "lodging",
+        "coordinates": { "lng": 26.1076033, "lat": 44.431244 }
+      },
+      {
+        "name": "N62",
+        "description": "Tent in a field.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 26.9111288, "lat": 44.2119182 }
+      },
+      {
+        "name": "N63",
+        "description": "Room in a cheap ho(s)tel.",
+        "type": "private-camping",
+        "coordinates": { "lng": 27.2050238, "lat": 44.0949826 }
+      },
+      {
+        "name": "N64",
+        "description": "Tent in a sheep field.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 27.3942804, "lat": 43.6393053 }
+      },
+      {
+        "name": "N65",
+        "description": "Tent in some field.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 27.4146652, "lat": 43.0351447 }
+      },
+      {
+        "name": "N66",
+        "description": "Two nights in the glorious apartcomplex Perla!",
+        "type": "lodging",
+        "coordinates": { "lng": 27.7050304, "lat": 42.6876958 }
+      },
+      {
+        "name": "N67",
+        "description": "Hostel Compass.",
+        "type": "lodging",
+        "coordinates": { "lng": 27.471569, "lat": 42.495339 }
+      },
+      {
+        "name": "N68-69",
+        "description": "Two nights with the lovely adventurer Merve!",
+        "type": "random-people",
+        "coordinates": { "lng": 27.2166753, "lat": 41.7479025 }
+      },
+      {
+        "name": "N70",
+        "description": "Couchsurfing with Alper.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 27.917515, "lat": 41.4442042 }
+      },
+      {
+        "name": "N70-75",
+        "description": "Avrasya Hostel",
+        "type": "lodging",
+        "coordinates": { "lng": 28.9795686, "lat": 41.0059899 }
+      },
+      {
+        "name": "N76-78",
+        "description": "Couchsurfing with Onur, the creepy painter.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 28.9269128, "lat": 41.0089369 }
+      },
+      {
+        "name": "N79-89",
+        "description": "Good times at the Hush Hostel!",
+        "type": "lodging",
+        "coordinates": { "lng": 29.0268177, "lat": 40.9960548 }
+      },
+      {
+        "name": "N90",
+        "description": "Tent near a gas station.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 29.5498967, "lat": 40.4841026 }
+      },
+      {
+        "name": "N91",
+        "description": "Tent in a field near the road. Woke up to howling wolves.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 29.8453796, "lat": 40.2472199 }
+      },
+      {
+        "name": "N92-96",
+        "description": "Couchsurfing with Gizem!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 30.5116698, "lat": 39.785126 }
+      },
+      {
+        "name": "N97",
+        "description": "Tent somewhere in this village.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 30.2104926, "lat": 39.5638991 }
+      },
+      {
+        "name": "N98",
+        "description": "Tent in a campsite by the road.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 30.4532003, "lat": 39.2641912 }
+      },
+      {
+        "name": "N99",
+        "description": "Staying with Tanju, a tour guide from this village.",
+        "type": "random-people",
+        "coordinates": { "lng": 30.4173446, "lat": 39.0876026 }
+      },
+      {
+        "name": "N100",
+        "description": "Night in the house of the mukhtar - head of the village.",
+        "type": "random-people",
+        "coordinates": { "lng": 30.585283, "lat": 39.1590666 }
+      },
+      {
+        "name": "N101",
+        "description": "Night in the local school.",
+        "type": "random-people",
+        "coordinates": { "lng": 30.7152575, "lat": 39.2031523 }
+      },
+      {
+        "name": "N102-103",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 31.1511178, "lat": 39.0204632 }
+      },
+      {
+        "name": "N104",
+        "description": "Night in a mosque.",
+        "type": "random-people",
+        "coordinates": { "lng": 32.340703, "lat": 38.8844271 }
+      },
+      {
+        "name": "N105",
+        "description": "Some hotel paid by friendly turks.",
+        "type": "random-people",
+        "coordinates": { "lng": 32.9246923, "lat": 38.6565794 }
+      },
+      {
+        "name": "N106",
+        "description": "Hotel - Ogretmen Evi (Teacher's House).",
+        "type": "lodging",
+        "coordinates": { "lng": 33.4123957, "lat": 38.4016926 }
+      },
+      {
+        "name": "N107-109",
+        "description": "Staying with an Airbnb host, one night for free.",
+        "type": "lodging",
+        "coordinates": { "lng": 34.0179795, "lat": 38.3621646 }
+      },
+      {
+        "name": "N110",
+        "description": "Sleeping in a cave mosque.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 34.2786098, "lat": 38.2834017 }
+      },
+      {
+        "name": "N111",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 34.2956471, "lat": 38.2415045 }
+      },
+      {
+        "name": "N112",
+        "description": "Hotel Aydin.",
+        "type": "lodging",
+        "coordinates": { "lng": 34.7331476, "lat": 38.3740652 }
+      },
+      {
+        "name": "N113-117",
+        "description": "Couchsurfing with the great Sibel!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 34.7341347, "lat": 38.6750489 }
+      },
+      {
+        "name": "N118",
+        "description": "Cave hostel.",
+        "type": "lodging",
+        "coordinates": { "lng": 34.8276848, "lat": 38.6416532 }
+      },
+      {
+        "name": "N119",
+        "description": "Couchsurfing with Murat.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 35.5410451, "lat": 38.7016064 }
+      },
+      {
+        "name": "N120",
+        "description": "Teacher's house again.",
+        "type": "lodging",
+        "coordinates": { "lng": 36.4124894, "lat": 39.3467438 }
+      },
+      {
+        "name": "N121-122",
+        "description": "Couchsurfing with Omer.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 37.007913, "lat": 39.747788 }
+      },
+      {
+        "name": "N123",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 38.1135504, "lat": 39.8759052 }
+      },
+      {
+        "name": "N124",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 39.1268648, "lat": 40.1904294 }
+      },
+      {
+        "name": "N125",
+        "description": "Teacher's house.",
+        "type": "lodging",
+        "coordinates": { "lng": 39.2912588, "lat": 40.5569163 }
+      },
+      {
+        "name": "N126-127",
+        "description": "Couchsurfing with Mehmet.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 39.7608653, "lat": 40.9967047 }
+      },
+      {
+        "name": "N128",
+        "description": "Couchsurfing with the fun Ecem!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 40.5612391, "lat": 41.0329434 }
+      },
+      {
+        "name": "N129-132",
+        "description": "Couchsurfing with Hanja.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 41.6171256, "lat": 41.6421069 }
+      },
+      {
+        "name": "N133-135",
+        "description": "Hostel Calypso.",
+        "type": "lodging",
+        "coordinates": { "lng": 41.6400987, "lat": 41.6503116 }
+      },
+      {
+        "name": "N136",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 41.7056304, "lat": 42.096065 }
+      },
+      {
+        "name": "N137",
+        "description": "Some bad guest house.",
+        "type": "lodging",
+        "coordinates": { "lng": 41.8766347, "lat": 42.5051544 }
+      },
+      {
+        "name": "N138",
+        "description": "Guest house QIRI.",
+        "type": "lodging",
+        "coordinates": { "lng": 41.8721017, "lat": 42.4982223 }
+      },
+      {
+        "name": "N149-150",
+        "description": "Back at QIRI.",
+        "type": "lodging",
+        "coordinates": { "lng": 41.8720829, "lat": 42.498167 }
+      },
+      {
+        "name": "N151-155",
+        "description": "The lovely Marco Polo guest house.",
+        "type": "lodging",
+        "coordinates": { "lng": 42.70154, "lat": 42.2716605 }
+      },
+      {
+        "name": "N156",
+        "description": "Staying at someone's home.",
+        "type": "lodging",
+        "coordinates": { "lng": 43.2654262, "lat": 42.1088093 }
+      },
+      {
+        "name": "N157-160",
+        "description": "Hostel Kalifornia.",
+        "type": "lodging",
+        "coordinates": { "lng": 44.1084096, "lat": 41.9835696 }
+      },
+      {
+        "name": "N161-162",
+        "description": "Couchsurfing with the entertaining Giorgio.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 44.7938722, "lat": 41.6900473 }
+      },
+      {
+        "name": "N163-175",
+        "description": "Staying way too long in a single hostel... A good hostel though!",
+        "type": "lodging",
+        "coordinates": { "lng": 44.7959697, "lat": 41.6948883 }
+      },
+      {
+        "name": "N176",
+        "description": "Staying with an old man who gave me an uncalled-for lift.",
+        "type": "random-people",
+        "coordinates": { "lng": 45.9820318, "lat": 41.9131681 }
+      },
+      {
+        "name": "N177-178",
+        "description": "Turqut hotel. Knee problems begin.",
+        "type": "lodging",
+        "coordinates": { "lng": 46.6545153, "lat": 41.6327415 }
+      },
+      {
+        "name": "N179",
+        "description": "Couchsurfing with the helpful Elvin (with a bit of help from Nadia)!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 46.9037676, "lat": 41.420847 }
+      },
+      {
+        "name": "N180-182",
+        "description": "Hostel Canal.",
+        "type": "lodging",
+        "coordinates": { "lng": 47.1824424, "lat": 41.2039617 }
+      },
+      {
+        "name": "N183",
+        "description": "Couchsurfing with Safar!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 47.8427929, "lat": 40.9754958 }
+      },
+      {
+        "name": "N184",
+        "description": "Paid for a bed in a strangers home.",
+        "type": "lodging",
+        "coordinates": { "lng": 48.1700331, "lat": 40.7962312 }
+      },
+      {
+        "name": "N185",
+        "description": "Paid for a bed in the home of a war veteran.",
+        "type": "lodging",
+        "coordinates": { "lng": 48.3891106, "lat": 40.8514753 }
+      },
+      {
+        "name": "N186",
+        "description": "A night in a smoky gatekeeper's shed.",
+        "type": "random-people",
+        "coordinates": { "lng": 48.2892251, "lat": 40.7327873 }
+      },
+      {
+        "name": "N187-200",
+        "description": "Staying at Mindaugas' place.",
+        "type": "random-people",
+        "coordinates": { "lng": 49.8451853, "lat": 40.3750632 }
+      },
+      {
+        "name": "N202-204",
+        "description": "Back at Mindaugas'.",
+        "type": "random-people",
+        "coordinates": { "lng": 49.845255, "lat": 40.3750755 }
+      },
+      {
+        "name": "N209-228",
+        "description": "Staying with Mindaugas again.",
+        "type": "random-people",
+        "coordinates": { "lng": 49.8452309, "lat": 40.375053 }
+      },
+      {
+        "name": "N229",
+        "description": "Some hotel",
+        "type": "lodging",
+        "coordinates": { "lng": 48.5454431, "lat": 39.4556816 }
+      },
+      {
+        "name": "N230",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 48.8413256, "lat": 38.7674689 }
+      },
+      {
+        "name": "N231",
+        "description": "Some tiny hotel room (suite).",
+        "type": "lodging",
+        "coordinates": { "lng": 48.8806321, "lat": 38.4285657 }
+      },
+      {
+        "name": "N232",
+        "description": "Tent in a forest.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 49.0310705, "lat": 37.6725098 }
+      },
+      {
+        "name": "N233-234",
+        "description": "Couchsurfing with Mostafa and Pedram!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 49.5817924, "lat": 37.3147228 }
+      },
+      {
+        "name": "N235-236",
+        "description": "Couchsurfing with the intelligent Amiir!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 50.3693104, "lat": 37.0886137 }
+      },
+      {
+        "name": "N237",
+        "description": "Night at a random helpful stranger's home.",
+        "type": "random-people",
+        "coordinates": { "lng": 51.0157013, "lat": 36.7548055 }
+      },
+      {
+        "name": "N238",
+        "description": "Camping next to lake Valasht.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 51.285494, "lat": 36.5404457 }
+      },
+      {
+        "name": "N239",
+        "description": "Night in a tiny room above a restaurant.",
+        "type": "random-people",
+        "coordinates": { "lng": 51.3150251, "lat": 36.2121299 }
+      },
+      {
+        "name": "N240",
+        "description": "Couchsurfing with the sexy rocker Parastou!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 51.0175198, "lat": 35.8348412 }
+      },
+      {
+        "name": "N241-248",
+        "description": "Staying with the amazing accidental acquaintance Arash and his brother Armin!",
+        "type": "random-people",
+        "coordinates": { "lng": 51.374149, "lat": 35.7211081 }
+      },
+      {
+        "name": "N249",
+        "description": "Couchsurfing with the talkative Moien.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 50.8599293, "lat": 34.598799 }
+      },
+      {
+        "name": "N250-251",
+        "description": "Couchsurfing with the friendly Farzaneh and her husband!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 51.4260846, "lat": 33.9982496 }
+      },
+      {
+        "name": "N253-260",
+        "description": "Staying with Farzaneh again, along with lots of other guests!",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 51.4261383, "lat": 33.9982274 }
+      },
+      {
+        "name": "N261",
+        "description": "Staying with a helpful stranger!",
+        "type": "random-people",
+        "coordinates": { "lng": 51.4135695, "lat": 33.674015 }
+      },
+      {
+        "name": "N262-267",
+        "description": "\"Couchsurfing\" at Annie's hostel.",
+        "type": "lodging",
+        "coordinates": { "lng": 51.6581708, "lat": 32.6538267 }
+      },
+      {
+        "name": "N268",
+        "description": "Tent in a public park next to a road.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 51.8818831, "lat": 32.0374752 }
+      },
+      {
+        "name": "N269",
+        "description": "Some hotel.",
+        "type": "lodging",
+        "coordinates": { "lng": 51.5631133, "lat": 31.4098527 }
+      },
+      {
+        "name": "N270",
+        "description": "Staying with a random heroin-smoking local.",
+        "type": "random-people",
+        "coordinates": { "lng": 51.5655971, "lat": 31.4187159 }
+      },
+      {
+        "name": "N271",
+        "description": "Tent on a hill.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 51.2511349, "lat": 31.2080299 }
+      },
+      {
+        "name": "N272",
+        "description": "Tent in the fields.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 51.5368652, "lat": 30.6424906 }
+      },
+      {
+        "name": "N273-281",
+        "description": "Couchsurfing with Sam at the Niayesh hotel.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 52.5392282, "lat": 29.612435 }
+      },
+      {
+        "name": "N282",
+        "description": "Staying with a random stranger.",
+        "type": "random-people",
+        "coordinates": { "lng": 53.6804008, "lat": 29.4064041 }
+      },
+      {
+        "name": "N283",
+        "description": "Camping in a desert near some fields.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 54.3078232, "lat": 28.9666971 }
+      },
+      {
+        "name": "N284",
+        "description": "Sleeping in a temp housing for construction workers behind a gas station.",
+        "type": "random-people",
+        "coordinates": { "lng": 54.8382568, "lat": 28.5820345 }
+      },
+      {
+        "name": "N285",
+        "description": "Tent in the desert next to the road.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 55.8328629, "lat": 28.1536655 }
+      },
+      {
+        "name": "N286-292",
+        "description": "Couchsurfing with the very European Navid.",
+        "type": "couchsurfing",
+        "coordinates": { "lng": 56.3345325, "lat": 27.2003849 }
+      },
+      {
+        "name": "N293",
+        "description": "Sleeping on the beach in almost unbearable heat.",
+        "type": "wild-camping",
+        "coordinates": { "lng": 55.9334028, "lat": 26.688062 }
+      },
+      {
+        "name": "N294",
+        "description": "Staying at a hotel for free.",
+        "type": "random-people",
+        "coordinates": { "lng": 55.7508945, "lat": 26.939211 }
+      },
+      {
+        "name": "N295",
+        "description": "Sleeping at some random strangers old office.",
+        "type": "random-people",
+        "coordinates": { "lng": 54.8823604, "lat": 26.5527904 }
+      },
+      {
+        "name": "N296-303",
+        "description": "Crashing at Kipras' place.",
+        "type": "random-people",
+        "coordinates": { "lng": 55.2769804, "lat": 25.2091541 }
+      }
+    ]
+  },
+  {
+    "name": "Side adventures with the bike",
+    "markers": [
+      {
+        "name": "N139",
+        "description": "Guest house.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.0381331, "lat": 42.7184843 }
+      },
+      {
+        "name": "N140",
+        "description": "Room above a small family restaurant.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.4279332, "lat": 43.0576787 }
+      },
+      {
+        "name": "N141-142",
+        "description": "NY at Keti's guest house.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.7311462, "lat": 43.0483807 }
+      },
+      {
+        "name": "N143-144",
+        "description": "Nino's guest house.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.7184486, "lat": 43.0422571 }
+      },
+      {
+        "name": "N147",
+        "description": "Back at Nino's.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.7184916, "lat": 43.0422022 }
+      },
+      {
+        "name": "N148",
+        "description": "Back at this guest house.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 42.0382082, "lat": 42.7184292 }
+      },
+      {
+        "name": "N252",
+        "description": "Tent in the Maranjab desert.",
+        "type": "bike-side-adventure",
+        "coordinates": { "lng": 51.7562485, "lat": 34.2899137 }
+      }
+    ]
+  },
+  {
+    "name": "Side adventures w/o the bike",
+    "markers": [
+      {
+        "name": "N35",
+        "description": "Cabin in a train station in the mountains.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 24.6057379, "lat": 47.7801381 }
+      },
+      {
+        "name": "N47",
+        "description": "Hostel.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 25.5891739, "lat": 45.6478124 }
+      },
+      {
+        "name": "N48",
+        "description": "Pensiunea Leia after finishing Transfagarasan very late and in a fog.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 24.5758796, "lat": 45.7289814 }
+      },
+      {
+        "name": "N49-50",
+        "description": "Couchsurfing with Georgiana.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 25.5718401, "lat": 45.6361456 }
+      },
+      {
+        "name": "N145-146",
+        "description": "Some guest house. Lucky to have found people.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 43.0158949, "lat": 42.9161436 }
+      },
+      {
+        "name": "N201",
+        "description": "Couchsurfing with the artistic Azar.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 48.5441852, "lat": 41.3616957 }
+      },
+      {
+        "name": "N205-208",
+        "description": "Back in Tbilisi to collect my Iranian visa.",
+        "type": "other-side-adventure",
+        "coordinates": { "lng": 44.79601, "lat": 41.6948823 }
+      }
+    ]
+  },
+  {
+    "name": "Cheats",
+    "markers": [
+      {
+        "name": "C1 start",
+        "description": "Boat from Romania to Bulgaria.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 27.2685385, "lat": 44.1313405 }
+      },
+      {
+        "name": "C1 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 27.2785807, "lat": 44.1212673 }
+      },
+      {
+        "name": "C2 start",
+        "description": "Boat from Europe to Asia.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 28.9740586, "lat": 41.0178258 }
+      },
+      {
+        "name": "C2 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 29.0225744, "lat": 40.9930424 }
+      },
+      {
+        "name": "C3 start",
+        "description": "Boat to Yalova to avoid exiting Istanbul.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 29.2356491, "lat": 40.8743242 }
+      },
+      {
+        "name": "C3 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 29.2797661, "lat": 40.6612384 }
+      },
+      {
+        "name": "C4 start",
+        "description": "Hitchhike to Eskisehir with a flat tire.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 30.1813638, "lat": 40.0275076 }
+      },
+      {
+        "name": "C4 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 30.5018556, "lat": 39.7882583 }
+      },
+      {
+        "name": "C5 start",
+        "description": "Unwanted lift which resulted in a torn hydraulic fluid cable.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 45.6414986, "lat": 41.6405915 }
+      },
+      {
+        "name": "C5 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 45.9823751, "lat": 41.9129924 }
+      },
+      {
+        "name": "C6 start",
+        "description": "Hitchhiking with a meat truck to save my knee.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 48.289032, "lat": 40.7309012 }
+      },
+      {
+        "name": "C6 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 49.8325574, "lat": 40.3984965 }
+      },
+      {
+        "name": "C7 start",
+        "description": "Helpful drivers save me from a killer crosswind.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 49.7136497, "lat": 40.2865972 }
+      },
+      {
+        "name": "C7 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 49.4114506, "lat": 40.0769057 }
+      },
+      {
+        "name": "C8 start",
+        "description": "Helpful driver saves me and my hurting knee from rain and darkness.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 51.6435099, "lat": 31.577073 }
+      },
+      {
+        "name": "C8 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 51.5656185, "lat": 31.4149848 }
+      },
+      {
+        "name": "C9 start",
+        "description": "Boat to Qeshm.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 56.28084, "lat": 27.1737537 }
+      },
+      {
+        "name": "C9 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 56.2725896, "lat": 26.9658501 }
+      },
+      {
+        "name": "C10 start",
+        "description": "Boat back to mainland Iran.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 55.7508945, "lat": 26.9513766 }
+      },
+      {
+        "name": "C10 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 55.747633, "lat": 26.9730265 }
+      },
+      {
+        "name": "C11 start",
+        "description": "Ferry to Dubai.",
+        "type": "cheat-start",
+        "coordinates": { "lng": 54.8866332, "lat": 26.5498848 }
+      },
+      {
+        "name": "C11 end",
+        "type": "cheat-end",
+        "coordinates": { "lng": 55.2830637, "lat": 25.2628123 }
+      }
+    ]
+  }
+]

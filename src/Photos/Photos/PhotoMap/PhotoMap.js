@@ -1,51 +1,26 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchGoogleMapsLib } from "./mapActions";
-import mapStyle from "./MapStyle.json";
+import { BaseMapClass, extendConnectedComponent } from "../../../common/Map/Map";
 import cameraIcon from "../../../resources/icons/camera.inline.svg";
 import cameraHoverIcon from "../../../resources/icons/camera-hover.inline.svg";
 
-const getIcon = (svg, { height, width }) => ({
-  url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
-  scaledSize: new google.maps.Size(height, width)
-});
-
 const getCameraIcon = () =>
-  getIcon(cameraIcon, {
+  BaseMapClass.getIcon(cameraIcon, {
     height: 30,
     width: 30
   });
 
 const getCameraHoverIcon = () =>
-  getIcon(cameraHoverIcon, {
+  BaseMapClass.getIcon(cameraHoverIcon, {
     height: 35,
     width: 35
   });
 
-const convertToLatLng = ({ lat, long }) => ({
-  lat,
-  lng: long
-});
-
-class MapContainer extends React.Component {
+class MapContainer extends BaseMapClass {
   constructor(...args) {
     super(...args);
     this.markers = new Map();
-		this.highlightedMarker = {};
-		this.markedMarker = {};
-  }
-
-  componentDidMount() {
-    this.props.onComponentMounted();
-  }
-
-  initializeMap() {
-    this.map = new this.props.googleMaps.Map(this.refs.mapContainer, {
-      zoom: 4,
-      center: { lat: 0, lng: 0 },
-      styles: mapStyle
-    });
+    this.highlightedMarker = {};
+    this.markedMarker = {};
   }
 
   getMapBounds() {
@@ -63,25 +38,25 @@ class MapContainer extends React.Component {
         this.map.panTo(this.highlightedMarker.marker.getPosition());
       }
     }, 500);
-	}
-	
-	highlightMarker(markerName, photoNameProp, zIndex) {
-		const {
+  }
+
+  highlightMarker(markerName, photoNameProp, zIndex) {
+    const {
       photoName: lastHighlightedPhotoName,
       icon: lastHighlightedIcon,
       zIndex: lastHighlightedZIndex
-		} = this[markerName] || {};
-		
-		const highlightedPhotoName = this.props[photoNameProp];
+    } = this[markerName] || {};
 
-		const hasHighlightChanged = highlightedPhotoName !== lastHighlightedPhotoName;
-		
-		if (lastHighlightedPhotoName && hasHighlightChanged) {
-			const marker = this.markers.get(lastHighlightedPhotoName);
+    const highlightedPhotoName = this.props[photoNameProp];
+
+    const hasHighlightChanged = highlightedPhotoName !== lastHighlightedPhotoName;
+
+    if (lastHighlightedPhotoName && hasHighlightChanged) {
+      const marker = this.markers.get(lastHighlightedPhotoName);
       marker.setIcon(lastHighlightedIcon);
-			marker.setZIndex(lastHighlightedZIndex);
-			this[markerName] = {};
-		}
+      marker.setZIndex(lastHighlightedZIndex);
+      this[markerName] = {};
+    }
 
     if (highlightedPhotoName && hasHighlightChanged) {
       const marker = this.markers.get(highlightedPhotoName);
@@ -94,19 +69,19 @@ class MapContainer extends React.Component {
       marker.setIcon(getCameraHoverIcon(cameraHoverIcon));
       marker.setZIndex(this.props.googleMaps.Marker.MAX_ZINDEX + zIndex);
       this.panMapToHighlightedLocation();
-		}
-	}
+    }
+  }
 
   highlightMarkers() {
-		this.highlightMarker("markedMarker", "markedPhotoName", 1);
-		if (this.props.highlightedPhotoName !== this.props.markedPhotoName) {
-			this.highlightMarker("highlightedMarker", "highlightedPhotoName", 2);
-		}
+    this.highlightMarker("markedMarker", "markedPhotoName", 1);
+    if (this.props.highlightedPhotoName !== this.props.markedPhotoName) {
+      this.highlightMarker("highlightedMarker", "highlightedPhotoName", 2);
+    }
   }
 
   createNewMarker(photoName) {
     const marker = new this.props.googleMaps.Marker({
-      position: convertToLatLng(this.props.photosMap[photoName]),
+      position: this.props.photosMap[photoName],
       map: this.map,
       icon: getCameraIcon(cameraIcon)
     });
@@ -127,17 +102,6 @@ class MapContainer extends React.Component {
     this.highlightMarkers();
   }
 
-  componentDidUpdate() {
-    if (!this.map) {
-      this.initializeMap();
-    }
-    this.updateComponent();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return !!nextProps.googleMaps;
-  }
-
   updateComponent() {
     const hasMorePhotosLoaded = this.markers.size !== Object.keys(this.props.photosMap).length;
     this.createMarkers();
@@ -148,24 +112,15 @@ class MapContainer extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    super.componentDidUpdate();
+    this.updateComponent();
+  }
+
   componentWillUnmount() {
     for (let marker of this.markers.values()) {
       this.props.googleMaps.event.clearInstanceListeners(marker);
     }
-  }
-
-  render() {
-    // NOTE Inline style is necessary here!
-    return (
-      <div
-        ref="mapContainer"
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "100%"
-        }}
-      />
-    );
   }
 }
 
@@ -173,20 +128,11 @@ MapContainer.propTypes = {
   photosMap: PropTypes.object.isRequired,
   highlightedPhotoName: PropTypes.string,
   markedPhotoName: PropTypes.string,
-  onMarkerClick: PropTypes.func,
-  onComponentMounted: PropTypes.func.isRequired,
-  googleMaps: PropTypes.object
+  onMarkerClick: PropTypes.func
 };
 
 MapContainer.defaultProps = {
   photos: []
 };
 
-export default connect(
-  state => ({
-    googleMaps: state.googleMaps && state.googleMaps.lib && state.googleMaps.lib.maps
-  }),
-  dispatch => ({
-    onComponentMounted: () => dispatch(fetchGoogleMapsLib())
-  })
-)(MapContainer);
+export default extendConnectedComponent(MapContainer);
