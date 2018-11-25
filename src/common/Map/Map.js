@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Spinner from "../Spinner/Spinner";
 import { fetchGoogleMapsLib } from "./mapActions";
 import mapStyle from "./MapStyle.json";
+import styles from "./Map.scss";
 
 export class BaseMapClass extends React.Component {
   static getIcon(svg, { height, width }) {
@@ -12,12 +14,19 @@ export class BaseMapClass extends React.Component {
     };
   }
 
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      isMapLoaded: false
+    };
+  }
+
   componentDidMount() {
-		if (!this.props.googleMaps) {
-			this.props.loadGoogleMaps();
-		} else {
-			this.initializeMap();
-		}
+    if (!this.props.googleMaps) {
+      this.props.loadGoogleMaps();
+    } else {
+      this.initializeMap();
+    }
   }
 
   initializeMap() {
@@ -25,7 +34,14 @@ export class BaseMapClass extends React.Component {
       zoom: 4,
       center: { lat: 0, lng: 0 },
       styles: mapStyle
-    });
+		});
+		
+		// An extra timeout to reduce the time of empty screen
+    google.maps.event.addListenerOnce(this.map, "idle", () =>
+      setTimeout(() => this.setState({
+        isMapLoaded: true
+      }), 250)
+    );
   }
 
   componentDidUpdate() {
@@ -39,16 +55,20 @@ export class BaseMapClass extends React.Component {
   }
 
   render() {
+    const spinner = this.state.isMapLoaded ? "" : <Spinner />;
     // NOTE Inline style is necessary here!
     return (
-      <div
-        ref="mapContainer"
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "100%"
-        }}
-      />
+      <div className={styles.container}>
+        <div
+          ref="mapContainer"
+          style={{
+            position: "absolute",
+            height: "100%",
+            width: "100%"
+          }}
+        />
+        {spinner}
+      </div>
     );
   }
 }
