@@ -1,7 +1,7 @@
 import React from "react";
 import SVGMap from "./SVGMap";
 import Dust from "./Dust";
-import styles from "./Home.css";
+import styles from "./Home.scss";
 
 export default class Home extends React.Component {
   constructor() {
@@ -10,20 +10,20 @@ export default class Home extends React.Component {
       hoveredCountryCode: null,
       isHovering: false
     };
-	}
+  }
 
   onCountryHover(countryCode) {
     this.setState({
-			allowAnimation: true,
+      allowAnimation: true,
       hoveredCountryCode: countryCode || this.state.hoveredCountryCode,
       isHovering: !!countryCode
     });
   }
 
   getClassNameForCountryText(countryCode = "") {
-    return `${styles.countryName} ${this.state.isHovering && this.state.hoveredCountryCode === countryCode
-      ? styles.hover
-      : ""} ${this.state.allowAnimation ? "" : styles.animationDisabled}`;
+    return `${styles.countryName} ${
+      this.state.isHovering && this.state.hoveredCountryCode === countryCode ? styles.hover : ""
+    } ${this.state.allowAnimation ? "" : styles.animationDisabled}`;
   }
 
   getClassNameForExamplePhoto(countryCode = "") {
@@ -54,7 +54,7 @@ export default class Home extends React.Component {
         <div className={styles.mapContainer}>
           <SVGMap
             onCountryHover={countryCode => this.onCountryHover(countryCode)}
-						history={this.props.history}
+            history={this.props.history}
           />
         </div>
         {/* See photos from... text */}
@@ -73,6 +73,33 @@ export default class Home extends React.Component {
           <div className={this.getClassNameForCountryText("IR")}>Iran</div>
           <div className={this.getClassNameForCountryText("AE")}>United Arab Emirates</div>
         </div>
+        <nav className={styles.navigation}>
+          <ul>
+            <li>
+              <a href="#/photos">See all photos</a>
+            </li>
+            <li>
+              <a href="#/map">See full trip map</a>
+            </li>
+            <li>
+              <a href="#/about">About</a>
+            </li>
+          </ul>
+          <section className={styles.contact}>
+            <a href="https://www.facebook.com/jonas.biciunas" className={styles.facebook}>
+              <span className={styles.greyIcon} />
+              <span className={styles.colorIcon} />
+            </a>
+            <a href="https://www.instagram.com/bomzpakis.travel" className={styles.instagram}>
+              <span className={styles.greyIcon} />
+              <span className={styles.colorIcon} />
+            </a>
+            <a href="mailto:jonas.biciunas@yahoo.com" className={styles.mail}>
+              <span className={styles.greyIcon} />
+              <span className={styles.colorIcon} />
+            </a>
+          </section>
+        </nav>
       </div>
     );
   }

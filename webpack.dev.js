@@ -28,7 +28,7 @@ module.exports = merge(common, {
             }
           }
         ]
-      },
+			},
       {
         test: /\.css$/,
         include: /node_modules/,
@@ -37,6 +37,20 @@ module.exports = merge(common, {
           {
             loader: "css-loader"
           }
+        ]
+      },
+			{
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: "[name]__[local]___[hash:base64:5]"
+            }
+					},
+					"sass-loader"
         ]
       },
       {

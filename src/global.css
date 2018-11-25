@@ -31,3 +31,16 @@
 	overflow: hidden;
 	margin: 0;
 }
+
+:global ul {
+	margin: 0;
+	padding: 0;
+}
+
+:global a {
+	text-decoration: none;
+}
+
+:global :focus {
+	outline: none;
+}
