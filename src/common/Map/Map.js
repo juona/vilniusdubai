@@ -13,7 +13,11 @@ export class BaseMapClass extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onComponentMounted();
+		if (!this.props.googleMaps) {
+			this.props.loadGoogleMaps();
+		} else {
+			this.initializeMap();
+		}
   }
 
   initializeMap() {
@@ -50,7 +54,7 @@ export class BaseMapClass extends React.Component {
 }
 
 BaseMapClass.propTypes = {
-  onComponentMounted: PropTypes.func.isRequired,
+  loadGoogleMaps: PropTypes.func.isRequired,
   googleMaps: PropTypes.object
 };
 
@@ -60,6 +64,6 @@ export const extendConnectedComponent = MapClass =>
       googleMaps: state.googleMaps && state.googleMaps.lib && state.googleMaps.lib.maps
     }),
     dispatch => ({
-      onComponentMounted: () => dispatch(fetchGoogleMapsLib())
+      loadGoogleMaps: () => dispatch(fetchGoogleMapsLib())
     })
   )(MapClass);
