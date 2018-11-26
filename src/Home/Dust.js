@@ -50,12 +50,10 @@ export default class Dust extends React.Component {
           : side === "bottom"
           ? this.refs.canvas.height
           : Math.floor(Math.random() * this.refs.canvas.height),
-      size: Math.random() > 0.65 ? 0.6 + random * 3.4 : 0.05 + random * 0.55,
-      velY: Math.random() * 0.2 - 0.1,
-      velX: Math.random() * 0.2 - 0.1,
-      opacity: 0.75 - random * 0.65,
-      step: 0,
-      stepSize: Math.random() / 30
+      size: Math.random() > 0.65 ? 0.6 + random * 1.8 : 0.05 + random * 0.55,
+      velY: Math.random() * 0.1 - 0.05,
+      velX: Math.random() * 0.1 - 0.05,
+      opacity: 0.5 - random * 0.45
     };
   }
 
@@ -65,13 +63,11 @@ export default class Dust extends React.Component {
     this.animationFrameRequestID = window.requestAnimationFrame(this.snow.bind(this));
   }
 
-  resetFlake(flake) {
-    Object.assign(flake, this.createFlake(top));
+  resetFlake(flake, side) {
+    Object.assign(flake, this.createFlake(side));
   }
 
   drawFlake(flake) {
-    flake.velX = flake.velX * 0.1 + Math.cos((flake.step += 0.05)) * flake.stepSize;
-
     flake.y += flake.velY;
     flake.x += flake.velX;
 
