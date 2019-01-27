@@ -1,0 +1,18 @@
+@value white from "../global.css";
+
+.article {
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: .5s;
+	position: absolute;
+	top: 35vmin;
+  height: 30vmin;
+  width: 300px;
+	left: 100px;
+	color: white;
+
+	&.show {
+		transition-delay: .5s;
+		opacity: 1;
+	}
+}

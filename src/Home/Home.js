@@ -1,6 +1,8 @@
 import React from "react";
+import { Route, Link, NavLink } from "react-router-dom";
 import SVGMap from "./SVGMap";
 import Dust from "./Dust";
+import About from "./About";
 import styles from "./Home.scss";
 
 export default class Home extends React.Component {
@@ -8,7 +10,8 @@ export default class Home extends React.Component {
     super();
     this.state = {
       hoveredCountryCode: null,
-      isHovering: false
+      isHovering: false,
+      isAboutShowing: false
     };
   }
 
@@ -73,33 +76,52 @@ export default class Home extends React.Component {
           <div className={this.getClassNameForCountryText("IR")}>Iran</div>
           <div className={this.getClassNameForCountryText("AE")}>United Arab Emirates</div>
         </div>
-        <nav className={styles.navigation}>
+        <Route path="#about" children={() => <About isShowing={this.state.isAboutShowing} />} />
+
+        <nav
+          className={`${styles.navigation} ${
+            this.state.isAboutShowing ? styles.linkIsSelected : ""
+          }`}
+        >
           <ul>
             <li>
-              <a href="#/photos">See all photos</a>
+              <Link to="/photos">See all photos</Link>
             </li>
             <li>
-              <a href="#/map">See full trip map</a>
+              <Link to="/map">See full trip map</Link>
             </li>
             <li>
-              <a href="#/about">About</a>
+              <NavLink
+                to={{ hash: "about" }}
+                exact
+                onClick={() =>
+                  this.setState({
+                    isAboutShowing: !this.state.isAboutShowing
+                  })
+                }
+                className={this.state.isAboutShowing ? styles.selectedLink : ""}
+              >
+                About
+              </NavLink>
             </li>
           </ul>
-          <section className={styles.contact}>
-            <a href="https://www.facebook.com/jonas.biciunas" className={styles.facebook}>
-              <span className={styles.greyIcon} />
-              <span className={styles.colorIcon} />
-            </a>
-            <a href="https://www.instagram.com/bomzpakis.travel" className={styles.instagram}>
-              <span className={styles.greyIcon} />
-              <span className={styles.colorIcon} />
-            </a>
-            <a href="mailto:jonas.biciunas@yahoo.com" className={styles.mail}>
-              <span className={styles.greyIcon} />
-              <span className={styles.colorIcon} />
-            </a>
-          </section>
         </nav>
+        <section
+          className={`${styles.contact} ${this.state.isAboutShowing ? styles.linkIsSelected : ""}`}
+        >
+          <a href="https://www.facebook.com/jonas.biciunas" className={styles.facebook}>
+            <span className={styles.greyIcon} />
+            <span className={styles.colorIcon} />
+          </a>
+          <a href="https://www.instagram.com/bomzpakis.travel" className={styles.instagram}>
+            <span className={styles.greyIcon} />
+            <span className={styles.colorIcon} />
+          </a>
+          <a href="mailto:jonas.biciunas@yahoo.com" className={styles.mail}>
+            <span className={styles.greyIcon} />
+            <span className={styles.colorIcon} />
+          </a>
+        </section>
       </div>
     );
   }
